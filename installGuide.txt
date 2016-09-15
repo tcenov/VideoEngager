@@ -71,18 +71,19 @@
 
 - Add jar files in project's build path
 
-- Optional - install PDANet+ for Android
-	http://pdanet.co/
-
-
-
+------------------------------------------------------
 - in case of errors add additional jar:
 	commons-io-2.5.jar
 	
+-------------------------------------------------------
+- Optional - install PDANet+ for Android
+	http://pdanet.co/
 
+- Optional - download ATUTestRecorder_2.1
+	https://drive.google.com/folderview?id=0B7rZvkq9tkwPRy1HLVJCdWtNekE&usp=sharing
 
-
-
+- Optional - download Monte Screen Recorder
+	www.randelshofer.ch/monte/files/demos/MonteScreenRecorder.jar
 
 
 
