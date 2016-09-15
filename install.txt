@@ -1,0 +1,90 @@
+
+- Download and install Java/JDK
+	http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+- Set JAVA_HOME Variable
+
+- Set Path Variable For Java
+
+- Download and install eclipse
+	https://eclipse.org/downloads/
+
+- Download WebDriver Jar Files. 
+	http://docs.seleniumhq.org/download/ http://selenium-release.storage.googleapis.com/3.0-beta3/selenium-java-3.0.0-beta3.zip
+
+- Add external jar file to java build path
+	Right click on project 'testproject' > Select Properties > Select Java build path > Navigate to Libraries tab
+    	Click on add external JARs button > select both .jar files from C:\selenium-2.33.0.
+    	Click on add external JARs button > select all .jar files from C:\selenium-2.33.0\libs
+
+- Install TestNG 
+	Open Eclipse and go to Menu Help -> Install New Software.
+	Type URL = http://beust.com/eclipse
+
+- Add TestNG Library (project's Properties -> Java Build Path -> Libraries Tab.)
+
+- Download Mozilla GeckoDriver
+	https://github.com/mozilla/geckodriver/releases
+
+- Download Google Chrome Driver
+	http://chromedriver.storage.googleapis.com/index.html?path=2.24/
+	https://sites.google.com/a/chromium.org/chromedriver/downloads
+	public static void main(String[] args) {
+  System.setProperty("webdriver.chrome.driver", "C:\\chromedriver_win32\\chromedriver.exe");
+  WebDriver driver = new ChromeDriver();
+
+- Download and install Android SDK 
+	https://dl.google.com/android/android-sdk_r24.4.1-windows.zip
+	https://dl.google.com/android/android-sdk_r24.4.1-macosx.zip
+
+- For developing install Required Packages from SDK/SDK Manager(Do not install Android Wear ARM/Intel...)
+	1. Tools 
+	2. Extras
+	3. Install Intel Hardware Accelerated Execution Manager - SDK\extras\intel\Hardware_Accelerated_Execution_Manager  intelhaxm-android.exe execute and install it.
+
+- Set ANDROID_HOME variable
+	Set Variable Name = ANDROID_HOME and Variable value = E:\SDK (Path of SDK folder)
+
+- Set Path Variables ;C:\SDK\tools;C:\SDK\platform-tools\;
+
+-  install ADT plugin in eclipse IDE. 
+	eclipse/Help/Install New Software 
+	Set URL https://dl-ssl.google.com/android/eclipse/
+- Set SDK Location
+	eclipse/Windows/Preferences
+	Select Android on Preferences dialog, Set SDK folder path in SDK Location box.
+
+- Install if not exist Microsoft .NET Framework 4.5
+
+- Install Node JS
+	https://nodejs.org/dist/v4.5.0/node-v4.5.0.pkg
+	https://nodejs.org/en/download/
+
+- Install Appium
+	http://appium.io/
+
+- Download appium client libraries
+	https://search.maven.org/#search%7Cga%7C1%7Cg%3Aio.appium%20a%3Ajava-client (http://appium.io/downloads.html)
+
+- Download google-gson jar
+	http://repo1.maven.org/maven2/com/google/code/gson/gson/2.7/gson-2.7.jar
+
+- Add jar files in project's build path
+
+- Optional - install PDANet+ for Android
+	http://pdanet.co/
+
+
+
+- in case of errors add additional jar:
+	commons-io-2.5.jar
+	
+
+
+
+
+
+
+
+
+

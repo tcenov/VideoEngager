@@ -1,0 +1,37 @@
+
+ToDo
+
+Capture screenshot on failure or pass.
+Firefox message received confirmation.
+Android message received confirmation.
+
+
+Call from background?
+what are the must push notifications... tests
+chat in background
+driver.java open notification
+
+
+
+Install app from apk file in folder. - Done
+Clean up - delete apk file. - delete, then install new apk - Done
+second agent from chrome
+call from browser - accept from android/browser
+
+push notification on stopped client
+while in app
+
+
+
+- Install guide - Done
+
+
+
+
+Bugs:
+
+
+Questions:
+Android studio
+NDK
+

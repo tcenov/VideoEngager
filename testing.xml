@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite One" >
+ <test name="Test One" >
+  <classes>
+   <class name="android2.TestCase1" />
+   <class name="android2.TestCase2" />
+   <class name="android2.TestCase3" />
+  </classes>
+ </test>
+  <test name="Test Two" >
+  <classes>
+   <class name="android2.TestCase1" />
+   <class name="android2.TestCase2" />
+   <class name="android2.TestCase3" />
+  </classes>
+ </test>
+  <test name="Test Three" >
+  <classes>
+   <class name="android2.TestCase1" />
+   <class name="android2.TestCase2" />
+   <class name="android2.TestCase3" />
+  </classes>
+ </test>
+</suite>
