@@ -3,6 +3,7 @@ package android2.VideoEngager;
 import java.awt.AWTException;
 import java.io.IOException;
 
+import org.openqa.selenium.interactions.PauseAction;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -20,50 +21,53 @@ public class FirefoxRunner {
 
 	@Test(priority = 1)
 	public void test() throws InterruptedException, AWTException, IOException {
-
 		android.login("tester2006@abv.bg", "Tarator1");
 		firefox.login();
-		firefox.SendMessage("Test1");
-		firefox.resizeWindow(500, 20);
-		android.print("Test case - login send message from android");
-		firefox.pause(120);
 	}
 
 	@Test(priority = 2)
-	public void agentRejectChat() throws InterruptedException {
-		// Commented steps are executed in "Test case - login send message from
-		// android"
-		// android.login("tester2006@abv.bg", "Tarator1");
-		// firefox.login();
-		// firefox.SendMessage("Test1");
+	public void agentReceiveChatMessage() throws InterruptedException {
+		// Prerequisites : login from android
+
+		firefox.SendMessage("Sent from browser prospector");
+		// firefox.resizeWindow(500, 20);
+		android.print("Test case - login send message from android");
+		android.startConversation();
+		// ToDo check message received from android
+		android.closeConversation();
+		android.print("Test case - agent receive chat message from browser.");
+	}
+
+	@Test(priority = 3)
+	public void prospectorReceiveChatMessage() {
 
 		android.startConversation();
-		//android.pause(5);
+		android.sendMessage("Sent from android agent");
+		// ToDo check message received from firefox
 		android.closeConversation();
-		android.print("Test case - agent reject chat");
+		android.print("Test case - agent android send message");
 	}
-//
-//	@Test(priority=19)
-//	public void agentReceiveCallThenSendMessage() {
-//		firefox.CallButtonClick();
-//		
-//		android.startConversation();
-//		
-//		android.closeConversation();
-//		android.print("Test case - agent receive call after that chat");		
-//	}
-	
-	@Test(priority=21)
-	public void prospectReceiveChatThenMakeCall() {
+
+	@Test(priority = 4)
+	public void prospectReceiveVideoCall() {
 		android.startConversation();
-		android.sendMessage("Send from android");
 		android.startVideoCall();
 		firefox.answerVideoCall();
 		android.stopVideoCall();
 		android.closeConversation();
-		android.print("Test case - prospect receive chat after that call");		
+		android.print("Test case - prospect receive Video call");
 	}
-	
+
+	@Test(priority = 5)
+	public void androidAgentReceiveVideoCall() throws InterruptedException {
+		firefox.CallButtonClick();
+		android.startConversation();
+		android.stopVideoCall();
+		android.closeConversation();
+		android.print("Test case - android receive video call");
+		android.pause(120);
+	}
+
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

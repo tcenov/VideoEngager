@@ -21,8 +21,8 @@ import org.testng.annotations.Test;
 public class InstallFromCrashlitics {
 
 	AppiumDriver driver;
-	
-@BeforeTest
+
+	@BeforeTest
 	public void setUp() throws MalformedURLException {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("deviceName", "emulator-5554");
@@ -36,7 +36,7 @@ public class InstallFromCrashlitics {
 
 	}
 
-@Test
+	@Test
 	public void install() throws IOException, InterruptedException {
 		System.out.println("Uninstall application");
 		Runtime.getRuntime().exec("adb shell am force-stop com.leadsecure.agent");
@@ -49,15 +49,11 @@ public class InstallFromCrashlitics {
 
 		System.out.println("elements.size() = " + elements.size());
 		for (WebElement webElement : elements) {
-			try {
-				webElement.getText();
-				System.out.println(webElement.getText());
-				if (Objects.equals(webElement.getText(), new String("com.leadsecure.agent"))) {
-					webElement.click();
-					System.out.println("com.leadsecure.agent package clicked");
-				}
-			} catch (Exception e) {
-				System.out.println("greshka");
+			webElement.getText();
+			System.out.println(webElement.getText());
+			if (Objects.equals(webElement.getText(), new String("com.leadsecure.agent"))) {
+				webElement.click();
+				System.out.println("com.leadsecure.agent package clicked");
 			}
 		}
 		try {
@@ -67,7 +63,7 @@ public class InstallFromCrashlitics {
 			System.out.println("Error when try to click on download button");
 		}
 
-		Thread.sleep(60000);
+		Thread.sleep(160000);
 	}
 
 	private void clickOnIdIfIsPresent(String id) {
