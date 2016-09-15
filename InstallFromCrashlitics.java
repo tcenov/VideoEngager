@@ -5,43 +5,79 @@ import io.appium.java_client.android.AndroidDriver;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterTest;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 @SuppressWarnings("rawtypes")
 
 public class InstallFromCrashlitics {
 
 	AppiumDriver driver;
-
-	@BeforeTest
+	
+@BeforeTest
 	public void setUp() throws MalformedURLException {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("deviceName", "emulator-5554");
 		capabilities.setCapability("browserName", "Android");
 		capabilities.setCapability("platformVersion", "5.1.1");
 		capabilities.setCapability("platformName", "Android");
-		capabilities.setCapability("appPackage", "io.crash.air-2");
+		capabilities.setCapability("appPackage", "io.crash.air");
 		capabilities.setCapability("appActivity", "io.crash.air.ui.MainActivity");
 		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
 	}
 
-	@Test
-	public void test() throws IOException, InterruptedException {
+@Test
+	public void install() throws IOException, InterruptedException {
+		System.out.println("Uninstall application");
+		Runtime.getRuntime().exec("adb shell am force-stop com.leadsecure.agent");
+		Runtime.getRuntime().exec("adb shell pm clear com.leadsecure.agent");
+		Runtime.getRuntime().exec("adb uninstall com.leadsecure.agent");
+		Thread.sleep(2000);
+		System.out.println("Uninstall finished");
+		System.out.println("Install started");
+		List<WebElement> elements = driver.findElements(By.id("app_package"));
 
-		System.out.println("test started");
-		Thread.sleep(5000);
+		System.out.println("elements.size() = " + elements.size());
+		for (WebElement webElement : elements) {
+			try {
+				webElement.getText();
+				System.out.println(webElement.getText());
+				if (Objects.equals(webElement.getText(), new String("com.leadsecure.agent"))) {
+					webElement.click();
+					System.out.println("com.leadsecure.agent package clicked");
+				}
+			} catch (Exception e) {
+				System.out.println("greshka");
+			}
+		}
+		try {
+			clickOnIdIfIsPresent("app_action_button");
+			System.out.println("Download agent should be started");
+		} catch (Exception e) {
+			System.out.println("Error when try to click on download button");
+		}
 
+		Thread.sleep(60000);
 	}
 
-	@AfterTest
-	public void End() throws IOException {
-		if (driver != null) {
-			driver.quit();
+	private void clickOnIdIfIsPresent(String id) {
+		Boolean isPresent = driver.findElements(By.id(id)).size() > 0;
+		if (isPresent) {
+			driver.findElement(By.id(id)).click();
+		} else {
+			WebDriverWait wait = new WebDriverWait(driver, 20);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+			driver.findElement(By.id(id)).click();
 		}
 	}
 }
