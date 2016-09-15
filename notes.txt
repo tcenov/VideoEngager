@@ -11,6 +11,7 @@ what are the must push notifications... tests
 chat in background
 driver.java open notification
 
+need to verify video while in call
 
 
 Install app from apk file in folder. - Done

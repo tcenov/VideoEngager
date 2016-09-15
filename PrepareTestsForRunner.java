@@ -53,6 +53,8 @@ public class PrepareTestsForRunner {
 		android.startConversation();
 		android.startVideoCall();
 		firefox.answerVideoCall();
+		//ToDo need to verify video
+		
 		android.stopVideoCall();
 		android.closeConversation();
 		android.print("Test case - prospect receive Video call");
