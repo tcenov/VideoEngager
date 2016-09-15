@@ -8,7 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class FirefoxRunner {
+public class TestsRunner {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();
@@ -20,7 +20,7 @@ public class FirefoxRunner {
 	}
 
 	@Test(priority = 1)
-	public void test() throws InterruptedException, AWTException, IOException {
+	public void login() throws InterruptedException, AWTException, IOException {
 		android.login("tester2006@abv.bg", "Tarator1");
 		firefox.login();
 	}
