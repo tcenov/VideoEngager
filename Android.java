@@ -50,17 +50,19 @@ public class Android {
 			print("you have visitor with name: " + webElement.getText());
 		}
 		visitors.get(0).click();
-		String visitorName = null;
 		try {
-			visitorName = visitors.get(0).getText();
+			String visitorName = android.findElement(By.id("txtTitle")).getText();
+			print("Started Conversation with " + visitorName);
 		} catch (Exception e) {
-			print(" Error on get name from visitor");
+			print(" Error on get visitor's name ");
 		}
-		print("Started Conversation with " + visitorName);
+		
 	}
 
 	void closeConversation() {
 		clickOnIdIfIsPresent("btnLeft");
+		print("Closed Conversation");
+		
 	}
 
 	void sendMessage(String message) {

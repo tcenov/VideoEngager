@@ -22,8 +22,8 @@ public class PrepareTestsForRunner_LoginTest {
 
 	}
 
-	@AfterClass
-	void cleanUp() throws IOException {
-		android.cleanUpAndroid();
-	}
+//	@AfterClass
+//	void cleanUp() throws IOException {
+//		android.cleanUpAndroid();
+//	}
 }

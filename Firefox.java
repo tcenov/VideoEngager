@@ -42,7 +42,7 @@ public class Firefox {
 		// this make firefoxProfile to block web page images
 		// firefox = new FirefoxDriver(firefoxProfile);
 		firefox.manage().window().maximize();
-		new Minimize().minimize();
+		//new Minimize().minimize();
 		firefox.get("https://videome.leadsecure.com/testtes");
 		firefox.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);

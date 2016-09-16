@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class PrepareTestsForRunner {
+public class PrepareTestsForRunner_ProspectReceiveVideoCall {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();
@@ -21,35 +21,6 @@ public class PrepareTestsForRunner {
 	public void firefoxLogin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
 		firefox.login();
-	}
-
-	@Test(priority = 3)
-	public void agentReceiveChatMessage() throws InterruptedException {
-		// Prerequisites : login from android
-		android.startConversation();
-		
-		firefox.SendMessage("Sent from browser prospector");
-		// firefox.resizeWindow(500, 20);
-		
-		// ToDo check message received from android
-		android.pause(20);
-		android.closeConversation();
-		android.print("Napisa li buga?");
-		android.pause(15);
-		android.print("Test case - agent receive chat message from browser.");
-	}
-
-	@Test(priority = 4)
-	public void prospectorReceiveChatMessage() throws InterruptedException {
-
-		android.startConversation();
-		android.sendMessage("Sent from android agent");
-		// ToDo check message received from firefox
-		
-		android.pause(10);
-		android.closeConversation();
-		android.pause(15);
-		android.print("Test case - agent android send message");
 	}
 
 	@Test(priority = 5)

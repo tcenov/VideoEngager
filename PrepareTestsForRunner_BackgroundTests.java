@@ -11,10 +11,6 @@ public class PrepareTestsForRunner_BackgroundTests {
 	Firefox firefox = new Firefox();
 	Android android = new Android();
 	
-//	@BeforeClass
-//	void setUp() throws IOException, InterruptedException, AWTException {
-//		
-//	}
 
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
@@ -28,19 +24,19 @@ public class PrepareTestsForRunner_BackgroundTests {
 		firefox.login();
 	}
 	
-	@Test(priority = 3)
+	@Test(priority = 7)
 	public void notificationsWhileRunInBackground() throws InterruptedException, IOException {
 		//android.runAppInBackground(5);
 				
 		android.pressHomeButton();
-		android.clearNotifications();
-		firefox.SendMessage("Message while android works in background");
+		//android.clearNotifications();
 		android.pause(2);
+		firefox.SendMessage("Message while android works in background");
+		android.pause(10);
 		android.openNotifications();
 		
 		//driver.findElement(By.xpath("//android.widget.TextView[@text='TitleText']"));
-		
-		
+				
 //		((AndroidDriver) driver).openNotifications();
 //		sleep(1); //wait while notifications are playing animation to appear to avoid missed taps
 //		nativeNotificationPage = new NativeNotificationPage(driver);
@@ -62,15 +58,8 @@ public class PrepareTestsForRunner_BackgroundTests {
 //		}
 		
 		
-		
-		
-		
-		
-		
-		
-		android.pause(240);
-		
-		android.print("End of test");
+		android.pause(240);	
+		android.print("Test case - call notifications while android run in background");
 		
 //		adb shell am start -n com.myApp.android/.Main
 //		adb shell am start -n com.leadsecure.core/.ui.LoginActivity
