@@ -2,8 +2,6 @@ package android2.VideoEngager;
 
 import java.awt.AWTException;
 import java.io.IOException;
-
-import org.openqa.selenium.interactions.PauseAction;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

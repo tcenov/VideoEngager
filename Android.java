@@ -2,6 +2,8 @@ package android2.VideoEngager;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -82,12 +84,29 @@ public class Android {
 		print("Clicked on StopVideoCall button.");
 	}
 
+	void openNotifications() {
+		((AndroidDriver) android).openNotifications();
+		print("Opened Notifications.");
+	}
+
+	void clearNotifications() {
+		openNotifications();
+		if (isElementPresent(By.id("dismiss_text"))) {
+			clickOnIdIfIsPresent("dismiss_text");
+			print("Cleared notifications.");
+		} else {
+			((AndroidDriver) android).a();
+		}
+				
+		
+	}
+
 	void inVideoCallCameraButtonClick() {
 		clickOnIdIfIsPresent("incallCameraButton");
 		print("Clicked on incallCameraButton button.");
 	}
 
-	public void videoCallGetTextFromElements() {
+	void videoCallGetTextFromElements() {
 		WebDriverWait wait = new WebDriverWait(android, 25);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("android.widget.TextView")));
 		List<WebElement> list = android.findElements(By.className("android.widget.TextView"));
@@ -131,7 +150,7 @@ public class Android {
 		}
 	}
 
-	public boolean isElementPresent(By selector) {
+	private boolean isElementPresent(By selector) {
 		boolean found = true;
 		try {
 			WebDriverWait wait = new WebDriverWait(android, 15);
@@ -143,7 +162,7 @@ public class Android {
 		return found;
 	}
 
-	public void typeTextInSelector(By selector, String text) {
+	private void typeTextInSelector(By selector, String text) {
 		try {
 			android.findElement(selector).click();
 			android.findElement(selector).sendKeys(text);
@@ -151,7 +170,7 @@ public class Android {
 		}
 	}
 
-	public void clickOnSelector(By selector) throws InterruptedException {
+	private void clickOnSelector(By selector) throws InterruptedException {
 		WebElement element = getWebElement(selector);
 		try {
 			element.click();
@@ -192,6 +211,26 @@ public class Android {
 			print("Something wrong in lock screen!!!");
 			e.printStackTrace();
 		}
+	}
+
+	void pressHomeButton() {
+		((AndroidDriver) android).pressKeyCode(AndroidKeyCode.HOME);
+		print("Pressed Home button - app works in background");
+	}
+
+	void runAppInBackground(int seconds) {
+		print("App is in background for " + seconds + " seconds");
+		android.runAppInBackground(seconds);
+	}
+
+	void startApp() {
+		android.launchApp();
+		print("App is launched");
+	}
+
+	void closeApp() {
+		android.closeApp();
+		print("App is closed");
 	}
 
 	void unlockScreen() {
