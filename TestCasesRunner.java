@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class TestsRunner {
+public class TestCasesRunner {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();
@@ -58,7 +58,9 @@ public class TestsRunner {
 		android.startVideoCall();
 		android.pause(5);
 		firefox.answerVideoCall();
-		android.pause(10);
+		android.pause(2);
+	//	firefox.muteMicrophone();
+		android.pause(2);
 		android.stopOrRejectVideoCall();
 		android.closeConversation();
 		android.print("Test case - prospect receive Video call");
@@ -71,7 +73,9 @@ public class TestsRunner {
 		firefox.CallButtonClick();
 		android.pause(2);
 		android.answerVideoCall();
-		android.pause(10);
+		android.pause(5);
+		firefox.muteMicrophone();
+		firefox.muteMicrophone();
 		android.stopOrRejectVideoCall();
 		android.pause(10);
 		android.print("Test case - android agent receive video call,then android end video call ");

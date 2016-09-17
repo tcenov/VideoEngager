@@ -6,7 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class PrepareTestsForRunner_AndroidLogin {
+public class Test_AndroidLogin {
 
 	Android android = new Android();
 

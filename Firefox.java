@@ -101,7 +101,7 @@ public class Firefox {
 		print("Firefox: showHideVideo.");
 	}
 	
-	public void MicrophoneButtonClick(){
+	public void muteMicrophone(){
 		clickOnIdIfIsPresent("showHideAudio");
 		print("Firefox: showHideAudio.");
 	}
@@ -113,17 +113,36 @@ public class Firefox {
 	
 	public void CallButtonClick(){
 		//id="callButton_3F37k1rLhVbmpxwf9"
+		WebElement call;
+		WebDriverWait wait;
+		try {
+			call = firefox.findElement(By.id("callButton_3F37k1rLhVbmpxwf9"));
+			print("callButton_3F37k1rLhVbmpxwf9");
+			print("call.isDisplayed()= " + call.isDisplayed());
+			print("call.isEnabled() = " + call.isEnabled());
+			wait = new WebDriverWait(firefox, 15);
+			wait.until(ExpectedConditions.elementToBeClickable(call));	
+			call.click();
+		} catch (Exception e) {
+			print("Greshka pri call");
+		}
+		try {
+			call = firefox.findElement(By.id("callButtonF37k1rLhVbmpxwf9"));
+			print("callButtonF37k1rLhVbmpxwf9");
+			print("call.isDisplayed()= " + call.isDisplayed());
+			print("call.isEnabled() = " + call.isEnabled());
+			wait = new WebDriverWait(firefox, 15);
+			wait.until(ExpectedConditions.elementToBeClickable(call));			
+			call.click();
+		} catch (Exception e) {
+			print("Greshka pri call");
+		}
 			  //callButtonF37k1rLhVbmpxwf9
 		//By.xpath("//*[contains(@id, '7k1rLhVbmpxwf9')]")
 		//classes wd-v-pickup trn-link
 		//click(By.cssSelector(".wd-v-pickup"));
-		if (isElementPresent(By.xpath("//*[contains(@id, '7k1rLhVbmpxwf9')]"))) {
-			WebElement call = firefox.findElement(By.xpath("//*[contains(@id, '7k1rLhVbmpxwf9')]"));
-			call.click();
-			print("Firefox called.");
-		} else {
-			print("Firefox: Greshka pri call from Firefox!!!");
-		}
+		print("Firefox called.");
+ 
 	}
 	
 	public void connectButtonClick() throws InterruptedException{

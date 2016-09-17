@@ -6,7 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class PrepareTestsForRunner_BackgroundTests {
+public class Test_BackgroundTests {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();

@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class PrepareTestsForRunner_ProspectReceiveVideoCallEndFromProspect {
+public class Test_ProspectReceiveVideoCallEndFromProspect {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();
