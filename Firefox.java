@@ -29,7 +29,7 @@ public class Firefox {
 
 	@BeforeTest
 	public void setUp() throws AWTException {
-		print("firefox.setUp() is starting");
+		print("Firefox: firefox.setUp() is starting");
 		System.setProperty("webdriver.gecko.driver", "D:\\geckodriver-v0.10.0-win64\\geckodriver.exe");
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities("firefox", "", Platform.ANY);
 		FirefoxProfile profile = new ProfilesIni().getProfile("default");
@@ -44,7 +44,7 @@ public class Firefox {
 		firefox.manage().window().maximize();
 		//new Minimize().minimize();
 		firefox.get("https://videome.leadsecure.com/testtes");
-		firefox.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		//firefox.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 		firefox.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
 	}
@@ -52,17 +52,17 @@ public class Firefox {
 	public void login() {
 		String title = firefox.getTitle();
 		if (Objects.equals(title, new String("Live Video Session"))) {
-			print(title + " is loaded on Firefox");
+			print("Firefox: " + title + " is loaded on Firefox");
 		} else {
-			print("There is something wrong !!!");
+			print("Firefox: There is something wrong !!!");
 		}
 		if (isElementPresent(By.xpath("//*[contains(@id, 'peer_email_video')]"))) {
-			print("You are logged in from Firefox");
+			print("Firefox: You are logged in from Firefox");
 		}
 	}
 
 	void logout() {
-		print("You are logged out");
+		print("Firefox: You are logged out from Firefox.");
 	}
 
 	public void answerVideoCall() {
@@ -70,9 +70,9 @@ public class Firefox {
 		// *[@id='answer_call_buttonF37k1rLhVbmpxwf9']
 		if (isElementPresent(By.xpath("//*[contains(@id, 'answer_call_button')]"))) {
 			firefox.findElement(By.xpath("//*[contains(@id, 'answer_call_button')]")).click();
-			print("Answer video call from Firefox");
+			print("Firefox answer video call.");
 		} else {
-			print("Greshka pri video call answer!!!");
+			print("Firefox: Greshka pri video call answer!!!");
 		}
 	}
 
@@ -82,17 +82,17 @@ public class Firefox {
 			WebElement messageField = firefox.findElement(By.xpath("//*[contains(@id, 'instacollab_chat_message')]"));
 			messageField.click();
 			messageField.sendKeys(message);
-			print("enter message in field");
+			print("Firefox enter message in field");
 		} else {
-			print("Greshka pri enter message in field!!!");
+			print("Firefox: Greshka pri enter message in field!!!");
 		}
 		//id of "Enter" webelement = instacollab_chat_button1Fv1231231v134
 		if (isElementPresent(By.xpath("//*[contains(@id, 'instacollab_chat_button1')]"))) {
 			WebElement enter = firefox.findElement(By.xpath("//*[contains(@id, 'instacollab_chat_button1')]"));
 			enter.click();
-			print("Message sent from Firefox");
+			print("Firefox: Message sent.");
 		} else {
-			print("Greshka pri send message from Firefox!!!");
+			print("Firefox: Greshka pri send message from Firefox!!!");
 		}
 	}
 	
@@ -110,9 +110,9 @@ public class Firefox {
 		if (isElementPresent(By.xpath("//*[contains(@id, 'callButton')]"))) {
 			WebElement call = firefox.findElement(By.xpath("//*[contains(@id, 'callButton')]"));
 			call.click();
-			print("Called from Firefox");
+			print("Firefox called.");
 		} else {
-			print("Greshka pri call from Firefox!!!");
+			print("Firefox: Greshka pri call from Firefox!!!");
 		}
 	}
 	
@@ -148,7 +148,7 @@ public class Firefox {
 			WebDriverWait wait = new WebDriverWait(firefox, 15);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(selector));
 		} catch (NoSuchElementException e) {
-			print("doesn't found selector");
+			print("Firefox: doesn't found selector.");
 			found = false;
 		}
 		return found;
@@ -200,7 +200,7 @@ public class Firefox {
 		}
 		robot.keyPress(KeyEvent.VK_SPACE);
 		robot.keyRelease(KeyEvent.VK_SPACE);
-		print("clicked on shared devices");
+		print("Firefox: clicked on shared devices");
 		pause(1);
 		for (int i = 0; i < 5; i++) {
 			robot.keyPress(KeyEvent.VK_TAB);
@@ -220,7 +220,7 @@ public class Firefox {
 	}
 
 	void pause(int seconds) throws InterruptedException {
-		System.out.println("Waiting " + seconds + " seconds");
+		System.out.println("Firefox: Waiting " + seconds + " seconds");
 		Thread.sleep(seconds * 1000);
 	}
 
@@ -235,14 +235,14 @@ public class Firefox {
 				return ((JavascriptExecutor) firefox).executeScript("return document.readyState").equals("complete");
 			}
 		});
-		print("Page is loaded.");
+		print("Firefox: Page is loaded.");
 	}
 
 	@AfterTest
 	void close() {
 		if (firefox != null) {
 			firefox.quit();
-			print("Firefox closed");
+			print("Firefox is closed");
 		}
 	}
 }

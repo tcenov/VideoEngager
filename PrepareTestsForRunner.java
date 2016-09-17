@@ -22,17 +22,7 @@ public class PrepareTestsForRunner {
 		firefox.login();
 	}
 
-
-	@Test(priority = 6)
-	public void androidAgentReceiveVideoCall() throws InterruptedException {
-		firefox.CallButtonClick();
-		android.startConversation();
-//		
-//		android.stopVideoCall();
-//		android.closeConversation();
-		android.print("Test case - android receive video call");
-		android.pause(120);
-	}
+ 
 	
 	@AfterClass
 	void cleanUp() throws IOException {
