@@ -38,7 +38,7 @@ public class PrepareTestsForRunner {
 	public void androidAgentReceiveVideoCall() throws InterruptedException {
 		
 		android.pause(5);
-		firefox.CallButtonClick();
+		firefox.callButtonFromConversationClick();
 		android.pause(2);
 		android.answerVideoCall();
 		android.pause(10);

@@ -70,7 +70,7 @@ public class TestCasesRunner {
 	public void androidAgentReceiveVideoCall() throws InterruptedException {
 		
 		android.pause(5);
-		firefox.CallButtonClick();
+		firefox.callButtonFromConversationClick();
 		android.pause(2);
 		android.answerVideoCall();
 		android.pause(5);
@@ -83,7 +83,7 @@ public class TestCasesRunner {
 
 	@Test(priority = 7)
 	public void androidAgentRejectVideoCall() throws InterruptedException {
-		firefox.CallButtonClick();
+		firefox.callButtonFromConversationClick();
 		android.pause(3);
 		android.stopOrRejectVideoCall();
 		android.pause(3);
@@ -94,7 +94,7 @@ public class TestCasesRunner {
 	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException {
 		android.startConversation();
 		android.pause(2);
-		firefox.CallButtonClick();
+		firefox.callButtonFromConversationClick();
 		android.pause(2);
 		android.answerVideoCall();
 		android.pause(10);
@@ -122,7 +122,6 @@ public class TestCasesRunner {
 		android.pause(30);	
 		android.print("Test case - call notifications while android run in background");
 	}
-	
 	
 	@AfterClass
 	void cleanUp() throws IOException {

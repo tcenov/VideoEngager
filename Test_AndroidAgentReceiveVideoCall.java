@@ -26,7 +26,7 @@ public class Test_AndroidAgentReceiveVideoCall {
 	@Test(priority = 6)
 	public void androidAgentReceiveVideoCall() throws InterruptedException {	
 		android.pause(5);
-		firefox.CallButtonClick();
+		firefox.callButtonFromHomeClick();
 		android.pause(2);
 		android.answerVideoCall();
 		android.pause(5);

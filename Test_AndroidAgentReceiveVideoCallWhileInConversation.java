@@ -27,7 +27,7 @@ public class Test_AndroidAgentReceiveVideoCallWhileInConversation {
 	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException {
 		android.startConversation();
 		android.pause(2);
-		firefox.CallButtonClick();
+		firefox.callButtonFromHomeClick();
 		android.pause(2);
 		android.answerVideoCall();
 		android.pause(10);

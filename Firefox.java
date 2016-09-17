@@ -112,7 +112,7 @@ public class Firefox {
 		print("Firefox stopped video call.");
 	}
 
-	public void CallButtonFromHomeClick() {
+	public void callButtonFromHomeClick() {
 		WebElement call;
 		WebDriverWait wait;
 		try {
@@ -130,7 +130,7 @@ public class Firefox {
 		}
 	}
 
-	public void CallButtonFromConversationClick() {
+	public void callButtonFromConversationClick() {
 		// id="callButton_3F37k1rLhVbmpxwf9"
 		// callButtonF37k1rLhVbmpxwf9
 		// By.xpath("//*[contains(@id, '7k1rLhVbmpxwf9')]")
