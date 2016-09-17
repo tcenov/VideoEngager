@@ -30,20 +30,10 @@ public class PrepareTestsForRunner_ProspectReceiveVideoCall {
 		android.pause(10);
 		firefox.answerVideoCall();
 		android.pause(10);
-		android.stopVideoCall();
+		android.stopOrRejectVideoCall();
 		android.closeConversation();
-		android.print("Test case - prospect receive Video call");
+		android.print("Test case - prospect receive Video call, video ended from android");
 	}
-
-//	@Test(priority = 6)
-//	public void androidAgentReceiveVideoCall() throws InterruptedException {
-//		firefox.CallButtonClick();
-//		android.startConversation();
-//		android.stopVideoCall();
-//		android.closeConversation();
-//		android.print("Test case - android receive video call");
-//		android.pause(120);
-//	}
 
 	@AfterClass
 	void cleanUp() throws IOException {

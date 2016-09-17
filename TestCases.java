@@ -31,7 +31,7 @@ public class TestCases extends Android {
 		pause(2);
 		videoCallGetTextFromElements();
 
-		stopVideoCall();
+		stopOrRejectVideoCall();
 //		pause(5);
 
 		closeConversation();

@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class PrepareTestsForRunner_AndroidAgentReceiveVideoCall {
+public class PrepareTestsForRunner_AndroidAgentRejectVideoCall {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();
@@ -23,16 +23,15 @@ public class PrepareTestsForRunner_AndroidAgentReceiveVideoCall {
 		firefox.login();
 	}
 
-	@Test(priority = 6)
-	public void androidAgentReceiveVideoCall() throws InterruptedException {
+	@Test(priority = 7)
+	public void androidAgentRejectVideoCall() throws InterruptedException {
 		firefox.CallButtonClick();
-		android.answerVideoCall();
-		android.pause(10);
+		android.pause(3);
 		android.stopOrRejectVideoCall();
-		android.pause(10);
-		android.print("Test case - android agent receive video call,then android end video call ");
+		android.pause(3);
+		android.print("Test case - android agent rejected video call.");
 	}
-
+ 
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

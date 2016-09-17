@@ -32,10 +32,10 @@ public class TestsRunner {
 		// firefox.resizeWindow(500, 20);
 		
 		// ToDo check message received from android
-		android.pause(20);
+		android.pause(10);
 		android.closeConversation();
 		android.print("Napisa li buga?");
-		android.pause(15);
+		android.pause(5);
 		android.print("Test case - agent receive chat message from browser.");
 	}
 
@@ -48,7 +48,7 @@ public class TestsRunner {
 		
 		android.pause(10);
 		android.closeConversation();
-		android.pause(15);
+		android.pause(5);
 		android.print("Test case - agent android send message");
 	}
 
@@ -56,25 +56,50 @@ public class TestsRunner {
 	public void prospectReceiveVideoCall() throws InterruptedException {
 		android.startConversation();
 		android.startVideoCall();
-		android.pause(10);
+		android.pause(5);
 		firefox.answerVideoCall();
 		android.pause(10);
-		android.stopVideoCall();
+		android.stopOrRejectVideoCall();
 		android.closeConversation();
 		android.print("Test case - prospect receive Video call");
 	}
-
-//	@Test(priority = 6)
-//	public void androidAgentReceiveVideoCall() throws InterruptedException {
-//		firefox.CallButtonClick();
-//		android.startConversation();
-//		android.stopVideoCall();
-//		android.closeConversation();
-//		android.print("Test case - android receive video call");
-//		android.pause(120);
-//	}
+	
+	@Test(priority = 6)
+	public void androidAgentReceiveVideoCall() throws InterruptedException {
+		
+		android.pause(5);
+		firefox.CallButtonClick();
+		android.pause(2);
+		android.answerVideoCall();
+		android.pause(10);
+		android.stopOrRejectVideoCall();
+		android.pause(10);
+		android.print("Test case - android agent receive video call,then android end video call ");
+	}
 
 	@Test(priority = 7)
+	public void androidAgentRejectVideoCall() throws InterruptedException {
+		firefox.CallButtonClick();
+		android.pause(3);
+		android.stopOrRejectVideoCall();
+		android.pause(3);
+		android.print("Test case - android agent rejected video call.");
+	}
+	
+	@Test(priority = 8)
+	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException {
+		android.startConversation();
+		android.pause(2);
+		firefox.CallButtonClick();
+		android.pause(2);
+		android.answerVideoCall();
+		android.pause(10);
+ 		android.stopOrRejectVideoCall();
+		android.print("Test case - android receive video call while conversation is opened");
+	}
+	
+	
+	@Test(priority = 9)
 	public void notificationsWhileRunInBackground() throws InterruptedException, IOException {
 		//android.runAppInBackground(5);
 				
@@ -82,9 +107,14 @@ public class TestsRunner {
 		//android.clearNotifications();
 		android.pause(2);
 		firefox.SendMessage("Message while android works in background");
-		android.pause(10);
+		android.pause(5);
 		android.openNotifications();
-		
+		android.pause(3);
+		android.clearNotifications();
+		android.pause(1);
+		firefox.SendMessage("Message while android works in background");
+		android.pause(2);
+		android.openNotifications();		
 		android.pause(30);	
 		android.print("Test case - call notifications while android run in background");
 	}

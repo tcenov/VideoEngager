@@ -81,7 +81,7 @@ public class Android {
 		print("Android clicked on StartVideoCall button.");
 	}
 
-	void stopVideoCall() {
+	void stopOrRejectVideoCall() {
 		clickOnIdIfIsPresent("incallRejectButton");
 		print("Android clicked on StopVideoCall button.");
 	}
@@ -108,7 +108,7 @@ public class Android {
 			clickOnIdIfIsPresent("dismiss_text");
 			print("Android: Cleared notifications.");
 		} else {
-			((AndroidDriver) android).a();
+			print("Android: Greshka pri Cleared notifications");
 		}
 				
 	}

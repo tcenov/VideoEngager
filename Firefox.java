@@ -98,17 +98,27 @@ public class Firefox {
 	
 	public void CameraButtonClick(){
 		clickOnIdIfIsPresent("showHideVideo");
+		print("Firefox: showHideVideo.");
 	}
 	
 	public void MicrophoneButtonClick(){
 		clickOnIdIfIsPresent("showHideAudio");
+		print("Firefox: showHideAudio.");
+	}
+	
+	public void stopVideoCall(){
+		clickOnIdIfIsPresent("hangupButton");
+		print("Firefox stopped video call.");
 	}
 	
 	public void CallButtonClick(){
 		//id="callButton_3F37k1rLhVbmpxwf9"
 			  //callButtonF37k1rLhVbmpxwf9
-		if (isElementPresent(By.xpath("//*[contains(@id, 'callButton')]"))) {
-			WebElement call = firefox.findElement(By.xpath("//*[contains(@id, 'callButton')]"));
+		//By.xpath("//*[contains(@id, '7k1rLhVbmpxwf9')]")
+		//classes wd-v-pickup trn-link
+		//click(By.cssSelector(".wd-v-pickup"));
+		if (isElementPresent(By.xpath("//*[contains(@id, '7k1rLhVbmpxwf9')]"))) {
+			WebElement call = firefox.findElement(By.xpath("//*[contains(@id, '7k1rLhVbmpxwf9')]"));
 			call.click();
 			print("Firefox called.");
 		} else {
