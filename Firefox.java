@@ -42,9 +42,9 @@ public class Firefox {
 		// this make firefoxProfile to block web page images
 		// firefox = new FirefoxDriver(firefoxProfile);
 		firefox.manage().window().maximize();
-		//new Minimize().minimize();
+		// new Minimize().minimize();
 		firefox.get("https://videome.leadsecure.com/testtes");
-		//firefox.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		// firefox.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 		firefox.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
 	}
@@ -77,7 +77,8 @@ public class Firefox {
 	}
 
 	public void SendMessage(String message) {
-		// id of "Message field" webelement = instacollab_chat_message1F37k1rLhVbmpxwf9
+		// id of "Message field" webelement =
+		// instacollab_chat_message1F37k1rLhVbmpxwf9
 		if (isElementPresent(By.xpath("//*[contains(@id, 'instacollab_chat_message')]"))) {
 			WebElement messageField = firefox.findElement(By.xpath("//*[contains(@id, 'instacollab_chat_message')]"));
 			messageField.click();
@@ -86,7 +87,7 @@ public class Firefox {
 		} else {
 			print("Firefox: Greshka pri enter message in field!!!");
 		}
-		//id of "Enter" webelement = instacollab_chat_button1Fv1231231v134
+		// id of "Enter" webelement = instacollab_chat_button1Fv1231231v134
 		if (isElementPresent(By.xpath("//*[contains(@id, 'instacollab_chat_button1')]"))) {
 			WebElement enter = firefox.findElement(By.xpath("//*[contains(@id, 'instacollab_chat_button1')]"));
 			enter.click();
@@ -95,34 +96,60 @@ public class Firefox {
 			print("Firefox: Greshka pri send message from Firefox!!!");
 		}
 	}
-	
-	public void CameraButtonClick(){
+
+	public void CameraButtonClick() {
 		clickOnIdIfIsPresent("showHideVideo");
 		print("Firefox: showHideVideo.");
 	}
-	
-	public void muteMicrophone(){
+
+	public void muteMicrophone() {
 		clickOnIdIfIsPresent("showHideAudio");
 		print("Firefox: showHideAudio.");
 	}
-	
-	public void stopVideoCall(){
+
+	public void stopVideoCall() {
 		clickOnIdIfIsPresent("hangupButton");
 		print("Firefox stopped video call.");
 	}
-	
-	public void CallButtonClick(){
-		//id="callButton_3F37k1rLhVbmpxwf9"
+
+	public void CallButtonFromHomeClick() {
 		WebElement call;
 		WebDriverWait wait;
 		try {
-			call = firefox.findElement(By.id("callButton_3F37k1rLhVbmpxwf9"));
-			print("callButton_3F37k1rLhVbmpxwf9");
+			call = firefox.findElement(By.xpath("//*[contains(@id, 'callButton_3')]"));
+			// By.xpath("//*[contains(@id, 'callButton_3')]")
+			print("callButton_");
 			print("call.isDisplayed()= " + call.isDisplayed());
 			print("call.isEnabled() = " + call.isEnabled());
 			wait = new WebDriverWait(firefox, 15);
-			wait.until(ExpectedConditions.elementToBeClickable(call));	
+			wait.until(ExpectedConditions.elementToBeClickable(call));
 			call.click();
+			print("Firefox called.");
+		} catch (Exception e) {
+			print("Greshka pri call");
+		}
+	}
+
+	public void CallButtonFromConversationClick() {
+		// id="callButton_3F37k1rLhVbmpxwf9"
+		// callButtonF37k1rLhVbmpxwf9
+		// By.xpath("//*[contains(@id, '7k1rLhVbmpxwf9')]")
+		// classes wd-v-pickup trn-link
+		// click(By.cssSelector(".wd-v-pickup"));
+
+		WebElement call;
+		WebDriverWait wait;
+		try {
+			call = firefox.findElement(By.xpath("//*[contains(@id, 'callButton_3')]"));
+			// By.xpath("//*[contains(@id, 'callButton_3')]")
+			print("callButton_");
+			print("call.isDisplayed()= " + call.isDisplayed());
+			print("call.isEnabled() = " + call.isEnabled());
+			wait = new WebDriverWait(firefox, 15);
+			wait.until(ExpectedConditions.elementToBeClickable(call));
+			call.click();
+			print("Firefox called.");
+
 		} catch (Exception e) {
 			print("Greshka pri call");
 		}
@@ -132,24 +159,19 @@ public class Firefox {
 			print("call.isDisplayed()= " + call.isDisplayed());
 			print("call.isEnabled() = " + call.isEnabled());
 			wait = new WebDriverWait(firefox, 15);
-			wait.until(ExpectedConditions.elementToBeClickable(call));			
+			wait.until(ExpectedConditions.elementToBeClickable(call));
 			call.click();
+			print("Firefox called.");
+
 		} catch (Exception e) {
 			print("Greshka pri call");
 		}
-			  //callButtonF37k1rLhVbmpxwf9
-		//By.xpath("//*[contains(@id, '7k1rLhVbmpxwf9')]")
-		//classes wd-v-pickup trn-link
-		//click(By.cssSelector(".wd-v-pickup"));
-		print("Firefox called.");
- 
 	}
-	
-	public void connectButtonClick() throws InterruptedException{
+
+	public void connectButtonClick() throws InterruptedException {
 		clickOnSelector(By.xpath("//*[contains(@id, 'cancel_call_button')]"));
 	}
-	
-	
+
 	private WebElement getWebElement(By selector) {
 		try {
 			WebElement element = firefox.findElement(selector);
@@ -159,8 +181,7 @@ public class Firefox {
 			return element;
 		}
 	}
-	
-	
+
 	public void clickOnSelector(By selector) throws InterruptedException {
 		WebElement element = getWebElement(selector);
 		try {
@@ -170,7 +191,7 @@ public class Firefox {
 			getWebElement(selector);
 		}
 	}
-	
+
 	public boolean isElementPresent(By selector) {
 		boolean found = true;
 		try {
@@ -182,14 +203,14 @@ public class Firefox {
 		}
 		return found;
 	}
-	
+
 	public void typeTextInSelector(By selector, String text) {
 		try {
 			firefox.findElement(selector).sendKeys(text);
 		} catch (NoSuchElementException e) {
 		}
 	}
-	
+
 	private void clickOnIdIfIsPresent(String id) {
 		Boolean isPresent = firefox.findElements(By.id(id)).size() > 0;
 		if (isPresent) {
@@ -243,7 +264,7 @@ public class Firefox {
 		// robot.mousePress(KeyEvent.BUTTON1_MASK );
 		// robot.mouseRelease(KeyEvent.BUTTON1_MASK );
 	}
-	
+
 	void print(String text) {
 		System.out.println(text);
 	}
@@ -253,10 +274,10 @@ public class Firefox {
 		Thread.sleep(seconds * 1000);
 	}
 
-	public void resizeWindow(int width, int height){
+	public void resizeWindow(int width, int height) {
 		firefox.manage().window().setSize(new Dimension(width, height));
 	}
-	
+
 	public void waitForPageLoad() {
 		WebDriverWait wait = new WebDriverWait(firefox, 30);
 		wait.until(new ExpectedCondition<Boolean>() {
