@@ -42,70 +42,80 @@ public class Android {
 	}
 
 	void startConversation() {
-		print("Waiting up to 20 sec. for visitors");
+		print("Android: Waiting up to 20 sec. for visitors");
 		WebDriverWait wait = new WebDriverWait(android, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("ongoingCallerName")));
 		List<WebElement> visitors = android.findElements(By.id("ongoingCallerName"));
 		for (WebElement webElement : visitors) {
-			print("you have visitor with name: " + webElement.getText());
+			print("Android: You have visitor with name: " + webElement.getText());
 		}
 		visitors.get(0).click();
 		try {
 			String visitorName = android.findElement(By.id("txtTitle")).getText();
 			print("Started Conversation with " + visitorName);
 		} catch (Exception e) {
-			print(" Error on get visitor's name ");
+			print("Android: Error on get visitor's name ");
 		}
 		
 	}
 
 	void closeConversation() {
 		clickOnIdIfIsPresent("btnLeft");
-		print("Closed Conversation");
+		print("Android closed conversation");
 		
 	}
 
 	void sendMessage(String message) {
 		WebElement textField = android.findElement(By.id("chatBottomLayout"));
 		textField.click();
-		print("clicked in message field.");
+		print("Android clicked in message field.");
 		textField.clear();
-		print("cleared message field.");
+		print("Android cleared message field.");
 		textField.sendKeys(message);
 		clickOnNameIfIsPresent("Send");
-		print("Message sent from android.");
+		print("Android: Message sent.");
 	}
 
 	void startVideoCall() {
 		clickOnIdIfIsPresent("btnRight");
-		print("Clicked on StartVideoCall button.");
+		print("Android clicked on StartVideoCall button.");
 	}
 
 	void stopVideoCall() {
 		clickOnIdIfIsPresent("incallRejectButton");
-		print("Clicked on StopVideoCall button.");
+		print("Android clicked on StopVideoCall button.");
 	}
 
+	void answerVideoCall() {
+		if (isElementPresent(By.id("incomingCallerName"))) {
+			String callerName = android.findElement(By.id("incomingCallerName")).getText();
+			print(callerName + " is calling");
+		} else {
+			print("Android: Greshka pri get caller name");
+		}
+		clickOnIdIfIsPresent("incallAcceptButton");
+		print("Android answered video call");
+	}
+	
 	void openNotifications() {
 		((AndroidDriver) android).openNotifications();
-		print("Opened Notifications.");
+		print("Android opened Notifications.");
 	}
 
 	void clearNotifications() {
 		openNotifications();
 		if (isElementPresent(By.id("dismiss_text"))) {
 			clickOnIdIfIsPresent("dismiss_text");
-			print("Cleared notifications.");
+			print("Android: Cleared notifications.");
 		} else {
 			((AndroidDriver) android).a();
 		}
 				
-		
 	}
 
 	void inVideoCallCameraButtonClick() {
 		clickOnIdIfIsPresent("incallCameraButton");
-		print("Clicked on incallCameraButton button.");
+		print("Android clicked on incallCameraButton button.");
 	}
 
 	void videoCallGetTextFromElements() {
@@ -115,10 +125,10 @@ public class Android {
 		int i = 0;
 		for (WebElement webElement : list) {
 			try {
-				print("text from element " + i + "= " + webElement.getText());
+				print("Android: Text from element " + i + "= " + webElement.getText());
 				i++;
 			} catch (Exception e) {
-				print("Greshka pri webElement.getText()");
+				print("Android: Greshka pri webElement.getText()");
 			}
 		}
 	}
@@ -131,7 +141,7 @@ public class Android {
 		clickOnNameIfIsPresent("ENTER");
 		WebDriverWait wait = new WebDriverWait(android, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("vanityTitleText")));
-		print("You are logged in from android device");
+		print("Android: You are logged in from android device");
 	}
 
 	void logout() throws InterruptedException {
@@ -158,7 +168,7 @@ public class Android {
 			WebDriverWait wait = new WebDriverWait(android, 15);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(selector));
 		} catch (NoSuchElementException e) {
-			print("doesn't found selector");
+			print("Android: doesn't found selector");
 			found = false;
 		}
 		return found;
@@ -208,39 +218,39 @@ public class Android {
 		try {
 			Runtime.getRuntime().exec("adb shell am force-stop io.appium.unlock");
 			Runtime.getRuntime().exec("adb shell input keyevent 26");
-			print("Screen is locked");
+			print("Android: Screen is locked");
 		} catch (IOException e) {
-			print("Something wrong in lock screen!!!");
+			print("Android: Something wrong in lock screen!!!");
 			e.printStackTrace();
 		}
 	}
 
 	void pressHomeButton() {
 		((AndroidDriver) android).pressKeyCode(AndroidKeyCode.HOME);
-		print("Pressed Home button - app works in background");
+		print("Android pressed Home button - app works in background");
 	}
 
 	void runAppInBackground(int seconds) {
-		print("App is in background for " + seconds + " seconds");
+		print("Android: App is in background for " + seconds + " seconds");
 		android.runAppInBackground(seconds);
 	}
 
 	void startApp() {
 		android.launchApp();
-		print("App is launched");
+		print("Android launched application.");
 	}
 
 	void closeApp() {
 		android.closeApp();
-		print("App is closed");
+		print("Android closed application.");
 	}
 
 	void unlockScreen() {
 		try {
 			Runtime.getRuntime().exec("adb shell input keyevent 82");
-			print("Screen is unlocked.");
+			print("Android unlocked screen.");
 		} catch (IOException e) {
-			print("Something wrong in lock screen!!!");
+			print("Android: Something wrong in lock screen!!!");
 			e.printStackTrace();
 		}
 	}
@@ -248,9 +258,9 @@ public class Android {
 	void unlockScreenWithAppium() {
 		try {
 			Runtime.getRuntime().exec("adb shell am start -n io.appium.unlock/.Unlock");
-			print("Screen is unlocked by Appium");
+			print("Android: Screen is unlocked by Appium");
 		} catch (IOException e) {
-			print("Something wrong in lock screen!!!");
+			print("Android: Something wrong in lock screen!!!");
 			e.printStackTrace();
 		}
 	}
@@ -260,13 +270,13 @@ public class Android {
 	}
 
 	void pause(int seconds) throws InterruptedException {
-		System.out.println("Waiting " + seconds + " seconds");
+		System.out.println("Android: Waiting " + seconds + " seconds");
 		Thread.sleep(seconds * 1000);
 	}
 
 	@AfterClass
 	void cleanUpAndroid() throws IOException {
-		print("Clean up android");
+		print("Android: Clean up.");
 		Runtime.getRuntime().exec("adb shell input keyevent 26");
 		Runtime.getRuntime().exec("adb shell am force-stop io.appium.unlock");
 		Runtime.getRuntime().exec("adb shell am force-stop com.leadsecure.agent");

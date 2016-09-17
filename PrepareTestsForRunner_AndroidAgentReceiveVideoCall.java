@@ -23,17 +23,28 @@ public class PrepareTestsForRunner_AndroidAgentReceiveVideoCall {
 		firefox.login();
 	}
 
-
 	@Test(priority = 6)
 	public void androidAgentReceiveVideoCall() throws InterruptedException {
 		firefox.CallButtonClick();
-		android.startConversation();
-		android.pause(10);
+		android.answerVideoCall();
+		android.pause(20);
 		android.stopVideoCall();
-		android.closeConversation();
-		android.print("Test case - android receive video call");
-		android.pause(120);
+		android.pause(20);
+		android.print("Test case - android agent receive video call,then android end video call ");
+		android.pause(30);
 	}
+	
+	
+//	@Test(priority = 7)
+//	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException {
+//		firefox.CallButtonClick();
+//		android.startConversation();
+//		android.pause(10);
+//		android.stopVideoCall();
+//		android.closeConversation();
+//		android.print("Test case - android receive video call");
+//		android.pause(120);
+//	}
 
 	@AfterClass
 	void cleanUp() throws IOException {

@@ -6,7 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class PrepareTestsForRunner_LoginTest {
+public class PrepareTestsForRunner_AndroidLogin {
 
 	Android android = new Android();
 
@@ -18,7 +18,7 @@ public class PrepareTestsForRunner_LoginTest {
 	@Test(priority = 1)
 	public void login() throws InterruptedException, AWTException, IOException {
 		android.login("tester2006@abv.bg", "Tarator1");
-		android.pause(30);
+		android.pause(15);
 
 	}
 
