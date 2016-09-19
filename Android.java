@@ -37,7 +37,7 @@ public class Android {
 		capabilities.setCapability("appActivity", "com.leadsecure.core.ui.LoginActivity");
 		cleanUpAndroid();
 		android = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-		android.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		//android.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox = new Firefox();
 	}
 
@@ -104,12 +104,30 @@ public class Android {
 
 	void clearNotifications() {
 		openNotifications();
-		if (isElementPresent(By.id("dismiss_text"))) {
-			clickOnIdIfIsPresent("dismiss_text");
-			print("Android: Cleared notifications.");
-		} else {
-			print("Android: Greshka pri Cleared notifications");
+		 //By.xpath("//*[contains(content-desc(),'Clear all notifications.')]");
+
+		//clickOnSelector(By.xpath("//*[contains(content-desc(),'Clear all notifications.')]"));
+		 
+		//isElementPresent(By.xpath("//*[contains(@id, 'dismiss')]")) ;
+		
+		boolean yes = isElementPresent(By.xpath("//*[contains(@id, 'dismiss')]"));
+		if (yes) {
+			print("Super s dismiss");
+		} else{
+			print("ne stana s dismiss");
 		}
+		
+		//By.id("dismiss_text")
+//		if (isElementPresent(By.id("clear_all_button"))) {
+//			;
+//			
+//			print("Android: Cleared notifications.");
+//			
+//			//com.android.systemui:id/notification_stack_scroller
+//		} else {
+//			print("Android: Greshka pri Cleared notifications");
+//			
+//		}
 				
 	}
 

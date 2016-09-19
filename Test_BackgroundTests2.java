@@ -6,9 +6,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Test_BackgroundTests {
+public class Test_BackgroundTests2 {
 
-	Firefox firefox = new Firefox();
 	Android android = new Android();
 	
 
@@ -17,12 +16,7 @@ public class Test_BackgroundTests {
 		android.setUp();
 		android.login("tester2006@abv.bg", "Tarator1");
 	}
-
-	@Test(priority = 2)
-	public void firefoxLogin() throws InterruptedException, AWTException, IOException {
-		firefox.setUp();
-		firefox.login();
-	}
+ 
 	
 	@Test(priority = 7)
 	public void notificationsWhileRunInBackground() throws InterruptedException, IOException {
@@ -31,9 +25,7 @@ public class Test_BackgroundTests {
 		android.pressHomeButton();
 		//android.clearNotifications();
 		android.pause(2);
-		firefox.SendMessage("Message while android works in background");
-		android.pause(2);
-		android.openNotifications();
+	//	android.openNotifications();
 		android.clearNotifications();
 		
 		//driver.findElement(By.xpath("//android.widget.TextView[@text='TitleText']"));
@@ -59,7 +51,7 @@ public class Test_BackgroundTests {
 //		}
 		
 		
-		android.pause(240);	
+		android.pause(20);	
 		android.print("Test case - call notifications while android run in background");
 		
 //		adb shell am start -n com.myApp.android/.Main
@@ -73,6 +65,5 @@ public class Test_BackgroundTests {
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();
-		firefox.close();
 	}
 }
