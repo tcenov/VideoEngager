@@ -3,12 +3,11 @@ package android2.VideoEngager;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
+import java.util.Objects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -37,7 +36,7 @@ public class Android {
 		capabilities.setCapability("appActivity", "com.leadsecure.core.ui.LoginActivity");
 		cleanUpAndroid();
 		android = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-		//android.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		// android.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox = new Firefox();
 	}
 
@@ -56,13 +55,13 @@ public class Android {
 		} catch (Exception e) {
 			print("Android: Error on get visitor's name ");
 		}
-		
+
 	}
 
 	void closeConversation() {
 		clickOnIdIfIsPresent("btnLeft");
 		print("Android closed conversation");
-		
+
 	}
 
 	void sendMessage(String message) {
@@ -96,39 +95,41 @@ public class Android {
 		clickOnIdIfIsPresent("incallAcceptButton");
 		print("Android answered video call");
 	}
-	
+
 	void openNotifications() {
 		((AndroidDriver) android).openNotifications();
 		print("Android opened Notifications.");
 	}
 
 	void clearNotifications() {
+		// Required Login
 		openNotifications();
-		 //By.xpath("//*[contains(content-desc(),'Clear all notifications.')]");
-
-		//clickOnSelector(By.xpath("//*[contains(content-desc(),'Clear all notifications.')]"));
-		 
-		//isElementPresent(By.xpath("//*[contains(@id, 'dismiss')]")) ;
-		
-		boolean yes = isElementPresent(By.xpath("//*[contains(@id, 'dismiss')]"));
-		if (yes) {
-			print("Super s dismiss");
-		} else{
-			print("ne stana s dismiss");
+		Boolean isPresent = android.findElements(By.className("android.widget.Button")).size() > 0;
+		if (isPresent) {
+			List<WebElement> allButtons = android.findElements(By.className("android.widget.Button"));
+			try {
+				allButtons = android.findElements(By.className("android.widget.Button"));
+				print("allButtons.size() = " + allButtons.size());
+				for (int i = 0; i < allButtons.size(); i++) {
+					String buttonName = allButtons.get(i).getText();
+					print("Android: Found button " + i + " with name= " + buttonName);
+					if (Objects.equals(buttonName, new String(""))) {
+						print("Android: Found clear notification button");
+						allButtons.get(i).click();
+						print("Android: Clear notifications.");
+						return;
+					} else {
+						print("Android: This button is not clear notification button");
+					}
+				}
+			} catch (Exception e) {
+				print("Android: There are no any notifications");
+				pressBackButton();
+			}
+		} else {
+			print("Android: There are no any notifications");
+			pressBackButton();
 		}
-		
-		//By.id("dismiss_text")
-//		if (isElementPresent(By.id("clear_all_button"))) {
-//			;
-//			
-//			print("Android: Cleared notifications.");
-//			
-//			//com.android.systemui:id/notification_stack_scroller
-//		} else {
-//			print("Android: Greshka pri Cleared notifications");
-//			
-//		}
-				
 	}
 
 	void inVideoCallCameraButtonClick() {
@@ -248,9 +249,56 @@ public class Android {
 		print("Android pressed Home button - app works in background");
 	}
 
+	void pressBackButton() {
+		((AndroidDriver) android).pressKeyCode(AndroidKeyCode.BACK);
+		print("Android pressed back button.");
+	}
+
+	void acceptRejectNotification(String acceptOrReject) {
+		acceptOrReject = acceptOrReject.toLowerCase();
+		List<WebElement> buttons = android.findElements(By.xpath("*//android.widget.Button"));
+		for (int j = 0; j < buttons.size(); j++) {
+			String buttonName = buttons.get(j).getText().toLowerCase();
+			if (Objects.equals(buttonName, acceptOrReject)) {
+				buttons.get(j).click();
+				return;
+			}
+		}
+	}
+
+	void getAllNotifications() {
+		List<WebElement> elements = android.findElements(By.xpath("//android.widget.TextView"));
+		for (WebElement webElement : elements) {
+			print(webElement.getText());
+		}
+		print("elements.size()" + Integer.toString(elements.size()));
+		elements = android.findElements(By.id("title"));
+		for (WebElement webElement : elements) {
+			print(webElement.getText());
+		}
+		print("elements.size()" + Integer.toString(elements.size()));
+
+		String title;
+		int i;
+		for (i = 0; i < elements.size(); i++) {
+			title = elements.get(i).getText();
+			if (Objects.equals(title, new String("Video Agent"))) {
+				print("Found video agent notification.");
+				return;
+			} else {
+				print("Tthere are no agent notifications");
+			}
+		}
+	}
+
 	void runAppInBackground(int seconds) {
 		print("Android: App is in background for " + seconds + " seconds");
 		android.runAppInBackground(seconds);
+	}
+
+	void getAppBackInForeground() {
+		print("Android: App is in foreground now");
+		android.runAppInBackground(1);
 	}
 
 	void startApp() {
@@ -287,6 +335,10 @@ public class Android {
 		System.out.println(text);
 	}
 
+	void adbExecuteComand(String command) throws IOException {
+		Runtime.getRuntime().exec(command);
+	}
+
 	void pause(int seconds) throws InterruptedException {
 		System.out.println("Android: Waiting " + seconds + " seconds");
 		Thread.sleep(seconds * 1000);
@@ -295,9 +347,9 @@ public class Android {
 	@AfterClass
 	void cleanUpAndroid() throws IOException {
 		print("Android: Clean up.");
-		Runtime.getRuntime().exec("adb shell input keyevent 26");
-		Runtime.getRuntime().exec("adb shell am force-stop io.appium.unlock");
-		Runtime.getRuntime().exec("adb shell am force-stop com.leadsecure.agent");
-		Runtime.getRuntime().exec("adb shell pm clear com.leadsecure.agent");
+		adbExecuteComand("adb shell input keyevent 26");
+		adbExecuteComand("adb shell am force-stop io.appium.unlock");
+		adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
+		adbExecuteComand("adb shell pm clear com.leadsecure.agent");
 	}
 }
