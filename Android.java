@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -73,6 +74,19 @@ public class Android {
 		textField.sendKeys(message);
 		clickOnNameIfIsPresent("Send");
 		print("Android: Message sent.");
+	}
+
+	void verifyMessage(String message) {
+		List<WebElement> messages = android.findElements(By.id("chatRowInMessageText"));
+		String messageText = null;
+		for (WebElement webElement : messages) {
+			messageText = webElement.getText();
+			if (Objects.equals(messageText, message)) {
+				print("Android verified message: " + message);
+				return;
+			}
+		}
+		Assert.assertEquals(messageText, message);
 	}
 
 	void startVideoCall() {
@@ -257,13 +271,16 @@ public class Android {
 	void acceptRejectNotification(String acceptOrReject) {
 		acceptOrReject = acceptOrReject.toLowerCase();
 		List<WebElement> buttons = android.findElements(By.xpath("*//android.widget.Button"));
+		String buttonName = null;
 		for (int j = 0; j < buttons.size(); j++) {
-			String buttonName = buttons.get(j).getText().toLowerCase();
+			buttonName = buttons.get(j).getText().toLowerCase();
 			if (Objects.equals(buttonName, acceptOrReject)) {
 				buttons.get(j).click();
 				return;
 			}
 		}
+		Assert.assertEquals(buttonName, acceptOrReject);
+		print("Android accepted/rejected notification");
 	}
 
 	void getAllNotifications() {
@@ -302,8 +319,17 @@ public class Android {
 	}
 
 	void startApp() {
-		android.launchApp();
+		try {
+			android.launchApp();
+		} catch (Exception e) {
+			// Ignore "... but it's already started" error.
+		}
 		print("Android launched application.");
+	}
+
+	void startAgentAppMainActivity() throws IOException {
+		adbExecuteComand("adb shell monkey -p com.leadsecure.agent -c android.intent.category.LAUNCHER 1");
+		print("Android 'adb shell monkey' launched video agent application.");
 	}
 
 	void closeApp() {
@@ -337,6 +363,7 @@ public class Android {
 
 	void adbExecuteComand(String command) throws IOException {
 		Runtime.getRuntime().exec(command);
+		print("Android executed command" + command);
 	}
 
 	void pause(int seconds) throws InterruptedException {

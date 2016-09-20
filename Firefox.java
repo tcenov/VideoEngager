@@ -3,6 +3,7 @@ package android2.VideoEngager;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -20,18 +21,21 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 public class Firefox {
 
 	WebDriver firefox;
-
+	String agenUrl = "https://videome.leadsecure.com/testtes";
+	String geckodriverPath = "D:\\geckodriver-v0.10.0-win64\\geckodriver.exe";
+	
 	@BeforeTest
 	public void setUp() throws AWTException {
 		print("Firefox: firefox.setUp() is starting");
-		System.setProperty("webdriver.gecko.driver", "D:\\geckodriver-v0.10.0-win64\\geckodriver.exe");
-		DesiredCapabilities desiredCapabilities = new DesiredCapabilities("firefox", "", Platform.ANY);
+		System.setProperty("webdriver.gecko.driver", "");
+		DesiredCapabilities desiredCapabilities = new DesiredCapabilities("firefox", geckodriverPath, Platform.ANY);
 		FirefoxProfile profile = new ProfilesIni().getProfile("default");
 		desiredCapabilities.setCapability("firefox_profile", profile);
 		firefox = new FirefoxDriver(desiredCapabilities);
@@ -43,7 +47,7 @@ public class Firefox {
 		// firefox = new FirefoxDriver(firefoxProfile);
 		firefox.manage().window().maximize();
 		// new Minimize().minimize();
-		firefox.get("https://videome.leadsecure.com/testtes");
+		firefox.get("agenUrl");
 		// firefox.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 		firefox.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
@@ -95,6 +99,21 @@ public class Firefox {
 		} else {
 			print("Firefox: Greshka pri send message from Firefox!!!");
 		}
+	}
+
+	void verifyMessage(String message) {
+		List<WebElement> messages = firefox.findElements(By.cssSelector(".wd-bubble>p"));
+		print("messages.size() = " + messages.size());
+		String messageText = null;
+		for (WebElement webElement : messages) {
+			messageText = webElement.getText();
+			print(messageText);
+			if (Objects.equals(messageText, message)) {
+				print("Firefox verified message: " + message);
+				return;
+			}
+		}
+		Assert.assertEquals(messageText, message);
 	}
 
 	public void CameraButtonClick() {
@@ -278,6 +297,11 @@ public class Firefox {
 		firefox.manage().window().setSize(new Dimension(width, height));
 	}
 
+	public void reloadAgentUrl() {
+		firefox.get(agenUrl);
+	}
+	
+	
 	public void waitForPageLoad() {
 		WebDriverWait wait = new WebDriverWait(firefox, 30);
 		wait.until(new ExpectedCondition<Boolean>() {

@@ -31,7 +31,7 @@ public class FirefoxRunner2  {
 		firefox.get("http://dir.bg");
 		//firefox.get("https://videome.leadsecure.com/testtes");	
 	}
-	
+
 	@Test
 	public void test1() throws InterruptedException{
 

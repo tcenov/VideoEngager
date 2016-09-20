@@ -11,7 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class AndroidCleanRun extends Android {
+public class AndroidCleanRun {
 
 	AppiumDriver driver;
 
@@ -22,8 +22,10 @@ public class AndroidCleanRun extends Android {
 		capabilities.setCapability("browserName", "Android");
 		capabilities.setCapability("platformVersion", "4.4.2");
 		capabilities.setCapability("platformName", "Android");
-		capabilities.setCapability("appPackage", "com.android.browser");
-		capabilities.setCapability("appActivity", "com.android.browser.BrowserActivity");
+//		capabilities.setCapability("appPackage", "com.android.calculator2");
+//		capabilities.setCapability("appActivity", "com.android.calculator2.Calculator");
+		capabilities.setCapability("appPackage", "com.leadsecure.agent");
+		capabilities.setCapability("appActivity", "com.leadsecure.core.ui.LoginActivity");
 		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
@@ -31,16 +33,13 @@ public class AndroidCleanRun extends Android {
 
 	@Test
 	public void test() throws IOException, InterruptedException {
-
+		pause(10);
 		System.out.println("test started");
-
-		pause(10);
-		lockScreen();
-		pause(15);
-		// Runtime.getRuntime().exec("adb shell input keyevent 26");
-
-		pause(10);
-
+		adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
+		
+		pause(180);
+		//lockScreen();
+		 
 	}
 
 	void print(String text) {
@@ -51,7 +50,16 @@ public class AndroidCleanRun extends Android {
 		System.out.println("Waiting " + seconds + " seconds");
 		Thread.sleep(seconds * 1000);
 	}
-
+	
+	void startApp() {
+		driver.launchApp();
+		print("Android launched application.");
+	}
+	
+	void adbExecuteComand(String command) throws IOException {
+		Runtime.getRuntime().exec(command);
+	}
+	
 	@AfterTest
 	public void End() throws IOException {
 		if (driver != null) {

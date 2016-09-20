@@ -5,11 +5,13 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
+
 public class TestCasesRunner {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();
-
 	
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
@@ -26,27 +28,23 @@ public class TestCasesRunner {
 	@Test(priority = 3)
 	public void agentReceiveChatMessage() throws InterruptedException {
 		// Prerequisites : login from android
-		android.startConversation();
-		
+		android.startConversation();		
 		firefox.SendMessage("Sent from browser prospector");
 		// firefox.resizeWindow(500, 20);
 		
-		// ToDo check message received from android
-		android.pause(10);
-		android.closeConversation();
-		android.print("Napisa li buga?");
+		android.verifyMessage("Sent from browser prospector");
 		android.pause(5);
+		android.closeConversation();
+		android.pause(2);
 		android.print("Test case - agent receive chat message from browser.");
 	}
 
 	@Test(priority = 4)
 	public void prospectorReceiveChatMessage() throws InterruptedException {
-
 		android.startConversation();
 		android.sendMessage("Sent from android agent");
-		// ToDo check message received from firefox
-		
-		android.pause(10);
+		firefox.verifyMessage("Sent from android agent");
+		android.pause(5);
 		android.closeConversation();
 		android.pause(5);
 		android.print("Test case - agent android send message");
@@ -68,13 +66,11 @@ public class TestCasesRunner {
 	
 	@Test(priority = 6)
 	public void androidAgentReceiveVideoCall() throws InterruptedException {
-		
 		android.pause(5);
 		firefox.callButtonFromConversationClick();
 		android.pause(2);
 		android.answerVideoCall();
 		android.pause(5);
-		firefox.muteMicrophone();
 		firefox.muteMicrophone();
 		android.stopOrRejectVideoCall();
 		android.pause(10);
@@ -102,13 +98,11 @@ public class TestCasesRunner {
 		android.print("Test case - android receive video call while conversation is opened");
 	}
 	
-	
 	@Test(priority = 9)
 	public void notificationsWhileRunInBackground() throws InterruptedException, IOException {
-		//android.runAppInBackground(5);
-				
+		//android.runAppInBackground(5); - this is not a solution.
 		android.pressHomeButton();
-		//android.clearNotifications();
+		android.clearNotifications();
 		android.pause(2);
 		firefox.SendMessage("Message while android works in background");
 		android.pause(5);
@@ -118,9 +112,106 @@ public class TestCasesRunner {
 		android.pause(1);
 		firefox.SendMessage("Message while android works in background");
 		android.pause(2);
-		android.openNotifications();		
-		android.pause(30);	
-		android.print("Test case - call notifications while android run in background");
+		android.openNotifications();
+		android.acceptRejectNotification("accept");
+		android.closeConversation();
+		firefox.reloadAgentUrl();
+		firefox.waitForPageLoad();
+		android.print("Test case - chat notifications while android run in background");
+	}
+	
+	@Test(priority = 10)
+	public void notificationsWhileAppIsKilled() throws InterruptedException, IOException {
+		android.pressHomeButton();
+		android.print("Android pressed Home button - app works in background");
+		firefox.SendMessage("Message while android works in background");
+		android.pause(5);
+		android.adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
+		android.openNotifications();
+		android.acceptRejectNotification("accept");
+		android.closeConversation();
+		firefox.reloadAgentUrl();
+		firefox.waitForPageLoad();
+		android.print("Test case - chat notifications while app is killed");
+	}
+	
+	@Test(priority = 11)
+	public void notificationsWhileAppIsClosed() throws InterruptedException {
+		firefox.reloadAgentUrl();
+		firefox.waitForPageLoad();
+		android.startApp();
+		android.pressHomeButton();
+		firefox.SendMessage("Message while android works in background");
+		android.pause(5);
+		android.closeApp();
+		android.openNotifications();
+		android.acceptRejectNotification("accept");
+		android.closeConversation();
+		firefox.reloadAgentUrl();
+		android.print("Test case - chat notifications while app is closed.");
+	}
+	
+	@Test(priority = 12)
+	public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedException, IOException {
+		firefox.reloadAgentUrl();
+		firefox.waitForPageLoad();
+		android.startApp();
+		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
+		firefox.SendMessage("Message while android works in background");
+		android.pause(5);
+		android.openNotifications();
+		android.acceptRejectNotification("accept");
+		android.closeConversation();
+		firefox.reloadAgentUrl();
+		android.print("Test case - chat notifications while another app is on focus.");
+	}
+	
+	@Test(priority = 13)
+	public void notificationsWhilePlayGame() throws InterruptedException {	
+		//ToDo
+		android.print("Not implemented: Test case - chat notifications while play game.");
+	}
+	
+	@Test(priority = 14)
+	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException {
+		firefox.reloadAgentUrl();
+		firefox.waitForPageLoad();
+		android.startApp();
+		android.pressHomeButton();
+		firefox.callButtonFromHomeClick();
+		android.pause(5);
+		//ToDo - code to handle call in background
+		android.print("Test case - Call while android works in background");
+	}
+	
+	@Test(priority = 15)
+	public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException {
+		firefox.reloadAgentUrl();
+		firefox.waitForPageLoad();
+		android.startApp();
+		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
+		firefox.callButtonFromHomeClick();
+		android.pause(5);
+		//ToDo - code to handle call in background
+		android.print("Test case - Call while android works in background");
+	}
+
+	@Test(priority = 16)
+	public void androidAgentReceiveVideoCallWhileAppIsClosed() throws InterruptedException, IOException {
+		firefox.reloadAgentUrl();
+		firefox.waitForPageLoad();
+		android.startApp();
+		android.closeApp();
+		firefox.callButtonFromHomeClick();
+		android.pause(5);
+		//ToDo - code to handle call in background
+		android.print("Test case - Call when app is closed");
+	}
+	
+	@Test(priority = 16)
+	public void androidAgentReceiveVideoCallWhenAppIsKilled() throws InterruptedException, IOException {
+		//ToDo
+		android.print("Not implemented - Test case - Call when app is killed");
 	}
 	
 	@AfterClass
