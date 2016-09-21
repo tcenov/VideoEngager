@@ -34,7 +34,7 @@ public class Firefox {
 	@BeforeTest
 	public void setUp() throws AWTException {
 		print("Firefox: firefox.setUp() is starting");
-		System.setProperty("webdriver.gecko.driver", "");
+		System.setProperty("webdriver.gecko.driver", geckodriverPath);
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities("firefox", geckodriverPath, Platform.ANY);
 		FirefoxProfile profile = new ProfilesIni().getProfile("default");
 		desiredCapabilities.setCapability("firefox_profile", profile);
@@ -101,7 +101,8 @@ public class Firefox {
 		}
 	}
 
-	void verifyMessage(String message) {
+	void verifyMessage(String message) throws InterruptedException {
+		pause(2);
 		List<WebElement> messages = firefox.findElements(By.cssSelector(".wd-bubble>p"));
 		print("messages.size() = " + messages.size());
 		String messageText = null;

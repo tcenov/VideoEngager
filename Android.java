@@ -110,18 +110,20 @@ public class Android {
 		print("Android answered video call");
 	}
 
-	void openNotifications() {
+	void openNotifications() throws InterruptedException {
 		((AndroidDriver) android).openNotifications();
+		pause(2);
 		print("Android opened Notifications.");
 	}
 
-	void clearNotifications() {
+	void clearNotifications() throws InterruptedException {
 		// Required Login
 		openNotifications();
 		Boolean isPresent = android.findElements(By.className("android.widget.Button")).size() > 0;
 		if (isPresent) {
 			List<WebElement> allButtons = android.findElements(By.className("android.widget.Button"));
 			try {
+				pause(2);
 				allButtons = android.findElements(By.className("android.widget.Button"));
 				print("allButtons.size() = " + allButtons.size());
 				for (int i = 0; i < allButtons.size(); i++) {

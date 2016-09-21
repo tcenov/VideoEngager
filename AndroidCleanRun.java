@@ -28,7 +28,6 @@ public class AndroidCleanRun {
 		capabilities.setCapability("appActivity", "com.leadsecure.core.ui.LoginActivity");
 		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-
 	}
 
 	@Test
@@ -42,6 +41,18 @@ public class AndroidCleanRun {
 		 
 	}
 
+	@Test
+	public void test180() throws IOException, InterruptedException {
+		pause(10);
+		System.out.println("Only this test started 180");
+		
+		pause(180);
+		//lockScreen();
+		 
+	}
+
+	
+	
 	void print(String text) {
 		System.out.println(text);
 	}

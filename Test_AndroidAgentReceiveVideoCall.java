@@ -9,7 +9,6 @@ public class Test_AndroidAgentReceiveVideoCall {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();
-
 	
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
