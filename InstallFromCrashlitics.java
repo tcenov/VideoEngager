@@ -39,9 +39,9 @@ public class InstallFromCrashlitics {
 	@Test
 	public void install() throws IOException, InterruptedException {
 		System.out.println("Uninstall application");
-		Runtime.getRuntime().exec("adb shell am force-stop com.leadsecure.agent");
-		Runtime.getRuntime().exec("adb shell pm clear com.leadsecure.agent");
-		Runtime.getRuntime().exec("adb uninstall com.leadsecure.agent");
+		adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
+		adbExecuteComand("adb shell pm clear com.leadsecure.agent");
+		adbExecuteComand("adb uninstall com.leadsecure.agent");
 		Thread.sleep(2000);
 		System.out.println("Uninstall finished");
 		System.out.println("Install started");
@@ -66,6 +66,11 @@ public class InstallFromCrashlitics {
 		Thread.sleep(160000);
 	}
 
+	void adbExecuteComand(String command) throws IOException {
+		Runtime.getRuntime().exec(command);
+		
+	}
+	
 	private void clickOnIdIfIsPresent(String id) {
 		Boolean isPresent = driver.findElements(By.id(id)).size() > 0;
 		if (isPresent) {

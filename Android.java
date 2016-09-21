@@ -249,8 +249,8 @@ public class Android {
 
 	void lockScreen() {
 		try {
-			Runtime.getRuntime().exec("adb shell am force-stop io.appium.unlock");
-			Runtime.getRuntime().exec("adb shell input keyevent 26");
+			adbExecuteComand("adb shell am force-stop io.appium.unlock");
+			adbExecuteComand("adb shell input keyevent 26");
 			print("Android: Screen is locked");
 		} catch (IOException e) {
 			print("Android: Something wrong in lock screen!!!");
@@ -339,7 +339,7 @@ public class Android {
 
 	void unlockScreen() {
 		try {
-			Runtime.getRuntime().exec("adb shell input keyevent 82");
+			adbExecuteComand("adb shell input keyevent 82");
 			print("Android unlocked screen.");
 		} catch (IOException e) {
 			print("Android: Something wrong in lock screen!!!");
@@ -349,7 +349,7 @@ public class Android {
 
 	void unlockScreenWithAppium() {
 		try {
-			Runtime.getRuntime().exec("adb shell am start -n io.appium.unlock/.Unlock");
+			adbExecuteComand("adb shell am start -n io.appium.unlock/.Unlock");
 			print("Android: Screen is unlocked by Appium");
 		} catch (IOException e) {
 			print("Android: Something wrong in lock screen!!!");

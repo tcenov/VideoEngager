@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class PrepareTestsForRunner {
+public class Tests_CallWhileIsLockedInBackground {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();
@@ -22,7 +22,20 @@ public class PrepareTestsForRunner {
 		firefox.login();
 	}
 
- 	
+	@Test(priority = 14)
+	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException {
+		firefox.reloadAgentUrl();
+		firefox.waitForPageLoad();
+		android.startApp();
+		android.pressHomeButton();
+		firefox.callButtonFromHomeClick();
+		android.pause(5);
+		android.answerVideoCall();
+		android.pause(5);
+		android.stopOrRejectVideoCall();
+		android.print("Test case - Call while android works in background");
+	}
+	
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

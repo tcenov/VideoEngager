@@ -28,7 +28,7 @@ import org.testng.annotations.BeforeTest;
 public class Firefox {
 
 	WebDriver firefox;
-	String agenUrl = "https://videome.leadsecure.com/testtes";
+	String agenUrl = "https:////videome.leadsecure.com//testtes";
 	String geckodriverPath = "D:\\geckodriver-v0.10.0-win64\\geckodriver.exe";
 	
 	@BeforeTest
@@ -46,7 +46,7 @@ public class Firefox {
 		// this make firefoxProfile to block web page images
 		// firefox = new FirefoxDriver(firefoxProfile);
 		firefox.manage().window().maximize();
-		// new Minimize().minimize();
+		new Minimize().minimize();
 		firefox.get("agenUrl");
 		// firefox.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
