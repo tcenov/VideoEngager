@@ -3,15 +3,14 @@ package android2.VideoEngager;
 import java.awt.AWTException;
 import java.io.IOException;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidKeyCode;
-
+@Listeners({ ScreenshotUtility.class })
 public class TestCasesRunner {
 
 	Firefox firefox = new Firefox();
-	Android android = new Android();
+	static Android android = new Android();
 	
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
@@ -187,9 +186,6 @@ public class TestCasesRunner {
 		android.stopOrRejectVideoCall();
 		android.print("Test case - Call while android works in background");
 	}
-	
-	
-	
 	
 	@Test(priority = 15)
 	public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException {

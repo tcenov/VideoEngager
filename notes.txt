@@ -30,7 +30,6 @@ ToDo
 - Firefox message received confirmation.- Done
 - Android message received confirmation.- Done
 
-
 Bugs:
 
 
