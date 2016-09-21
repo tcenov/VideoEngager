@@ -28,7 +28,7 @@ import org.testng.annotations.BeforeTest;
 public class Firefox {
 
 	WebDriver firefox;
-	String agenUrl = "https:////videome.leadsecure.com//testtes";
+	String agenUrl = "";
 	String geckodriverPath = "D:\\geckodriver-v0.10.0-win64\\geckodriver.exe";
 	
 	@BeforeTest
@@ -47,7 +47,7 @@ public class Firefox {
 		// firefox = new FirefoxDriver(firefoxProfile);
 		firefox.manage().window().maximize();
 		new Minimize().minimize();
-		firefox.get("agenUrl");
+		firefox.get("https://videome.leadsecure.com/testtes");
 		// firefox.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 		firefox.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
@@ -298,7 +298,7 @@ public class Firefox {
 	}
 
 	public void reloadAgentUrl() {
-		firefox.get(agenUrl);
+		firefox.get("https://videome.leadsecure.com/testtes");
 	}
 	
 	

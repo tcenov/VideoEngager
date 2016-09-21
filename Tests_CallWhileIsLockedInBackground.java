@@ -25,9 +25,11 @@ public class Tests_CallWhileIsLockedInBackground {
 	@Test(priority = 14)
 	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException {
 		firefox.reloadAgentUrl();
+		android.startApp();
 		firefox.waitForPageLoad();
 		android.startApp();
 		android.pressHomeButton();
+		android.pause(5);
 		firefox.callButtonFromHomeClick();
 		android.pause(5);
 		android.answerVideoCall();
