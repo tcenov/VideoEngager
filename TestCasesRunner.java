@@ -180,7 +180,9 @@ public class TestCasesRunner {
 		android.pressHomeButton();
 		firefox.callButtonFromHomeClick();
 		android.pause(5);
-		//ToDo - code to handle call in background
+		android.answerVideoCall();
+		android.pause(5);
+		android.stopOrRejectVideoCall();
 		android.print("Test case - Call while android works in background");
 	}
 	
@@ -192,7 +194,9 @@ public class TestCasesRunner {
 		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
 		firefox.callButtonFromHomeClick();
 		android.pause(5);
-		//ToDo - code to handle call in background
+		android.answerVideoCall();
+		android.pause(5);
+		android.stopOrRejectVideoCall();
 		android.print("Test case - Call while android works in background");
 	}
 
@@ -204,7 +208,9 @@ public class TestCasesRunner {
 		android.closeApp();
 		firefox.callButtonFromHomeClick();
 		android.pause(5);
-		//ToDo - code to handle call in background
+		android.answerVideoCall();
+		android.pause(5);
+		android.stopOrRejectVideoCall();
 		android.print("Test case - Call when app is closed");
 	}
 	
