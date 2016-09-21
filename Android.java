@@ -363,7 +363,7 @@ public class Android {
 
 	void adbExecuteComand(String command) throws IOException {
 		Runtime.getRuntime().exec(command);
-		print("Android executed command" + command);
+		print("Android executed command: " + command);
 	}
 
 	void pause(int seconds) throws InterruptedException {

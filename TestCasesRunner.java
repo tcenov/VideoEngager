@@ -171,13 +171,15 @@ public class TestCasesRunner {
 		//ToDo
 		android.print("Not implemented: Test case - chat notifications while play game.");
 	}
-	
+ 	
 	@Test(priority = 14)
 	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException {
 		firefox.reloadAgentUrl();
+		android.startApp();
 		firefox.waitForPageLoad();
 		android.startApp();
 		android.pressHomeButton();
+		android.pause(5);
 		firefox.callButtonFromHomeClick();
 		android.pause(5);
 		android.answerVideoCall();
@@ -185,6 +187,9 @@ public class TestCasesRunner {
 		android.stopOrRejectVideoCall();
 		android.print("Test case - Call while android works in background");
 	}
+	
+	
+	
 	
 	@Test(priority = 15)
 	public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException {
