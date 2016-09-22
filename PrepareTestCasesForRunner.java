@@ -2,6 +2,8 @@ package android2.VideoEngager;
 
 import java.awt.AWTException;
 import java.io.IOException;
+
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 //@Listeners({ ScreenshotUtility.class })
@@ -23,66 +25,25 @@ public class PrepareTestCasesForRunner {
 		firefox.join();
 		android.print("--------------------------------------------------------------------------------");
 	}
-		
-	@Test(priority = 12)
-	public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedException, IOException {
+
+	@Test(priority = 15)
+	public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws  AWTException, IOException, InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
-		firefox.reloadAgentUrl();
-		firefox.waitForPageLoad();
-		android.startApp();
-		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
-		firefox.SendMessage("Message while android works in background");
-		android.pause(5);
-		android.openNotifications();
-		android.acceptRejectNotification("accept");
-		android.closeConversation();
-		firefox.reloadAgentUrl();
-		android.print("Test case - chat notifications while another app is on focus.");
+		android.startCalculatorApp();
+		android.pause(45);
+		
+		
+		
+//		firefox.callButtonFromHomeClick();
+//		android.pause(1);
+//		android.answerVideoCall();
+//		//ToDo verify Video
+//		android.pause(5);
+//		android.stopOrRejectVideoCall();
+//		android.print("Test case - Call while android works behind calculator");
 		android.print("--------------------------------------------------------------------------------");
 	}
-	
-//	@Test(priority = 13)
-//	public void notificationsWhilePlayGame() throws InterruptedException {	
-//		android.print("start new test ------------------------------------------------------------------");
-//		//ToDo
-//		android.print("Not implemented: Test case - chat notifications while play game.");
-//		android.print("--------------------------------------------------------------------------------");
-//	}
-// 	
-//	@Test(priority = 14)
-//	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException {
-//		android.print("start new test ------------------------------------------------------------------");
-//		firefox.reloadAgentUrl();
-//		android.startApp();
-//		firefox.waitForPageLoad();
-//		android.startApp();
-//		android.pressHomeButton();
-//		android.pause(5);
-//		firefox.callButtonFromHomeClick();
-//		android.pause(5);
-//		android.answerVideoCall();
-//		android.pause(5);
-//		android.stopOrRejectVideoCall();
-//		android.print("Test case - Call while android works in background");
-//		android.print("--------------------------------------------------------------------------------");
-//	}
-//	
-//	@Test(priority = 15)
-//	public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException {
-//		android.print("start new test ------------------------------------------------------------------");
-//		firefox.reloadAgentUrl();
-//		firefox.waitForPageLoad();
-//		android.startApp();
-//		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
-//		firefox.callButtonFromHomeClick();
-//		android.pause(5);
-//		android.answerVideoCall();
-//		android.pause(5);
-//		android.stopOrRejectVideoCall();
-//		android.print("Test case - Call while android works in background");
-//		android.print("--------------------------------------------------------------------------------");
-//	}
-//
+
 //	@Test(priority = 16)
 //	public void androidAgentReceiveVideoCallWhileAppIsClosed() throws InterruptedException, IOException {
 //		android.print("start new test ------------------------------------------------------------------");
@@ -107,9 +68,9 @@ public class PrepareTestCasesForRunner {
 //		android.print("--------------------------------------------------------------------------------");
 //	}
 	
-//	@AfterClass
-//	void cleanUp() throws IOException {
-//		android.cleanUpAndroid();
-//		firefox.close();
-//	}
+	@AfterClass
+	void cleanUp() throws IOException {
+		android.cleanUpAndroid();
+		firefox.close();
+	}
 }

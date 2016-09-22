@@ -333,7 +333,14 @@ public class Android {
 		adbExecuteComand("adb shell monkey -p com.leadsecure.agent -c android.intent.category.LAUNCHER 1");
 		print("Android 'adb shell monkey' launched video agent application.");
 	}
-
+	void startCalculatorApp() throws IOException {
+		adbExecuteComand("adb shell monkey -p com.google.android.calculator -c android.intent.category.LAUNCHER 1");
+		adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
+		adbExecuteComand("adb shell am start -n com.android.calculator2/.CalculatorGoogle");
+		adbExecuteComand("adb shell monkey -p com.google.android.calculator-2 -c android.intent.category.LAUNCHER 1");
+		print("Android 'adb' launched Calculator application.");
+	}
+	
 	void closeApp() {
 		android.closeApp();
 		print("Android closed application.");
