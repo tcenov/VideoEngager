@@ -18,7 +18,7 @@ public class TestCasesRunner {
 	}
 
 	@Test(priority = 2)
-	public void firefoxLogin() throws InterruptedException, AWTException, IOException {
+	public void firefoxJoin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
 		firefox.join();
 		android.print("--------------------------------------------------------------------------------");
@@ -114,17 +114,17 @@ public class TestCasesRunner {
 	}
 	
 	@Test(priority = 9)
-	public void notificationsWhileRunInBackground() throws InterruptedException, IOException {
+	public void notificationsWhileRunInBackground() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
 		//android.runAppInBackground(5); - this is not a solution.
 		android.pressHomeButton();
 		android.clearNotifications();
-		android.pause(1);
+		firefox.close();
+		firefox.setUp();
+		firefox.waitForPageLoad();
 		firefox.SendMessage("Message while android works in background");
 		android.openNotifications();
 		android.getAllNotifications();
-		android.pause(100);
-		
 		android.pause(2);
 		android.acceptRejectNotification("accept");
 		android.pause(4);
@@ -134,10 +134,13 @@ public class TestCasesRunner {
 		android.print("Test case - chat notifications while android run in background");
 		android.print("--------------------------------------------------------------------------------");
 	}
-//	
-//	@Test(priority = 10)
-//	public void notificationsWhileAppIsKilled() throws InterruptedException, IOException {
-//		android.print("start new test ------------------------------------------------------------------");
+
+	@Test(priority = 10)
+	public void notificationsWhileAppIsKilled() throws InterruptedException, IOException {
+		android.print("start new test ------------------------------------------------------------------");
+		
+		android.acceptRejectNotification("accept");
+		
 //		android.pressHomeButton();
 //		android.adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
 //		firefox.SendMessage("Message while android works in background");
@@ -148,30 +151,31 @@ public class TestCasesRunner {
 //		android.verifyMessage("Message while android works in background");
 //		android.pause(2);
 //		android.closeConversation();
-//		android.print("Test case - chat notifications while app is killed");
-//		android.print("--------------------------------------------------------------------------------");
-//	}
-//
-//	@Test(priority = 11)
-//	public void notificationsWhileAppIsClosed() throws InterruptedException {
-//		android.print("start new test --------------------------------------------------------------------------------");
-//		android.clearNotifications();
-//		android.pause(5);
-//		android.getAppBackInForeground();
-//		android.pause(14);
-//		android.closeApp();
-//		android.pause(13);
-//		firefox.SendMessage("Message while android works in background");
-//		android.pause(2);
-//		android.openNotifications();
-//		android.pause(11);
-//		android.acceptRejectNotification("accept");
-//		android.pause(5);
-//		android.closeConversation();
-//		android.print("Test case - chat notifications while app is closed.");
-//		android.print("--------------------------------------------------------------------------------");
-//	}
-//	
+		android.print("Test case - chat notifications while app is killed");
+		android.print("--------------------------------------------------------------------------------");
+	}
+
+	@Test(priority = 11)
+	public void notificationsWhileAppIsClosed() throws InterruptedException, AWTException {
+		android.print("start new test --------------------------------------------------------------------------------");
+		android.clearNotifications();
+		firefox.close();
+		firefox.setUp();
+		firefox.waitForPageLoad();
+		android.closeApp();		
+		firefox.SendMessage("Message while android app is closed");
+		android.pause(2);
+		android.openNotifications();
+		android.pause(5);
+		android.acceptRejectNotification("accept");
+		android.pause(4);
+		android.verifyMessage("Message while android app is closed");
+		android.pause(5);
+		android.closeConversation();
+		android.print("Test case - chat notifications while app is closed.");
+		android.print("--------------------------------------------------------------------------------");
+	}
+
 //	@Test(priority = 12)
 //	public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedException, IOException {
 //		android.print("start new test ------------------------------------------------------------------");
