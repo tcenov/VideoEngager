@@ -53,7 +53,7 @@ public class Firefox {
 		firefox.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
 	}
 
-	public void login() {
+	public void join() {
 		String title = firefox.getTitle();
 		if (Objects.equals(title, new String("Live Video Session"))) {
 			print("Firefox: " + title + " is loaded on Firefox");
@@ -61,7 +61,7 @@ public class Firefox {
 			print("Firefox: There is something wrong !!!");
 		}
 		if (isElementPresent(By.xpath("//*[contains(@id, 'peer_email_video')]"))) {
-			print("Firefox: You are logged in from Firefox");
+			print("Firefox: You are joined as prospector in from Firefox");
 		}
 	}
 

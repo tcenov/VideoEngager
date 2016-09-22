@@ -21,7 +21,7 @@ public class TestCasesRunner {
 	@Test(priority = 2)
 	public void firefoxLogin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
-		firefox.login();
+		firefox.join();
 		android.print("--------------------------------------------------------------------------------");
 	}
 
@@ -44,6 +44,9 @@ public class TestCasesRunner {
 	@Test(priority = 4)
 	public void prospectorReceiveChatMessage() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
+		//ToDo - to remove next row after bug fix
+		android.closeConversation();
+		
 		android.startConversation();
 		android.sendMessage("Sent from android agent");
 		firefox.verifyMessage("Sent from android agent");
@@ -250,9 +253,9 @@ public class TestCasesRunner {
 		android.print("--------------------------------------------------------------------------------");
 	}
 	
-	@AfterClass
-	void cleanUp() throws IOException {
-		android.cleanUpAndroid();
-		firefox.close();
-	}
+//	@AfterClass
+//	void cleanUp() throws IOException {
+//		android.cleanUpAndroid();
+//		firefox.close();
+//	}
 }

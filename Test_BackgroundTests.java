@@ -21,7 +21,7 @@ public class Test_BackgroundTests {
 	@Test(priority = 2)
 	public void firefoxLogin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
-		firefox.login();
+		firefox.join();
 	}
 	
 	@Test(priority = 7)

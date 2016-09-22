@@ -20,7 +20,7 @@ public class Test_ProspectReceiveVideoCallEndFromProspect {
 	@Test(priority = 2)
 	public void firefoxLogin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
-		firefox.login();
+		firefox.join();
 	}
 
 	@Test(priority = 5)

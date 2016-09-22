@@ -19,7 +19,7 @@ public class TestCases extends Android {
 	public void loginSendMessageAndLogout() throws InterruptedException, AWTException, IOException {
 
 		firefox.setUp();
-		firefox.login();
+		firefox.join();
 
 		login("tester2006@abv.bg", "Tarator1");
 		startConversation();
