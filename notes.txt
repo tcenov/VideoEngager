@@ -5,7 +5,7 @@ ToDo
 - need to verify video while in call
 - second agent from chrome
 - call from browser - accept from android/browser agent
-
+ - verify message in notification
 
 	Call from background? - Implementation in progress
 	what are the must push notifications... tests
