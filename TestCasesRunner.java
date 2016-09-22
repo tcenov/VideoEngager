@@ -3,7 +3,6 @@ package android2.VideoEngager;
 import java.awt.AWTException;
 import java.io.IOException;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 //@Listeners({ ScreenshotUtility.class })
@@ -74,16 +73,17 @@ public class TestCasesRunner {
 	@Test(priority = 6)
 	public void androidAgentReceiveVideoCall() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
-		android.pause(5);
+		android.pause(2);
+		//firefox.callButtonFromHomeClick();
 		firefox.callButtonFromConversationClick();
 		android.pause(2);
 		android.answerVideoCall();
 		android.pause(5);
 		firefox.muteMicrophone();
 		android.stopOrRejectVideoCall();
-		android.pause(5);
+		android.pause(2);
 		android.print("Test case - android agent receive video call,then android end video call ");
-		android.print("--------------------------------------------------------------------------------");
+		android.print("---------------------------------------------------------------------------");
 	}
 
 	@Test(priority = 7)
@@ -117,20 +117,15 @@ public class TestCasesRunner {
 		//android.runAppInBackground(5); - this is not a solution.
 		android.pressHomeButton();
 		android.clearNotifications();
-		android.pause(2);
-		firefox.SendMessage("Message while android works in background");
-		android.pause(5);
-		android.openNotifications();
-		android.pause(3);
-		android.clearNotifications();
 		android.pause(1);
 		firefox.SendMessage("Message while android works in background");
-		android.pause(2);
 		android.openNotifications();
+		android.pause(2);
 		android.acceptRejectNotification("accept");
+		android.pause(4);
+		android.verifyMessage("Message while android works in background");
+		android.pause(2);
 		android.closeConversation();
-		firefox.reloadAgentUrl();
-		firefox.waitForPageLoad();
 		android.print("Test case - chat notifications while android run in background");
 		android.print("--------------------------------------------------------------------------------");
 	}
@@ -139,33 +134,35 @@ public class TestCasesRunner {
 	public void notificationsWhileAppIsKilled() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.pressHomeButton();
-		android.print("Android pressed Home button - app works in background");
-		firefox.SendMessage("Message while android works in background");
-		android.pause(5);
 		android.adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
+		firefox.SendMessage("Message while android works in background");
 		android.openNotifications();
+		android.pause(2);		
 		android.acceptRejectNotification("accept");
+		android.pause(4);
+		android.verifyMessage("Message while android works in background");
+		android.pause(2);
 		android.closeConversation();
-		firefox.reloadAgentUrl();
-		firefox.waitForPageLoad();
 		android.print("Test case - chat notifications while app is killed");
 		android.print("--------------------------------------------------------------------------------");
 	}
-	
+
 	@Test(priority = 11)
 	public void notificationsWhileAppIsClosed() throws InterruptedException {
-		android.print("start new test ------------------------------------------------------------------");
-		firefox.reloadAgentUrl();
-		firefox.waitForPageLoad();
-		android.startApp();
-		android.pressHomeButton();
-		firefox.SendMessage("Message while android works in background");
+		android.print("start new test --------------------------------------------------------------------------------");
+		android.clearNotifications();
 		android.pause(5);
+		android.getAppBackInForeground();
+		android.pause(14);
 		android.closeApp();
+		android.pause(13);
+		firefox.SendMessage("Message while android works in background");
+		android.pause(2);
 		android.openNotifications();
+		android.pause(11);
 		android.acceptRejectNotification("accept");
+		android.pause(5);
 		android.closeConversation();
-		firefox.reloadAgentUrl();
 		android.print("Test case - chat notifications while app is closed.");
 		android.print("--------------------------------------------------------------------------------");
 	}
