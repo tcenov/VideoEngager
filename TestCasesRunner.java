@@ -161,15 +161,71 @@ public class TestCasesRunner {
 	}
 
 	@Test(priority = 11)
+	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
+		android.print("start new test ------------------------------------------------------------------");
+		firefox.close();
+		firefox.setUp();
+		firefox.waitForPageLoad();
+		android.startCalculatorApp();
+		android.lockScreen();
+		android.pause(5);
+		firefox.SendMessage("Message while android is locked and behind calculator");
+		android.pause(5);
+		//android.unlockScreenWithAppium();
+		android.unlockScreen();
+		android.startCalculatorApp();
+		//android.getAppBackInForeground();
+		android.openNotifications();
+		android.openNotifications();
+		android.getAllNotifications();
+		android.pause(2);
+		android.acceptRejectNotification("accept");
+		android.pause(4);
+		android.verifyMessage("Message while android is locked and behind calculator");
+		android.closeConversation();
+		android.print("Test case - chat notifications while device is locked.");
+		android.print("--------------------------------------------------------------------------------");
+	}
+	
+	@Test(priority = 12)
+	public void notificationsWhileAppInBackgroundAndDeviceLocked() throws InterruptedException, IOException, AWTException {
+		android.print("start new test ------------------------------------------------------------------");
+		firefox.close();
+		firefox.setUp();
+		firefox.waitForPageLoad();
+		android.pause(2);
+		//android.unlockScreenWithAppium();
+		android.getAppBackInForeground();
+		android.pressHomeButton();
+		android.pause(5);
+		android.lockScreen();
+		android.pause(2);
+		firefox.SendMessage("Message while app is in background and device is locked.");
+		android.pause(5);
+		//android.unlockScreenWithAppium();
+		android.unlockScreen();
+		android.pause(5);
+		android.openNotifications();
+		android.pause(5);
+		android.getAllNotifications();
+		android.acceptRejectNotification("accept");
+		android.pause(7);
+		android.verifyMessage("Message while app is in background and device is locked.");
+		android.closeConversation();
+		android.print("Test case - chat notifications while deveice is locked.");
+		android.print("--------------------------------------------------------------------------------");
+	}
+		
+	@Test(priority = 17)
 	public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
 		firefox.close();
 		firefox.setUp();
 		firefox.waitForPageLoad();
 		android.startCalculatorApp();
-		android.pause(15);
+		android.pause(5);
 		firefox.SendMessage("Message while android is behind calculator");
-		android.pause(10);
+		android.pause(5);
 		android.openNotifications();
 		android.acceptRejectNotification("accept");
 		android.pause(4);
@@ -179,7 +235,7 @@ public class TestCasesRunner {
 		android.print("--------------------------------------------------------------------------------");
 	}
 	
-	@Test(priority = 12)
+	@Test(priority = 18)
 	public void notificationsWhilePlayGame() throws InterruptedException {	
 		android.print("start new test ---notificationsWhilePlayGame-----------------------------");
 		android.print("At the moment it failed intentionally");
@@ -206,7 +262,6 @@ public class TestCasesRunner {
 		android.print("Test case - Call while android works in background");
 		android.print("--------------------------------------------------------------------------------");
 	}
-	
 	
 	@Test(priority = 14)
 	public void notificationsWhileAppIsClosed() throws InterruptedException, AWTException {

@@ -1,0 +1,1 @@
+adb shell am start -n io.appium.unlock/.Unlock

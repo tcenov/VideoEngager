@@ -8,9 +8,14 @@ import java.util.Date;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.Augmenter;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 
 public class ScreenshotUtility implements ITestListener {
 	// This method will execute before starting of Test suite.
@@ -47,12 +52,14 @@ public class ScreenshotUtility implements ITestListener {
 
 	// Function to capture screenshot.
 	public void captureScreenShot(ITestResult result, String status) {
+		
 		// AndroidDriver driver=ScreenshotOnPassFail.getDriver();
 		String destDir = "";
 		String passfailMethod = result.getMethod().getRealClass().getSimpleName() + "."
 				+ result.getMethod().getMethodName();
 		// To capture screenshot.
 		File scrFile = ((TakesScreenshot) TestCasesRunner.android).getScreenshotAs(OutputType.FILE);
+		
 		DateFormat dateFormat = new SimpleDateFormat("hh_mm_ssaa");
 		// If status = fail then set folder name "Screenshots/Failures"
 		if (status.equalsIgnoreCase("fail")) {

@@ -1,6 +1,7 @@
 
 ToDo
 
+- Orientation change testing
 - Capture screenshot on failure or pass.
 - need to verify video while in call
 - second agent from chrome
@@ -8,27 +9,26 @@ ToDo
  - verify message in notification
 
 	Call from background? - Implementation in progress
-	what are the must push notifications... tests
 	chat in background - Partially Done
 	push notification on stopped state- Partially Done
 	while in app - - Implementation in progress
 	
-1	To check if the notification received even if the app is not running
-2	Check if the notification received if the app was open, or during playing a game, or using another app.
-3	Check if the notification received on multiple time zones .
+	To check if the notification received even if the app is not running
+	Check if the notification received if the app was open, or during playing a game, or using another app.
 
-4	Is it clickable? If it is, what should it do? Open the app or open a new activity?
-	Test if Push Message is received when Device is locked. Preconditions: App is Closed- Implementation in progress
-	Test if Push Message is received when Device is locked. Preconditions: App is in Background.- Implementation in progress
-	Test if Push Message is received. Preconditions: App is in use.- Implementation in progress
-	Test if Push Message is received. Preconditions: App is Closed - Implementation in progress
-	Test if Push Message is received.when other app is in use.- Implementation in progress
+
+	Is it clickable? If it is, what should it do? Open the app or open a new activity?
+	Push Message is received when Device is locked. Preconditions: App is Closed- Implementation in progress
+	Push Message is received. Preconditions: App is in use.- Implementation in progress
+	Push Message is received. Preconditions: App is Closed - Implementation in progress, Java exceptions
+	Push Message is received.when other app is in use.- Implementation in progress
 
 - Install guide - Done
 - Install app from apk file in folder. - Done
 - Clean up - delete apk file. - delete, then install new apk - Done
 - Firefox message received confirmation.- Done
 - Android message received confirmation.- Done
+Push Message is received when Device is locked. Preconditions: App is in Background.- Done
 
 Bugs:
 

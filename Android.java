@@ -16,7 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 @SuppressWarnings("rawtypes")
@@ -35,7 +34,6 @@ public class Android {
 		capabilities.setCapability("platformName", "Android");
 		capabilities.setCapability("appPackage", "com.leadsecure.agent");
 		capabilities.setCapability("appActivity", "com.leadsecure.core.ui.LoginActivity");
-		cleanUpAndroid();
 		android = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		// android.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox = new Firefox();
@@ -68,6 +66,7 @@ public class Android {
 	void sendMessage(String message) {
 		WebElement textField = android.findElement(By.id("chatBottomLayout"));
 		textField.click();
+		android.hideKeyboard();
 		print("Android clicked in message field.");
 		textField.clear();
 		print("Android cleared message field.");
@@ -249,15 +248,10 @@ public class Android {
 		}
 	}
 
-	void lockScreen() {
-		try {
-			adbExecuteComand("adb shell am force-stop io.appium.unlock");
+	void lockScreen() throws IOException {
+			//adbExecuteComand("adb shell am force-stop io.appium.unlock");
 			adbExecuteComand("adb shell input keyevent 26");
 			print("Android: Screen is locked");
-		} catch (IOException e) {
-			print("Android: Something wrong in lock screen!!!");
-			e.printStackTrace();
-		}
 	}
 
 	void pressHomeButton() {
@@ -305,7 +299,7 @@ public class Android {
 				print("Found video agent notification.");
 				return;
 			} else {
-				print("Tthere are no agent notifications");
+				print("There are no agent notifications");
 			}
 		}
 	}
@@ -356,16 +350,11 @@ public class Android {
 		}
 	}
 
-	void unlockScreenWithAppium() {
-		try {
+	void unlockScreenWithAppium() throws InterruptedException, IOException {
 			adbExecuteComand("adb shell am start -n io.appium.unlock/.Unlock");
 			print("Android: Screen is unlocked by Appium");
-		} catch (IOException e) {
-			print("Android: Something wrong in lock screen!!!");
-			e.printStackTrace();
-		}
 	}
-
+	
 	void print(String text) {
 		System.out.println(text);
 	}
