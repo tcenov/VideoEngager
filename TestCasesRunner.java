@@ -112,7 +112,7 @@ public class TestCasesRunner {
 		android.pause(2);
 		android.answerVideoCall();
 		//ToDo verify video
-		android.pause(10);
+		android.pause(7);
  		android.stopOrRejectVideoCall();
 		android.print("Test case - android receive video call while conversation is opened");
 		android.print("--------------------------------------------------------------------------------");

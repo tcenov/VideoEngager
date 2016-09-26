@@ -160,22 +160,9 @@ public class Firefox {
 		WebElement call;
 		WebDriverWait wait;
 		try {
-			call = firefox.findElement(By.xpath("//*[contains(@id, 'callButton_3')]"));
+			call = firefox.findElement(By.xpath("//*[contains(@id, 'callButton_1')]"));
 			// By.xpath("//*[contains(@id, 'callButton_3')]")
 			print("callButton_");
-			print("call.isDisplayed()= " + call.isDisplayed());
-			print("call.isEnabled() = " + call.isEnabled());
-			wait = new WebDriverWait(firefox, 15);
-			wait.until(ExpectedConditions.elementToBeClickable(call));
-			call.click();
-			print("Firefox called.");
-
-		} catch (Exception e) {
-			print("Greshka pri call");
-		}
-		try {
-			call = firefox.findElement(By.id("callButtonF37k1rLhVbmpxwf9"));
-			print("callButtonF37k1rLhVbmpxwf9");
 			print("call.isDisplayed()= " + call.isDisplayed());
 			print("call.isEnabled() = " + call.isEnabled());
 			wait = new WebDriverWait(firefox, 15);
