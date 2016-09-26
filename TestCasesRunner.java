@@ -96,9 +96,9 @@ public class TestCasesRunner {
 	public void androidAgentRejectVideoCall() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
 		firefox.callButtonFromConversationClick();
-		android.pause(3);
+		android.pause(1);
 		android.stopOrRejectVideoCall();
-		android.pause(3);
+		android.pause(2);
 		android.print("Test case - android agent rejected video call.");
 		android.print("--------------------------------------------------------------------------------");
 	}
@@ -248,6 +248,7 @@ public class TestCasesRunner {
 	@Test(priority = 13)
 	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
+		android.getAppBackInForeground();
 		firefox.close();
 		firefox.setUp();
 		firefox.waitForPageLoad();

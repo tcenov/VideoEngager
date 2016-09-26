@@ -310,8 +310,8 @@ public class Android {
 	}
 
 	void getAppBackInForeground() {
-		print("Android: App is in foreground now");
 		android.runAppInBackground(1);
+		print("Android: App is in foreground now");
 	}
 
 	void startApp() {
