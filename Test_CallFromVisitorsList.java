@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 @SuppressWarnings("rawtypes")
 
-public class TestCallFromVisitorsList extends Android {
+public class Test_CallFromVisitorsList extends Android {
 
 	AppiumDriver android;
 	Dimension size;

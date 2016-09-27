@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-//@Listeners({ ScreenshotUtility.class })
 public class PrepareTestCasesForRunner {
 
 

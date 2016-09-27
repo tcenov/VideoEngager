@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite One" >
- <test name="Test One" >
-  <classes>
-   <class name="android2.FirefoxRunner" />
-  </classes>
- </test>
-</suite>

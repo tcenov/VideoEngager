@@ -1,8 +1,5 @@
 package android2.VideoEngager;
 
-import java.awt.AWTException;
-import java.io.IOException;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,33 +10,6 @@ public class TestCases extends Android {
 	@BeforeMethod
 	void cleanBeforeEachTest() {
 		print("@BeforeMethod");
-	}
-
-	@Test(priority=1)
-	public void loginSendMessageAndLogout() throws InterruptedException, AWTException, IOException {
-
-		firefox.setUp();
-		firefox.join();
-
-		login("tester2006@abv.bg", "Tarator1");
-		startConversation();
-		sendMessage("Alabala");
-		startVideoCall();
-		firefox.answerVideoCall();
-
-//		inVideoCallCameraButtonClick();
-		pause(2);
-		videoCallGetTextFromElements();
-
-		stopOrRejectVideoCall();
-//		pause(5);
-
-		closeConversation();
-//		logout();
-//		pause(20);
-
-		print("Test case - Android login, Firefox login, send message from android, start video call, answerVideoCall from firefox, android stop call, close, logout");
-		//firefox.close();
 	}
 
 	@Test(priority=2)
@@ -79,7 +49,7 @@ public class TestCases extends Android {
 	
 	@Test(priority=9)
 	public void prospectMicrophoneTurnOnOffWhileInCall() {
-		print("Test case -  prospect Microphone Turn On/ Off when in call");		
+		print("Test case - prospect Microphone Turn On/ Off when in call");		
 	}
 	
 	@Test(priority=10)

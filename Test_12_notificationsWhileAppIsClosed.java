@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_notificationsWhileAppIsBehindAnotherApp {
+public class Test_12_notificationsWhileAppIsClosed {
 
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
@@ -25,34 +25,26 @@ public class Test_notificationsWhileAppIsBehindAnotherApp {
 	}
 
 
-	@Test(priority = 11)
-	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
-		android.print("start new test ------------------------------------------------------------------");
-//		firefox.close();
-//		firefox.setUp();
-//		firefox.waitForPageLoad();
-		android.startCalculatorApp();
-		android.lockScreen();
-		android.pause(5);
-		firefox.SendMessage("Message while android is locked and behind calculator");
-		android.pause(5);
-		//android.unlockScreenWithAppium();
-		android.unlockScreen();
-		android.startCalculatorApp();
-		//android.getAppBackInForeground();
-		android.openNotifications();
-		android.openNotifications();
-		android.getAllNotifications();
+	@Test(priority = 14)
+	public void notificationsWhileAppIsClosed() throws InterruptedException, AWTException {
+		android.print("start new test --------------------------------------------------------------------------------");
+		android.clearNotifications();
+		firefox.close();
+		firefox.setUp();
+		firefox.waitForPageLoad();
+		android.closeApp();		
+		firefox.SendMessage("Message while android app is closed");
 		android.pause(2);
+		android.openNotifications();
+		android.pause(5);
 		android.acceptRejectNotification("accept");
 		android.pause(4);
-		android.verifyMessage("Message while android is locked and behind calculator");
+		android.verifyMessage("Message while android app is closed");
+		android.pause(5);
 		android.closeConversation();
-		android.print("Test case - chat notifications while device is locked.");
+		android.print("Test case - chat notifications while app is closed.");
 		android.print("--------------------------------------------------------------------------------");
 	}
-	
-	
 	
 	@AfterClass
 	void cleanUp() throws IOException {

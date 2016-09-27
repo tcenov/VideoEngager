@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_notificationsWhileAppIsBehindAnotherApp {
+public class Test_10_notificationsWhileAppInBackgroundAndDeviceLocked {
 
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
@@ -24,36 +24,35 @@ public class Test_notificationsWhileAppIsBehindAnotherApp {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-
-	@Test(priority = 11)
-	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
+	@Test(priority = 12)
+	public void notificationsWhileAppInBackgroundAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
-//		firefox.close();
-//		firefox.setUp();
-//		firefox.waitForPageLoad();
-		android.startCalculatorApp();
-		android.lockScreen();
+		firefox.close();
+		firefox.setUp();
+		firefox.waitForPageLoad();
+		android.pause(2);
+		//android.unlockScreenWithAppium();
+		android.getAppBackInForeground();
+		android.pressHomeButton();
 		android.pause(5);
-		firefox.SendMessage("Message while android is locked and behind calculator");
+		android.lockScreen();
+		android.pause(2);
+		firefox.SendMessage("Message while app is in background and device is locked.");
 		android.pause(5);
 		//android.unlockScreenWithAppium();
 		android.unlockScreen();
-		android.startCalculatorApp();
-		//android.getAppBackInForeground();
+		android.pause(5);
 		android.openNotifications();
-		android.openNotifications();
+		android.pause(5);
 		android.getAllNotifications();
-		android.pause(2);
 		android.acceptRejectNotification("accept");
-		android.pause(4);
-		android.verifyMessage("Message while android is locked and behind calculator");
+		android.pause(7);
+		android.verifyMessage("Message while app is in background and device is locked.");
 		android.closeConversation();
-		android.print("Test case - chat notifications while device is locked.");
+		android.print("Test case - chat notifications while deveice is locked.");
 		android.print("--------------------------------------------------------------------------------");
 	}
-	
-	
-	
+
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

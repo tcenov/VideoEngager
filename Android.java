@@ -24,7 +24,10 @@ public class Android {
 
 	AppiumDriver android;
 	Firefox firefox;
-
+	By prospector = By.id("ongoingCallerName");
+	By visitorName = By.id("txtTitle");
+	By messages = By.id("chatRowInMessageText");
+	
 	@BeforeTest
 	public void setUp() throws IOException, InterruptedException {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -340,14 +343,9 @@ public class Android {
 		print("Android closed application.");
 	}
 
-	void unlockScreen() {
-		try {
+	void unlockScreen() throws IOException {
 			adbExecuteComand("adb shell input keyevent 82");
 			print("Android unlocked screen.");
-		} catch (IOException e) {
-			print("Android: Something wrong in lock screen!!!");
-			e.printStackTrace();
-		}
 	}
 
 	void unlockScreenWithAppium() throws InterruptedException, IOException {

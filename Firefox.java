@@ -30,7 +30,7 @@ public class Firefox {
 	WebDriver firefox;
 	String agenUrl = "";
 	String geckodriverPath = "D:\\geckodriver-v0.10.0-win64\\geckodriver.exe";
-	
+
 	@BeforeTest
 	public void setUp() throws AWTException {
 		print("Firefox: firefox.setUp() is starting");
@@ -169,7 +169,6 @@ public class Firefox {
 			wait.until(ExpectedConditions.elementToBeClickable(call));
 			call.click();
 			print("Firefox called.");
-
 		} catch (Exception e) {
 			print("Greshka pri call");
 		}
@@ -288,7 +287,6 @@ public class Firefox {
 	public void reloadAgentUrl() {
 		firefox.get("https://videome.leadsecure.com/testtes");
 	}
-	
 	
 	public void waitForPageLoad() {
 		WebDriverWait wait = new WebDriverWait(firefox, 30);

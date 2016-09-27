@@ -5,33 +5,37 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_AndroidAgentRejectVideoCall {
+public class Test_05_androidAgentRejectVideoCall {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();
-
 	
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
 		android.setUp();
 		android.login("tester2006@abv.bg", "Tarator1");
+		android.print("--------------------------------------------------------------------------------");
 	}
 
 	@Test(priority = 2)
-	public void firefoxLogin() throws InterruptedException, AWTException, IOException {
+	public void firefoxJoin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
 		firefox.join();
+		android.print("--------------------------------------------------------------------------------");
 	}
 
 	@Test(priority = 7)
 	public void androidAgentRejectVideoCall() throws InterruptedException {
+		android.print("start new test ------------------------------------------------------------------");
 		firefox.callButtonFromHomeClick();
-		android.pause(3);
+		//firefox.callButtonFromConversationClick();
+		android.pause(1);
 		android.stopOrRejectVideoCall();
-		android.pause(3);
+		android.pause(2);
 		android.print("Test case - android agent rejected video call.");
+		android.print("--------------------------------------------------------------------------------");
 	}
- 
+		
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();
