@@ -27,9 +27,9 @@ public class Test_10_notificationsWhileAppInBackgroundAndDeviceLocked {
 	@Test(priority = 12)
 	public void notificationsWhileAppInBackgroundAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
-		firefox.close();
-		firefox.setUp();
-		firefox.waitForPageLoad();
+//		firefox.close();
+//		firefox.setUp();
+//		firefox.waitForPageLoad();
 		android.pause(2);
 		//android.unlockScreenWithAppium();
 		android.getAppBackInForeground();

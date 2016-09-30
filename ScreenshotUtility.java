@@ -8,16 +8,12 @@ import java.util.Date;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.Augmenter;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
-
 public class ScreenshotUtility implements ITestListener {
+		
 	// This method will execute before starting of Test suite.
 	public void onStart(ITestContext tr) {
 
@@ -30,12 +26,12 @@ public class ScreenshotUtility implements ITestListener {
 
 	// This method will execute only when the test is pass.
 	public void onTestSuccess(ITestResult tr) {
-		captureScreenShot(tr, "pass");
+		captureScreenShot( tr, "pass");
 	}
 
 	// This method will execute only on the event of fail test.
 	public void onTestFailure(ITestResult tr) {
-		captureScreenShot(tr, "fail");
+		captureScreenShot( tr, "fail");
 	}
 
 	// This method will execute before the main test start (@Test)
@@ -50,6 +46,7 @@ public class ScreenshotUtility implements ITestListener {
 	public void onTestFailedButWithinSuccessPercentage(ITestResult tr) {
 	}
 
+  
 	// Function to capture screenshot.
 	public void captureScreenShot(ITestResult result, String status) {
 		
@@ -59,7 +56,7 @@ public class ScreenshotUtility implements ITestListener {
 				+ result.getMethod().getMethodName();
 		// To capture screenshot.
 		File scrFile = ((TakesScreenshot) TestCasesRunner.android).getScreenshotAs(OutputType.FILE);
-		
+
 		DateFormat dateFormat = new SimpleDateFormat("hh_mm_ssaa");
 		// If status = fail then set folder name "Screenshots/Failures"
 		if (status.equalsIgnoreCase("fail")) {

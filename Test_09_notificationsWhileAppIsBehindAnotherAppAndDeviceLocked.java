@@ -27,9 +27,9 @@ public class Test_09_notificationsWhileAppIsBehindAnotherAppAndDeviceLocked {
 	@Test(priority = 11)
 	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
-		firefox.close();
-		firefox.setUp();
-		firefox.waitForPageLoad();
+//		firefox.close();
+//		firefox.setUp();
+//		firefox.waitForPageLoad();
 		android.startCalculatorApp();
 		android.lockScreen();
 		android.pause(5);

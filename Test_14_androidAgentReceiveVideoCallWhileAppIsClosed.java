@@ -27,8 +27,8 @@ public class Test_14_androidAgentReceiveVideoCallWhileAppIsClosed {
 	@Test(priority = 16)
 	public void androidAgentReceiveVideoCallWhileAppIsClosed() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
-		firefox.reloadAgentUrl();
-		firefox.waitForPageLoad();
+
+
 		android.startApp();
 		android.closeApp();
 		firefox.callButtonFromHomeClick();

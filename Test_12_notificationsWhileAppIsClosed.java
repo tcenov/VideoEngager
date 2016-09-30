@@ -26,15 +26,19 @@ public class Test_12_notificationsWhileAppIsClosed {
 
 
 	@Test(priority = 14)
-	public void notificationsWhileAppIsClosed() throws InterruptedException, AWTException {
+	public void notificationsWhileAppIsClosed() throws InterruptedException, AWTException, IOException {
 		android.print("start new test --------------------------------------------------------------------------------");
 		android.clearNotifications();
-		firefox.close();
-		firefox.setUp();
-		firefox.waitForPageLoad();
-		android.closeApp();		
+//		firefox.close();
+//		firefox.setUp();
+//		firefox.waitForPageLoad();
+		android.closeApp();
+		
+		android.pause(5);
 		firefox.SendMessage("Message while android app is closed");
-		android.pause(2);
+		android.pause(5);
+		android.startCalculatorApp();
+		android.pause(5);
 		android.openNotifications();
 		android.pause(5);
 		android.acceptRejectNotification("accept");

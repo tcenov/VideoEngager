@@ -2,24 +2,24 @@
 <suite name="Suite One" >
  <test name="Test One" >
   <classes>
-   <class name="android2.Test_01_agentReceiveChatMessage" />
-   <class name="android2.Test_02_prospectorReceiveChatMessage" />
-   <class name="android2.Test_03_prospectReceiveVideoCall" />
-   <class name="android2.Test_04_androidAgentReceiveVideoCall" />
-   <class name="android2.Test_05_androidAgentRejectVideoCall" />
-   <class name="android2.Test_06_androidAgentReceiveVideoCallWhileInConversation" />
-   <class name="android2.Test_07_notificationsWhileRunInBackground" />
-   <class name="android2.Test_08_notificationsWhileAppIsKilled" />
-   <class name="android2.Test_09_notificationsWhileAppIsBehindAnotherAppAndDeviceLocked" />
-   <class name="android2.Test_10_notificationsWhileAppInBackgroundAndDeviceLocked" />
-   <class name="android2.Test_11_androidAgentReceiveVideoCallWhileAppInBackground" />
-   <class name="android2.Test_12_notificationsWhileAppIsClosed" />
-   <class name="android2.Test_13_androidAgentReceiveVideoCallWhileAppBehindAnotherApp" />
-   <class name="android2.Test_14_androidAgentReceiveVideoCallWhileAppIsClosed" />
-   <class name="android2.Test_15_notificationsWhileAppIsBehindAnotherApp" />
-   <class name="android2.Test_16_notificationsWhilePlayGame" />
-   <class name="android2.Test_17_androidAgentReceiveVideoCallWhenAppIsKilled" />
-   <class name="android2.Test_18_ProspectReceiveVideoCallEndFromProspect" />
+   <class name="android2.VideoEngager.Test_01_agentReceiveChatMessage" />
+   <class name="android2.VideoEngager.Test_02_prospectorReceiveChatMessage" />
+   <class name="android2.VideoEngager.Test_03_prospectReceiveVideoCall" />
+   <class name="android2.VideoEngager.Test_04_androidAgentReceiveVideoCall" />
+   <class name="android2.VideoEngager.Test_05_androidAgentRejectVideoCall" />
+   <class name="android2.VideoEngager.Test_06_androidAgentReceiveVideoCallWhileInConversation" />
+   <class name="android2.VideoEngager.Test_07_notificationsWhileRunInBackground" />
+   <class name="android2.VideoEngager.Test_08_notificationsWhileAppIsKilled" />
+   <class name="android2.VideoEngager.Test_09_notificationsWhileAppIsBehindAnotherAppAndDeviceLocked" />
+   <class name="android2.VideoEngager.Test_10_notificationsWhileAppInBackgroundAndDeviceLocked" />
+   <class name="android2.VideoEngager.Test_11_androidAgentReceiveVideoCallWhileAppInBackground" />
+   <class name="android2.VideoEngager.Test_12_notificationsWhileAppIsClosed" />
+   <class name="android2.VideoEngager.Test_13_androidAgentReceiveVideoCallWhileAppBehindAnotherApp" />
+   <class name="android2.VideoEngager.Test_14_androidAgentReceiveVideoCallWhileAppIsClosed" />
+   <class name="android2.VideoEngager.Test_15_notificationsWhileAppIsBehindAnotherApp" />
+   <class name="android2.VideoEngager.Test_16_notificationsWhilePlayGame" />
+   <class name="android2.VideoEngager.Test_17_androidAgentReceiveVideoCallWhenAppIsKilled" />
+   <class name="android2.VideoEngager.Test_18_ProspectReceiveVideoCallEndFromProspect" />
   </classes>
  </test>
 </suite>

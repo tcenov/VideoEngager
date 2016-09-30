@@ -31,9 +31,9 @@ public class Test_07_notificationsWhileRunInBackground {
 		//android.runAppInBackground(5); - this is not a solution.
 		android.pressHomeButton();
 		android.clearNotifications();
-		firefox.close();
-		firefox.setUp();
-		firefox.waitForPageLoad();
+//		firefox.close();
+//		firefox.setUp();
+//		firefox.waitForPageLoad();
 		firefox.SendMessage("Message while android works in background");
 		android.openNotifications();
 		android.getAllNotifications();

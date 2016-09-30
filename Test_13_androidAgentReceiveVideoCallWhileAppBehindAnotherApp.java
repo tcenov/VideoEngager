@@ -28,8 +28,8 @@ public class Test_13_androidAgentReceiveVideoCallWhileAppBehindAnotherApp {
 	@Test(priority = 15)
 	public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
-		firefox.reloadAgentUrl();
-		firefox.waitForPageLoad();
+
+
 		android.startApp();
 		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
 		firefox.callButtonFromHomeClick();
