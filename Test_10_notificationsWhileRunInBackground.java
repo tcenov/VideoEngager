@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_07_notificationsWhileRunInBackground {
+public class Test_10_notificationsWhileRunInBackground {
 
 	Firefox firefox = new Firefox();
 	static Android android = new Android();

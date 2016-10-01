@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_06_androidAgentReceiveVideoCallWhileInConversation {
+public class Test_08_androidAgentRejectVideoCall {
 
 	Firefox firefox = new Firefox();
 	Android android = new Android();
@@ -24,22 +24,18 @@ public class Test_06_androidAgentReceiveVideoCallWhileInConversation {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 8)
-	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException {
+	@Test(priority = 7)
+	public void androidAgentRejectVideoCall() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
-		android.startConversation();
-		android.pause(2);
 		firefox.callButtonFromHomeClick();
 		//firefox.callButtonFromConversationClick();
+		android.pause(1);
+		android.stopOrRejectVideoCall();
 		android.pause(2);
-		android.answerVideoCall();
-		//ToDo verify video
-		android.pause(7);
- 		android.stopOrRejectVideoCall();
-		android.print("Test case - android receive video call while conversation is opened");
+		android.print("Test case - android agent rejected video call.");
 		android.print("--------------------------------------------------------------------------------");
 	}
-
+		
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

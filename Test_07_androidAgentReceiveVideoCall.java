@@ -5,10 +5,10 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_03_prospectReceiveVideoCall {
+public class Test_07_androidAgentReceiveVideoCall {
 
 	Firefox firefox = new Firefox();
-	Android android = new Android();
+	static Android android = new Android();
 	
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
@@ -23,24 +23,24 @@ public class Test_03_prospectReceiveVideoCall {
 		firefox.join();
 		android.print("--------------------------------------------------------------------------------");
 	}
-
-	@Test(priority = 5)
-	public void prospectReceiveVideoCall() throws InterruptedException {
+	
+	@Test(priority = 6)
+	public void androidAgentReceiveVideoCall() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
-		android.startConversation();
-		android.startVideoCall();
-		android.pause(5);
-		firefox.answerVideoCall();
+		android.pause(2);
+		firefox.callButtonFromHomeClick();
+		//firefox.callButtonFromConversationClick();
+		android.pause(2);
+		android.answerVideoCall();
 		//ToDo verify video
-		android.pause(2);
-	//	firefox.muteMicrophone();
-		android.pause(2);
+		android.pause(5);
+		firefox.muteMicrophone();
 		android.stopOrRejectVideoCall();
-		android.closeConversation();
-		android.print("Test case - prospect receive Video call, video ended from android");
-		android.print("--------------------------------------------------------------------------------");
+		android.pause(2);
+		android.print("Test case - android agent receive video call,then android end video call ");
+		android.print("---------------------------------------------------------------------------");
 	}
-
+	
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

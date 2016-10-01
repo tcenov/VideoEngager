@@ -58,7 +58,7 @@ public class TestCasesRunner {
 	}
 
 	@Test(priority = 5)
-	public void prospectReceiveVideoCall() throws InterruptedException {
+	public void prospectReceiveVideoCallEndFromAndroid() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.startConversation();
 		android.startVideoCall();
@@ -75,6 +75,19 @@ public class TestCasesRunner {
 	}
 	
 	@Test(priority = 6)
+	public void prospectReceiveVideoCallEndFromProspect() throws InterruptedException {
+		android.startConversation();
+		android.startVideoCall();
+		android.pause(10);
+		firefox.answerVideoCall();
+		android.pause(10);
+		firefox.stopVideoCall();
+		android.pause(30);
+		//android.closeConversation();
+		android.print("Test case - prospect receive Video call");
+	}
+	
+	@Test(priority = 7)
 	public void androidAgentReceiveVideoCall() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.pause(2);
@@ -91,7 +104,7 @@ public class TestCasesRunner {
 		android.print("---------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 8)
 	public void androidAgentRejectVideoCall() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
 		firefox.callButtonFromConversationClick();
@@ -102,7 +115,7 @@ public class TestCasesRunner {
 		android.print("--------------------------------------------------------------------------------");
 	}
 	
-	@Test(priority = 8)
+	@Test(priority = 9)
 	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.startConversation();
@@ -117,7 +130,7 @@ public class TestCasesRunner {
 		android.print("--------------------------------------------------------------------------------");
 	}
 	
-	@Test(priority = 9)
+	@Test(priority = 10)
 	public void notificationsWhileRunInBackground() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
 		//android.runAppInBackground(5); - this is not a solution.
@@ -139,7 +152,7 @@ public class TestCasesRunner {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 10)
+	@Test(priority = 11)
 	public void notificationsWhileAppIsKilled() throws InterruptedException, IOException {
 		android.print("start new test ---- -while app is killed---------------------------------------");
 		android.print("At the moment it failed intentionally");
@@ -159,7 +172,7 @@ public class TestCasesRunner {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 12)
 	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
 //		firefox.close();
@@ -186,7 +199,7 @@ public class TestCasesRunner {
 		android.print("--------------------------------------------------------------------------------");
 	}
 	
-	@Test(priority = 12)
+	@Test(priority = 13)
 	public void notificationsWhileAppInBackgroundAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
 		firefox.close();
@@ -215,14 +228,14 @@ public class TestCasesRunner {
 		android.print("--------------------------------------------------------------------------------");
 	}
 	
-	@Test(priority = 13)
+	@Test(priority = 14)
 	public void marker()  {
 		android.print("start new test ------------------------------------------------------------------");
 		android.print("marker finished");
 		android.print("--------------------------------------------------------------------------------");
 	}
 	
-	@Test(priority = 14)
+	@Test(priority = 15)
 	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.getAppBackInForeground();
@@ -241,7 +254,7 @@ public class TestCasesRunner {
 		android.print("--------------------------------------------------------------------------------");
 	}
 	
-	@Test(priority = 17)
+	@Test(priority = 16)
 	public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
 		firefox.close();
@@ -260,7 +273,7 @@ public class TestCasesRunner {
 		android.print("--------------------------------------------------------------------------------");
 	}
 	
-	@Test(priority = 18)
+	@Test(priority = 17)
 	public void notificationsWhilePlayGame() throws InterruptedException {	
 		android.print("start new test ---notificationsWhilePlayGame-----------------------------");
 		android.print("At the moment it failed intentionally");
@@ -271,7 +284,7 @@ public class TestCasesRunner {
 	}
 	
 	
-//	@Test(priority = 14)
+//	@Test(priority = 18)
 //	public void notificationsWhileAppIsClosed() throws InterruptedException, AWTException {
 //		android.print("start new test --------------------------------------------------------------------------------");
 //		android.clearNotifications();
@@ -292,24 +305,27 @@ public class TestCasesRunner {
 //		android.print("--------------------------------------------------------------------------------");
 //	}
 	
-//	@Test(priority = 15)
-//	public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException {
-//		android.print("start new test ------------------------------------------------------------------");
-//		firefox.reloadAgentUrl();
-//		firefox.waitForPageLoad();
-//		android.startApp();
-//		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
-//		firefox.callButtonFromHomeClick();
-//		android.pause(5);
-//		android.answerVideoCall();
-		//ToDo verify video
-//		android.pause(5);
-//		android.stopOrRejectVideoCall();
-//		android.print("Test case - Call while android works in background");
-//		android.print("--------------------------------------------------------------------------------");
-//	}
-//
-//	@Test(priority = 16)
+	@Test(priority = 19)
+		public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException, AWTException {
+			android.print("start new test ------------------------------------------------------------------");
+			firefox.close();
+			firefox.setUp();
+			firefox.waitForPageLoad();
+			android.pause(2);
+			android.startCalculatorApp();
+			android.pause(2);
+			firefox.callButtonFromHomeClick();
+			android.pause(1);
+			android.answerVideoCall();
+			//ToDo verify video
+			android.pause(5);
+			android.stopOrRejectVideoCall();
+			android.print("Test case - Call while android works in background");
+			android.print("--------------------------------------------------------------------------------");
+		}
+	 
+		
+//	@Test(priority = 20)
 //	public void androidAgentReceiveVideoCallWhileAppIsClosed() throws InterruptedException, IOException {
 //		android.print("start new test ------------------------------------------------------------------");
 //		firefox.reloadAgentUrl();
@@ -326,7 +342,7 @@ public class TestCasesRunner {
 //		android.print("--------------------------------------------------------------------------------");
 //	}
 //	
-//	@Test(priority = 17)
+//	@Test(priority = 21)
 //	public void androidAgentReceiveVideoCallWhenAppIsKilled() throws InterruptedException, IOException {
 //		android.print("start new test ------------------------------------------------------------------");
 //		//ToDo

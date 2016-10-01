@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_13_androidAgentReceiveVideoCallWhileAppBehindAnotherApp {
+public class Test_17_notificationsWhilePlayGame {
 
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
@@ -24,24 +24,16 @@ public class Test_13_androidAgentReceiveVideoCallWhileAppBehindAnotherApp {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
+@Test(priority = 18)
+public void notificationsWhilePlayGame() throws InterruptedException {	
+	android.print("start new test ---notificationsWhilePlayGame-----------------------------");
+	android.print("At the moment it failed intentionally");
+	android.acceptRejectNotification("accept");		
+	//ToDo
+	android.print("Test case - chat notifications while play game.");
+	android.print("--------------------------------------------------------------------------------");
+}
 
-	@Test(priority = 15)
-	public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException {
-		android.print("start new test ------------------------------------------------------------------");
-
-
-		android.startApp();
-		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
-		firefox.callButtonFromHomeClick();
-		android.pause(5);
-		android.answerVideoCall();
-		//ToDo verify video
-		android.pause(5);
-		android.stopOrRejectVideoCall();
-		android.print("Test case - Call while android works in background");
-		android.print("--------------------------------------------------------------------------------");
-	}
-	
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

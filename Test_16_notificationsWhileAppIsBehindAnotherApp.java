@@ -2,11 +2,10 @@ package android2.VideoEngager;
 
 import java.awt.AWTException;
 import java.io.IOException;
-
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_01_agentReceiveChatMessage {
+public class Test_16_notificationsWhileAppIsBehindAnotherApp {
 
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
@@ -25,22 +24,25 @@ public class Test_01_agentReceiveChatMessage {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 3)
-	public void agentReceiveChatMessage() throws InterruptedException {
-		android.print("start new test ------------------------------------------------------------------");
-		// Prerequisites : login from android
-		android.startConversation();		
-		firefox.SendMessage("Sent from browser prospector");
-		// firefox.resizeWindow(500, 20);
-		
-		android.verifyMessage("Sent from browser prospector");
-		android.pause(5);
-		android.closeConversation();
-		android.pause(2);
-		android.print("Test case - agent receive chat message from browser.");
-		android.print("--------------------------------------------------------------------------------");
-	}
-
+@Test(priority = 17)
+public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedException, IOException, AWTException {
+	android.print("start new test ------------------------------------------------------------------");
+	firefox.close();
+	firefox.setUp();
+	firefox.waitForPageLoad();
+	android.startCalculatorApp();
+	android.pause(5);
+	firefox.SendMessage("Message while android is behind calculator");
+	android.pause(5);
+	android.openNotifications();
+	android.acceptRejectNotification("accept");
+	android.pause(4);
+	android.verifyMessage("Message while android is behind calculator");
+	android.closeConversation();
+	android.print("Test case - chat notifications while another app is on focus.");
+	android.print("--------------------------------------------------------------------------------");
+}
+	
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

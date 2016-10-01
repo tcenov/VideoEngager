@@ -5,10 +5,10 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_09_notificationsWhileAppIsBehindAnotherAppAndDeviceLocked {
+public class Test_09_androidAgentReceiveVideoCallWhileInConversation {
 
 	Firefox firefox = new Firefox();
-	static Android android = new Android();
+	Android android = new Android();
 	
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
@@ -24,33 +24,22 @@ public class Test_09_notificationsWhileAppIsBehindAnotherAppAndDeviceLocked {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 11)
-	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
+	@Test(priority = 8)
+	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
-//		firefox.close();
-//		firefox.setUp();
-//		firefox.waitForPageLoad();
-		android.startCalculatorApp();
-		android.lockScreen();
-		android.pause(5);
-		firefox.SendMessage("Message while android is locked and behind calculator");
-		android.pause(5);
-		//android.unlockScreenWithAppium();
-		android.unlockScreen();
-		android.startCalculatorApp();
-		//android.getAppBackInForeground();
-		android.openNotifications();
-		android.openNotifications();
-		android.getAllNotifications();
+		android.startConversation();
 		android.pause(2);
-		android.acceptRejectNotification("accept");
-		android.pause(4);
-		android.verifyMessage("Message while android is locked and behind calculator");
-		android.closeConversation();
-		android.print("Test case - chat notifications while device is locked.");
+		firefox.callButtonFromHomeClick();
+		//firefox.callButtonFromConversationClick();
+		android.pause(2);
+		android.answerVideoCall();
+		//ToDo verify video
+		android.pause(7);
+ 		android.stopOrRejectVideoCall();
+		android.print("Test case - android receive video call while conversation is opened");
 		android.print("--------------------------------------------------------------------------------");
 	}
-	
+
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

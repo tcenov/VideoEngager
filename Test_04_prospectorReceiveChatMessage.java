@@ -2,10 +2,11 @@ package android2.VideoEngager;
 
 import java.awt.AWTException;
 import java.io.IOException;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_04_androidAgentReceiveVideoCall {
+public class Test_04_prospectorReceiveChatMessage {
 
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
@@ -23,24 +24,23 @@ public class Test_04_androidAgentReceiveVideoCall {
 		firefox.join();
 		android.print("--------------------------------------------------------------------------------");
 	}
-	
-	@Test(priority = 6)
-	public void androidAgentReceiveVideoCall() throws InterruptedException {
+
+	@Test(priority = 4)
+	public void prospectorReceiveChatMessage() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
-		android.pause(2);
-		firefox.callButtonFromHomeClick();
-		//firefox.callButtonFromConversationClick();
-		android.pause(2);
-		android.answerVideoCall();
-		//ToDo verify video
+		//ToDo - to remove next row after bug fix
+		android.closeConversation();
+		
+		android.startConversation();
+		android.sendMessage("Sent from android agent");
+		firefox.verifyMessage("Sent from android agent");
 		android.pause(5);
-		firefox.muteMicrophone();
-		android.stopOrRejectVideoCall();
-		android.pause(2);
-		android.print("Test case - android agent receive video call,then android end video call ");
-		android.print("---------------------------------------------------------------------------");
+		android.closeConversation();
+		android.pause(5);
+		android.print("Test case - agent android send message");
+		android.print("--------------------------------------------------------------------------------");
 	}
-	
+
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

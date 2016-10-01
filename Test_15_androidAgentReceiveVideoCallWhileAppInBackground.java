@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_08_notificationsWhileAppIsKilled {
+public class Test_15_androidAgentReceiveVideoCallWhileAppInBackground {
 
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
@@ -24,24 +24,22 @@ public class Test_08_notificationsWhileAppIsKilled {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	
-	@Test(priority = 10)
-	public void notificationsWhileAppIsKilled() throws InterruptedException, IOException {
-		android.print("start new test ---- -while app is killed---------------------------------------");
-		android.print("At the moment it failed intentionally");
-		android.acceptRejectNotification("accept");
-		
-//		android.pressHomeButton();
-//		android.adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
-//		firefox.SendMessage("Message while android works in background");
-//		android.openNotifications();
-//		android.pause(2);		
-//		android.acceptRejectNotification("accept");
-//		android.pause(4);
-//		android.verifyMessage("Message while android works in background");
-//		android.pause(2);
-//		android.closeConversation();
-		android.print("Test case - chat notifications while app is killed");
+	@Test(priority = 13)
+	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException, AWTException {
+		android.print("start new test ------------------------------------------------------------------");
+		android.getAppBackInForeground();
+//		firefox.close();
+//		firefox.setUp();
+//		firefox.waitForPageLoad();
+		android.pressHomeButton();
+		//android.pause(5);
+		firefox.callButtonFromHomeClick();
+		//android.pause(5);
+		android.answerVideoCall();
+		//ToDo verify video
+		android.pause(5);
+		android.stopOrRejectVideoCall();
+		android.print("Test case - Call while android works in background");
 		android.print("--------------------------------------------------------------------------------");
 	}
 	

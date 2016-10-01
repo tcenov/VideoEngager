@@ -2,11 +2,10 @@ package android2.VideoEngager;
 
 import java.awt.AWTException;
 import java.io.IOException;
-
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_02_prospectorReceiveChatMessage {
+public class Test_12_notificationsWhileAppInBackgroundAndDeviceLocked {
 
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
@@ -25,19 +24,32 @@ public class Test_02_prospectorReceiveChatMessage {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 4)
-	public void prospectorReceiveChatMessage() throws InterruptedException {
+	@Test(priority = 12)
+	public void notificationsWhileAppInBackgroundAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
-		//ToDo - to remove next row after bug fix
-		android.closeConversation();
-		
-		android.startConversation();
-		android.sendMessage("Sent from android agent");
-		firefox.verifyMessage("Sent from android agent");
+//		firefox.close();
+//		firefox.setUp();
+//		firefox.waitForPageLoad();
+		android.pause(2);
+		//android.unlockScreenWithAppium();
+		android.getAppBackInForeground();
+		android.pressHomeButton();
 		android.pause(5);
-		android.closeConversation();
+		android.lockScreen();
+		android.pause(2);
+		firefox.SendMessage("Message while app is in background and device is locked.");
 		android.pause(5);
-		android.print("Test case - agent android send message");
+		//android.unlockScreenWithAppium();
+		android.unlockScreen();
+		android.pause(5);
+		android.openNotifications();
+		android.pause(5);
+		android.getAllNotifications();
+		android.acceptRejectNotification("accept");
+		android.pause(7);
+		android.verifyMessage("Message while app is in background and device is locked.");
+		android.closeConversation();
+		android.print("Test case - chat notifications while deveice is locked.");
 		android.print("--------------------------------------------------------------------------------");
 	}
 
