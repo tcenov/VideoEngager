@@ -24,66 +24,16 @@ public class TestCasesRunner2 {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	
-
-
-	@Test(priority = 5)
-	public void prospectReceiveVideoCall() throws InterruptedException {
-		android.print("start new test ------------------------------------------------------------------");
-		android.startConversation();
-		android.startVideoCall();
-		android.pause(5);
-		firefox.answerVideoCall();
-		//ToDo verify video
-		android.pause(2);
-	//	firefox.muteMicrophone();
-		android.pause(2);
-		android.stopOrRejectVideoCall();
-		android.closeConversation();
-		android.print("Test case - prospect receive Video call");
-		android.print("--------------------------------------------------------------------------------");
-	}
-	
-
-
-	
-
-
-	
-	@Test(priority = 9)
-	public void notificationsWhileRunInBackground() throws InterruptedException, IOException, AWTException {
-		android.print("start new test ------------------------------------------------------------------");
-		//android.runAppInBackground(5); - this is not a solution.
-		android.pressHomeButton();
-		android.clearNotifications();
-		firefox.close();
-		firefox.setUp();
-		firefox.waitForPageLoad();
-		firefox.SendMessage("Message while android works in background");
-		android.openNotifications();
-		android.getAllNotifications();
-		android.pause(2);
-		android.acceptRejectNotification("accept");
-		android.pause(4);
-		android.verifyMessage("Message while android works in background");
-		android.pause(2);
-		android.closeConversation();
-		android.print("Test case - chat notifications while android run in background");
-		android.print("--------------------------------------------------------------------------------");
-	}
-
-
-
 
 	@Test(priority = 11)
 	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
-		firefox.close();
-		firefox.setUp();
-		firefox.waitForPageLoad();
+//		firefox.close();
+//		firefox.setUp();
+//		firefox.waitForPageLoad();
 		android.startCalculatorApp();
-		android.lockScreen();
 		android.pause(5);
+		android.lockScreen();
 		firefox.SendMessage("Message while android is locked and behind calculator");
 		android.pause(5);
 		//android.unlockScreenWithAppium();
@@ -93,7 +43,7 @@ public class TestCasesRunner2 {
 		android.openNotifications();
 		android.openNotifications();
 		android.getAllNotifications();
-		android.pause(2);
+		android.pause(1);
 		android.acceptRejectNotification("accept");
 		android.pause(4);
 		android.verifyMessage("Message while android is locked and behind calculator");
@@ -130,7 +80,33 @@ public class TestCasesRunner2 {
 		android.print("Test case - chat notifications while deveice is locked.");
 		android.print("--------------------------------------------------------------------------------");
 	}
-		
+	
+	@Test(priority = 13)
+	public void marker()  {
+		android.print("start new test ------------------------------------------------------------------");
+		android.print("marker finished");
+		android.print("--------------------------------------------------------------------------------");
+	}
+	
+	@Test(priority = 14)
+	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException, AWTException {
+		android.print("start new test ------------------------------------------------------------------");
+		android.getAppBackInForeground();
+		firefox.close();
+		firefox.setUp();
+		firefox.waitForPageLoad();
+		android.pressHomeButton();
+		//android.pause(5);
+		firefox.callButtonFromHomeClick();
+		//android.pause(5);
+		android.answerVideoCall();
+		//ToDo verify video
+		android.pause(5);
+		android.stopOrRejectVideoCall();
+		android.print("Test case - Call while android works in background");
+		android.print("--------------------------------------------------------------------------------");
+	}
+	
 	@Test(priority = 17)
 	public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
@@ -159,25 +135,7 @@ public class TestCasesRunner2 {
 		android.print("Test case - chat notifications while play game.");
 		android.print("--------------------------------------------------------------------------------");
 	}
-
-	@Test(priority = 13)
-	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException, AWTException {
-		android.print("start new test ------------------------------------------------------------------");
-		android.getAppBackInForeground();
-		firefox.close();
-		firefox.setUp();
-		firefox.waitForPageLoad();
-		android.pressHomeButton();
-		//android.pause(5);
-		firefox.callButtonFromHomeClick();
-		//android.pause(5);
-		android.answerVideoCall();
-		//ToDo verify video
-		android.pause(5);
-		android.stopOrRejectVideoCall();
-		android.print("Test case - Call while android works in background");
-		android.print("--------------------------------------------------------------------------------");
-	}
+	
 	
 //	@Test(priority = 14)
 //	public void notificationsWhileAppIsClosed() throws InterruptedException, AWTException {

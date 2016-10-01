@@ -50,9 +50,9 @@ public class TestCasesRunner {
 		android.startConversation();
 		android.sendMessage("Sent from android agent");
 		firefox.verifyMessage("Sent from android agent");
-		android.pause(5);
+		android.pause(2);
 		android.closeConversation();
-		android.pause(5);
+		android.pause(2);
 		android.print("Test case - agent android send message");
 		android.print("--------------------------------------------------------------------------------");
 	}
@@ -177,7 +177,7 @@ public class TestCasesRunner {
 		android.openNotifications();
 		android.openNotifications();
 		android.getAllNotifications();
-		android.pause(2);
+		android.pause(1);
 		android.acceptRejectNotification("accept");
 		android.pause(4);
 		android.verifyMessage("Message while android is locked and behind calculator");
@@ -214,37 +214,15 @@ public class TestCasesRunner {
 		android.print("Test case - chat notifications while deveice is locked.");
 		android.print("--------------------------------------------------------------------------------");
 	}
-		
-//	@Test(priority = 17)
-//	public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedException, IOException, AWTException {
-//		android.print("start new test ------------------------------------------------------------------");
-//		firefox.close();
-//		firefox.setUp();
-//		firefox.waitForPageLoad();
-//		android.startCalculatorApp();
-//		android.pause(5);
-//		firefox.SendMessage("Message while android is behind calculator");
-//		android.pause(5);
-//		android.openNotifications();
-//		android.acceptRejectNotification("accept");
-//		android.pause(4);
-//		android.verifyMessage("Message while android is behind calculator");
-//		android.closeConversation();
-//		android.print("Test case - chat notifications while another app is on focus.");
-//		android.print("--------------------------------------------------------------------------------");
-//	}
-//	
-	@Test(priority = 18)
-	public void notificationsWhilePlayGame() throws InterruptedException {	
-		android.print("start new test ---notificationsWhilePlayGame-----------------------------");
-		android.print("At the moment it failed intentionally");
-		android.acceptRejectNotification("accept");		
-		//ToDo
-		android.print("Test case - chat notifications while play game.");
+	
+	@Test(priority = 13)
+	public void marker()  {
+		android.print("start new test ------------------------------------------------------------------");
+		android.print("marker finished");
 		android.print("--------------------------------------------------------------------------------");
 	}
-
-	@Test(priority = 13)
+	
+	@Test(priority = 14)
 	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.getAppBackInForeground();
@@ -262,6 +240,36 @@ public class TestCasesRunner {
 		android.print("Test case - Call while android works in background");
 		android.print("--------------------------------------------------------------------------------");
 	}
+	
+	@Test(priority = 17)
+	public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedException, IOException, AWTException {
+		android.print("start new test ------------------------------------------------------------------");
+		firefox.close();
+		firefox.setUp();
+		firefox.waitForPageLoad();
+		android.startCalculatorApp();
+		android.pause(5);
+		firefox.SendMessage("Message while android is behind calculator");
+		android.pause(5);
+		android.openNotifications();
+		android.acceptRejectNotification("accept");
+		android.pause(4);
+		android.verifyMessage("Message while android is behind calculator");
+		android.closeConversation();
+		android.print("Test case - chat notifications while another app is on focus.");
+		android.print("--------------------------------------------------------------------------------");
+	}
+	
+	@Test(priority = 18)
+	public void notificationsWhilePlayGame() throws InterruptedException {	
+		android.print("start new test ---notificationsWhilePlayGame-----------------------------");
+		android.print("At the moment it failed intentionally");
+		android.acceptRejectNotification("accept");		
+		//ToDo
+		android.print("Test case - chat notifications while play game.");
+		android.print("--------------------------------------------------------------------------------");
+	}
+	
 	
 //	@Test(priority = 14)
 //	public void notificationsWhileAppIsClosed() throws InterruptedException, AWTException {

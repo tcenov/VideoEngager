@@ -341,6 +341,11 @@ public class Android {
 		print("Android 'adb shell monkey' launched video agent application.");
 	}
 	void startCalculatorApp() throws IOException {
+		//kill calculator before start
+		adbExecuteComand("adb shell am force-stop com.google.android.calculator");
+		adbExecuteComand("adb shell am force-stop com.android.calculator2");
+		adbExecuteComand("adb shell am force-stop com.google.android.calculator-2");
+		
 		adbExecuteComand("adb shell monkey -p com.google.android.calculator -c android.intent.category.LAUNCHER 1");
 		adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
 		adbExecuteComand("adb shell am start -n com.android.calculator2/.CalculatorGoogle");
