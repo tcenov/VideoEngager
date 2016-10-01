@@ -389,5 +389,9 @@ public class Android {
 		adbExecuteComand("adb shell am force-stop io.appium.unlock");
 		adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
 		adbExecuteComand("adb shell pm clear com.leadsecure.agent");
+		
+		adbExecuteComand("adb shell am force-stop com.google.android.calculator");
+		adbExecuteComand("adb shell am force-stop com.android.calculator2");
+		adbExecuteComand("adb shell am force-stop com.google.android.calculator-2");
 	}
 }

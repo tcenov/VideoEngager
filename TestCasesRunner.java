@@ -62,7 +62,7 @@ public class TestCasesRunner {
 		android.print("start new test ------------------------------------------------------------------");
 		android.startConversation();
 		android.startVideoCall();
-		android.pause(5);
+		android.pause(2);
 		firefox.answerVideoCall();
 		//ToDo verify video
 		android.pause(2);
@@ -162,9 +162,9 @@ public class TestCasesRunner {
 	@Test(priority = 11)
 	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
-		firefox.close();
-		firefox.setUp();
-		firefox.waitForPageLoad();
+//		firefox.close();
+//		firefox.setUp();
+//		firefox.waitForPageLoad();
 		android.startCalculatorApp();
 		android.lockScreen();
 		android.pause(5);
