@@ -54,8 +54,10 @@ public class InstallFromCrashlitics {
 			if (Objects.equals(webElement.getText(), new String("com.leadsecure.agent"))) {
 				webElement.click();
 				System.out.println("com.leadsecure.agent package clicked");
+				break;
 			}
 		}
+		
 		try {
 			clickOnIdIfIsPresent("app_action_button");
 			System.out.println("Download agent should be started");
