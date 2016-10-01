@@ -17,47 +17,67 @@ public class TestCasesVideo {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
 	public void firefoxJoin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
 		firefox.join();
 		android.print("--------------------------------------------------------------------------------");
 	}
 	  
-	@Test(priority = 5)
-	public void prospectReceiveVideoCallEndFromAndroid() throws InterruptedException {
-		android.print("start new test ------------------------------------------------------------------");
-		android.startConversation();
-		android.startVideoCall();
-		android.pause(2);
-		firefox.answerVideoCall();
-		//ToDo verify video
-		android.pause(2);
-	//	firefox.muteMicrophone();
-		android.pause(2);
-		android.stopOrRejectVideoCall();
-		android.closeConversation();
-		android.print("Test case - prospect receive Video call");
-		android.print("--------------------------------------------------------------------------------");
-	}
+	
 	 
 	@Test(priority = 7)
 	public void androidAgentReceiveVideoCall() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
-		android.pause(2);
-		//firefox.callButtonFromHomeClick();
-		firefox.callButtonFromConversationClick();
+
+		firefox.callButtonFromHomeClick();
+		//firefox.callButtonFromConversationClick();
 		android.pause(2);
 		android.answerVideoCall();
 		//ToDo verify video
-		android.pause(5);
+		android.pause(10);
 		firefox.muteMicrophone();
+		android.pause(11);
+		android.inVideoCallCameraButtonClick();
+		android.pause(8);
+		android.changeCameraTo("back camera");
+		
+		android.pause(8);
+		android.inVideoCallCameraButtonClick();
+		android.pause(8);
+		android.changeCameraTo("front camera");
+		
+		android.pause(11);
+		android.inVideoCallCameraButtonClick();
+		android.pause(8);
+		android.changeCameraTo("no camera");
+		
+		android.pause(20);
 		android.stopOrRejectVideoCall();
 		android.pause(2);
 		android.print("Test case - android agent receive video call,then android end video call ");
 		android.print("---------------------------------------------------------------------------");
 	}
            
+	
+//	@Test(priority = 5)
+//	public void prospectReceiveVideoCallEndFromAndroid() throws InterruptedException {
+//		android.print("start new test ------------------------------------------------------------------");
+//		android.startConversation();
+//		android.startVideoCall();
+//		android.pause(2);
+//		firefox.answerVideoCall();
+//		//ToDo verify video
+//		android.pause(2);
+//	//	firefox.muteMicrophone();
+//		android.pause(2);
+//		android.stopOrRejectVideoCall();
+//		android.closeConversation();
+//		android.print("Test case - prospect receive Video call");
+//		android.print("--------------------------------------------------------------------------------");
+//	}
+	
+	
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();

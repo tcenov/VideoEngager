@@ -112,6 +112,36 @@ public class Android {
 		print("Android answered video call");
 	}
 
+	void changeCameraTo(String cameraPosition){
+		String optionName = null;
+		//Camera position can be "Back Camera","Front Camera" or "No Camera" 
+		cameraPosition = cameraPosition.toLowerCase();
+		List<WebElement> options = android.findElements(By.xpath("*//android.widget.CheckedTextView"));
+		for (int j = 0; j < options.size(); j++) {
+			optionName = options.get(j).getText().toLowerCase();
+			print(j + "- " + optionName);
+			if (Objects.equals(optionName, cameraPosition)) {
+				options.get(j).click();
+				break;
+			}
+//			if (Objects.equals(new String("back camera"), cameraPosition)) {
+//				options.get(0).click();
+//				print("Clicked on back camera");
+//			}
+//			if (Objects.equals(new String("front camera"), cameraPosition)) {
+//				options.get(1).click();
+//				print("Clicked on front camera");
+//			}
+//			if (Objects.equals(new String("no camera"), cameraPosition)) {
+//				options.get(2).click();
+//				print("Clicked on 'no camera'");
+//			}
+			
+		}
+		print("Android changed camera to: " + optionName);
+	}
+	
+	
 	void openNotifications() throws InterruptedException {
 		((AndroidDriver) android).openNotifications();
 		pause(2);
