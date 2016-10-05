@@ -178,6 +178,16 @@ public class Firefox {
 		clickOnSelector(By.xpath("//*[contains(@id, 'cancel_call_button')]"));
 	}
 
+	public void fillRequestedForm() throws InterruptedException {
+		// TODO  
+		//id="instacollab_nameF37k1rLhVbmpxwf9"
+		//instacollab_emailF37k1rLhVbmpxwf9
+		//id="instacollab_phoneF37k1rLhVbmpxwf9"
+		//click on continue-buttonF37k1rLhVbmpxwf9
+		clickOnSelector(By.xpath("//*[contains(@id, 'continue-button')]"));
+		
+	}
+	
 	private WebElement getWebElement(By selector) {
 		try {
 			WebElement element = firefox.findElement(selector);
@@ -305,4 +315,6 @@ public class Firefox {
 			print("Firefox is closed");
 		}
 	}
+
+	
 }

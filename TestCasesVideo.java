@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class TestCasesVideo {
 
 	Firefox firefox = new Firefox();
-	static Android android = new Android();
+	Android android = new Android();
 	
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
@@ -27,7 +27,7 @@ public class TestCasesVideo {
 	
 	 
 	@Test(priority = 7)
-	public void androidAgentReceiveVideoCall() throws InterruptedException {
+	public void androidAgentReceiveVideoCall() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
 
 		firefox.callButtonFromHomeClick();
@@ -35,22 +35,31 @@ public class TestCasesVideo {
 		android.pause(2);
 		android.answerVideoCall();
 		//ToDo verify video
-		android.pause(10);
+		android.pause(5);
 		firefox.muteMicrophone();
-		android.pause(11);
+		android.pause(3);
 		android.inVideoCallCameraButtonClick();
-		android.pause(8);
-		android.changeCameraTo("back camera");
-		
-		android.pause(8);
-		android.inVideoCallCameraButtonClick();
-		android.pause(8);
-		android.changeCameraTo("front camera");
-		
-		android.pause(11);
-		android.inVideoCallCameraButtonClick();
-		android.pause(8);
+		android.pause(4);
 		android.changeCameraTo("no camera");
+
+		android.pause(8);
+		android.verifyStoppedOwnVideo();
+		firefox.CameraButtonClick();
+		android.pause(8);
+		android.verifyStoppedVideoFromProspector();
+		android.pause(8);
+		android.requestPhoneAndEmail();
+		firefox.fillRequestedForm();
+		
+//		android.pause(8);
+//		android.inVideoCallCameraButtonClick();
+//		android.pause(8);
+//		android.changeCameraTo("front camera");
+//		
+//		android.pause(11);
+//		android.inVideoCallCameraButtonClick();
+//		android.pause(8);
+//		android.changeCameraTo("back camera");
 		
 		android.pause(20);
 		android.stopOrRejectVideoCall();

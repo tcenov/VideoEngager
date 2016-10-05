@@ -185,6 +185,23 @@ public class Android {
 		print("Android clicked on incallCameraButton button.");
 	}
 
+	void verifyStoppedOwnVideo() throws IOException{
+				if (isElementPresent(By.id("incallCalleeImage"))) {
+					print("Android: Video is stopped");
+				}
+	}
+	
+	void verifyStoppedVideoFromProspector() throws IOException{
+		if (isElementPresent(By.id("incallCallerImage"))) {
+			print("Android: Video from prospector is stopped");
+		}
+	}
+	
+	void requestPhoneAndEmail() throws IOException{
+		clickOnIdIfIsPresent("requestInfoButton");
+		print("Android: Requested prospctor for phone and email");
+	}
+	
 	void videoCallGetTextFromElements() {
 		WebDriverWait wait = new WebDriverWait(android, 25);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("android.widget.TextView")));
