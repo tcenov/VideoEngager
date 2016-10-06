@@ -183,11 +183,7 @@ public class TestCasesRunner {
 		android.pause(5);
 		firefox.SendMessage("Message while android is locked and behind calculator");
 		android.pause(5);
-		//android.unlockScreenWithAppium();
 		android.unlockScreen();
-		android.startCalculatorApp();
-		//android.getAppBackInForeground();
-		android.openNotifications();
 		android.openNotifications();
 		android.getAllNotifications();
 		android.pause(1);
