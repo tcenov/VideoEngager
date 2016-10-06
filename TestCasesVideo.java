@@ -24,8 +24,6 @@ public class TestCasesVideo {
 		android.print("--------------------------------------------------------------------------------");
 	}
 	  
-	
-	 
 	@Test(priority = 7)
 	public void androidAgentReceiveVideoCall() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
@@ -49,8 +47,8 @@ public class TestCasesVideo {
 		android.verifyStoppedVideoFromProspector();
 		android.pause(8);
 		android.requestPhoneAndEmail();
-		firefox.fillRequestedForm();
-		
+		firefox.fillRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
+
 //		android.pause(8);
 //		android.inVideoCallCameraButtonClick();
 //		android.pause(8);
@@ -64,10 +62,9 @@ public class TestCasesVideo {
 		android.pause(20);
 		android.stopOrRejectVideoCall();
 		android.pause(2);
-		android.print("Test case - android agent receive video call,then android end video call ");
+		android.print("Test case -  ");
 		android.print("---------------------------------------------------------------------------");
 	}
-           
 	
 //	@Test(priority = 5)
 //	public void prospectReceiveVideoCallEndFromAndroid() throws InterruptedException {
@@ -85,7 +82,6 @@ public class TestCasesVideo {
 //		android.print("Test case - prospect receive Video call");
 //		android.print("--------------------------------------------------------------------------------");
 //	}
-	
 	
 	@AfterClass
 	void cleanUp() throws IOException {

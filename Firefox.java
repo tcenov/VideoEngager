@@ -3,6 +3,8 @@ package android2.VideoEngager;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -178,14 +180,27 @@ public class Firefox {
 		clickOnSelector(By.xpath("//*[contains(@id, 'cancel_call_button')]"));
 	}
 
-	public void fillRequestedForm() throws InterruptedException {
-		// TODO  
+	public void fillRequestedForm(String name,String email, String phone) throws InterruptedException {
 		//id="instacollab_nameF37k1rLhVbmpxwf9"
 		//instacollab_emailF37k1rLhVbmpxwf9
 		//id="instacollab_phoneF37k1rLhVbmpxwf9"
 		//click on continue-buttonF37k1rLhVbmpxwf9
-		clickOnSelector(By.xpath("//*[contains(@id, 'continue-button')]"));
-		
+		typeTextInSelector(By.xpath("//*[contains(@id, 'instacollab_name')]"), name);
+		typeTextInSelector(By.xpath("//*[contains(@id, 'instacollab_email')]"), email);
+		typeTextInSelector(By.xpath("//*[contains(@id, 'instacollab_phone')]"), phone);
+		clickOnSelector(By.xpath("//*[contains(@id, 'continue-button')]"));	
+	}
+	
+	public String generateName() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("hh_mm_ss");
+		String name = dateFormat.format(new Date())+ "_name";
+		return name;
+	}
+	
+	public String generateEmail() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("hh_mm_ss");
+		String email = dateFormat.format(new Date())+ "@mail.com";
+		return email;
 	}
 	
 	private WebElement getWebElement(By selector) {
@@ -314,7 +329,5 @@ public class Firefox {
 			firefox.quit();
 			print("Firefox is closed");
 		}
-	}
-
-	
+	}	
 }
