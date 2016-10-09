@@ -35,8 +35,8 @@ public class Test_09_DeleteMe {
 		android.pause(5);
 		android.unlockScreen();
 		android.openNotifications();
-		android.getAllNotifications();
-		android.pause(2);
+	//	android.getAllNotifications();
+	//	android.pause(2);
 		android.acceptRejectNotification("accept");
 		android.pause(4);
 		android.verifyMessage("Message while android is locked and behind calculator");
