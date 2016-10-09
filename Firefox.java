@@ -3,6 +3,7 @@ package android2.VideoEngager;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -81,7 +82,23 @@ public class Firefox {
 			print("Firefox: Greshka pri video call answer!!!");
 		}
 	}
-
+	public void verifyVideoFromAgent() throws IOException {
+		//id=remoteVideoF37k1rLhVbmpxwf9
+		if (isElementPresent(By.xpath("//*[contains(@id, 'remoteVideo')]"))) {
+			print("Firefox: verified video receive from agent.");
+		} else {
+		    throw new IOException("Firefox: Greshka when receive video call !!!");
+		}
+	}
+	public void verifyOwnVideo() throws IOException {
+		//id=localVideoF37k1rLhVbmpxwf9
+		if (isElementPresent(By.xpath("//*[contains(@id, 'localVideo')]"))) {
+			print("Firefox: verified video send from prospector.");
+		} else {
+		    throw new IOException("Firefox: Greshka when send video from prospector !!!");
+		}
+	}
+	
 	public void SendMessage(String message) {
 		// id of "Message field" webelement =
 		// instacollab_chat_message1F37k1rLhVbmpxwf9

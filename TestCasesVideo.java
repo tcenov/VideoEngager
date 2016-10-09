@@ -30,8 +30,10 @@ public class TestCasesVideo {
 
 		firefox.callButtonFromHomeClick();
 		//firefox.callButtonFromConversationClick();
-		android.pause(2);
+		android.pause(1);
 		android.answerVideoCall();
+		firefox.verifyVideoFromAgent();
+		firefox.verifyOwnVideo();
 		//ToDo verify video
 		android.pause(5);
 		firefox.muteMicrophone();
@@ -47,8 +49,10 @@ public class TestCasesVideo {
 		android.verifyStoppedVideoFromProspector();
 		android.pause(8);
 		android.requestPhoneAndEmail();
+		android.pause(18);
 		firefox.fillRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
-
+		
+		
 //		android.pause(8);
 //		android.inVideoCallCameraButtonClick();
 //		android.pause(8);

@@ -37,6 +37,7 @@ public class Android {
 		capabilities.setCapability("platformName", "Android");
 		capabilities.setCapability("appPackage", "com.leadsecure.agent");
 		capabilities.setCapability("appActivity", "com.leadsecure.core.ui.LoginActivity");
+		cleanUpAndroid();
 		android = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		// android.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox = new Firefox();
@@ -199,7 +200,7 @@ public class Android {
 	
 	void requestPhoneAndEmail() throws IOException{
 		clickOnIdIfIsPresent("requestInfoButton");
-		print("Android: Requested prospctor for phone and email");
+		print("Android: Requested prospåctor for phone and email");
 	}
 	
 	void videoCallGetTextFromElements() {
