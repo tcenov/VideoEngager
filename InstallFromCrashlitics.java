@@ -25,7 +25,7 @@ public class InstallFromCrashlitics {
 	@BeforeTest
 	public void setUp() throws MalformedURLException {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("deviceName", "emulator-5554");
+		capabilities.setCapability("deviceName", "");
 		capabilities.setCapability("browserName", "Android");
 		capabilities.setCapability("platformVersion", "5.1.1");
 		capabilities.setCapability("platformName", "Android");
