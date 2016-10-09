@@ -25,7 +25,7 @@ public class Test_09_androidAgentReceiveVideoCallWhileInConversation {
 	}
 
 	@Test(priority = 8)
-	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException {
+	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.startConversation();
 		android.pause(2);
@@ -34,6 +34,8 @@ public class Test_09_androidAgentReceiveVideoCallWhileInConversation {
 		android.pause(2);
 		android.answerVideoCall();
 		//ToDo verify video
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
 		android.pause(7);
  		android.stopOrRejectVideoCall();
 		android.print("Test case - android receive video call while conversation is opened");

@@ -25,7 +25,7 @@ public class Test_07_androidAgentReceiveVideoCall {
 	}
 	
 	@Test(priority = 6)
-	public void androidAgentReceiveVideoCall() throws InterruptedException {
+	public void androidAgentReceiveVideoCall() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.pause(2);
 		firefox.callButtonFromHomeClick();
@@ -33,6 +33,8 @@ public class Test_07_androidAgentReceiveVideoCall {
 		android.pause(2);
 		android.answerVideoCall();
 		//ToDo verify video
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
 		android.pause(5);
 		firefox.muteMicrophone();
 		android.stopOrRejectVideoCall();

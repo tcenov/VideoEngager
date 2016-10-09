@@ -10,7 +10,7 @@ public class TestCasesVideo {
 	Firefox firefox = new Firefox();
 	Android android = new Android();
 
-	@Test(priority = 1)
+	@Test(priority = 2)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
 		android.setUp();
 		android.login("tester2006@abv.bg", "Tarator1");
@@ -49,6 +49,9 @@ public class TestCasesVideo {
 		android.verifyStoppedVideoFromProspector();
 		firefox.verifyStoppedOwnVideo();
 		android.pause(3);
+		
+		firefox.CameraButtonClick();
+		
 		android.requestPhoneAndEmail();
 		android.pause(5);
 		firefox.fillRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");

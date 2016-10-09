@@ -32,8 +32,10 @@ public class Test_14_androidAgentReceiveVideoCallWhileAppIsClosed {
 		android.startApp();
 		android.closeApp();
 		firefox.callButtonFromHomeClick();
+		firefox.verifyOwnVideo();
 		android.pause(5);
 		android.answerVideoCall();
+		firefox.verifyVideoFromAgent();
 		//ToDo verify video
 		android.pause(5);
 		android.stopOrRejectVideoCall();

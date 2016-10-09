@@ -24,11 +24,13 @@ public class Test_06_ProspectReceiveVideoCallEndFromProspect {
 	}
 
 	@Test(priority = 5)
-	public void prospectReceiveVideoCallEndFromProspect() throws InterruptedException {
+	public void prospectReceiveVideoCallEndFromProspect() throws InterruptedException, IOException {
 		android.startConversation();
 		android.startVideoCall();
 		android.pause(10);
 		firefox.answerVideoCall();
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
 		android.pause(10);
 		firefox.stopVideoCall();
 		android.pause(30);

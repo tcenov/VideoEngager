@@ -20,27 +20,34 @@ public class FirefoxRunner2  {
 		ProfilesIni profile = new ProfilesIni();
 		FirefoxProfile  firefoxProfile= profile.getProfile("default");
 		 // this make firefoxProfile to block web page images
-		firefoxProfile.setPreference("permissions.default.image", 2);
+		//firefoxProfile.setPreference("permissions.default.image", 2);
 		firefox = new FirefoxDriver(firefoxProfile);		
 		firefox.manage().window().maximize();
 		new Minimize().minimize();
-		firefox.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 		firefox.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
-		
-		firefox.get("http://dir.bg");
-		//firefox.get("https://videome.leadsecure.com/testtes");	
+			
 	}
 
 	@Test
 	public void test1() throws InterruptedException{
 
         System.out.println("test");      
-    //    firefox.get("https://videome.leadsecure.com/testtes");	
-        
-        FirefoxProfile profile1= new FirefoxProfile(new File("C:\\Users\\toci\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\zvbhnh6q.selenium")); 
-    	WebDriver driver1= new FirefoxDriver(profile1);
-    	driver1.get("https://videome.leadsecure.com/testtes");
+       firefox.get("https://videome.leadsecure.com/testtes");	
+       Thread.sleep(7000);
+       System.out.println("1");
+       firefox.get("http://blank.org/");
+       firefox.get("https://videome.leadsecure.com/testtes");
+       
+       Thread.sleep(2000);
+       System.out.println("2");
+       firefox.get("http://blank.org/");
+       firefox.get("https://videome.leadsecure.com/testtes");
+       Thread.sleep(2000);
+       
+       System.out.println("3");
+       firefox.get("http://blank.org/");
+       firefox.get("https://videome.leadsecure.com/testtes");
     	Thread.sleep(120000);
 
 	}

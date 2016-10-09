@@ -25,7 +25,7 @@ public class Test_15_androidAgentReceiveVideoCallWhileAppInBackground {
 	}
 
 	@Test(priority = 13)
-	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException, AWTException {
+	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException, AWTException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.getAppBackInForeground();
 //		firefox.close();
@@ -37,6 +37,8 @@ public class Test_15_androidAgentReceiveVideoCallWhileAppInBackground {
 		//android.pause(5);
 		android.answerVideoCall();
 		//ToDo verify video
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
 		android.pause(5);
 		android.stopOrRejectVideoCall();
 		android.print("Test case - Call while android works in background");
