@@ -33,8 +33,10 @@ public class Test_19_androidAgentReceiveVideoCallWhileAppBehindAnotherApp {
 		android.startApp();
 		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
 		firefox.callButtonFromHomeClick();
+		firefox.verifyOwnVideo();
 		android.pause(5);
 		android.answerVideoCall();
+		firefox.verifyVideoFromAgent();
 		//ToDo verify video
 		android.pause(5);
 		android.stopOrRejectVideoCall();
