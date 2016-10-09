@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.Assert.ThrowingRunnable;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -82,20 +83,28 @@ public class Firefox {
 			print("Firefox: Greshka pri video call answer!!!");
 		}
 	}
+	
 	public void verifyVideoFromAgent() throws IOException {
 		//id=remoteVideoF37k1rLhVbmpxwf9
 		if (isElementPresent(By.xpath("//*[contains(@id, 'remoteVideo')]"))) {
-			print("Firefox: verified video receive from agent.");
-		} else {
-		    throw new IOException("Firefox: Greshka when receive video call !!!");
-		}
+			print("Firefox: verified video received from agent.");
+		} 
 	}
+	
 	public void verifyOwnVideo() throws IOException {
 		//id=localVideoF37k1rLhVbmpxwf9
 		if (isElementPresent(By.xpath("//*[contains(@id, 'localVideo')]"))) {
 			print("Firefox: verified video send from prospector.");
+		}
+	}
+	
+	public void verifyStoppedOwnVideo() throws IOException {
+		//id=localVideoF37k1rLhVbmpxwf9
+		Boolean isPresent = firefox.findElements(By.xpath("//*[contains(@id, 'localVideo')]")).size() > 0;
+		if (isPresent = false) {
+			print("Firefox: verified stopped own video");
 		} else {
-		    throw new IOException("Firefox: Greshka when send video from prospector !!!");
+			 throw new IOException("Firefox: video is not stopped properly");
 		}
 	}
 	

@@ -58,12 +58,15 @@ public class TestCasesRunner {
 	}
 
 	@Test(priority = 5)
-	public void prospectReceiveVideoCallEndFromAndroid() throws InterruptedException {
+	public void prospectReceiveVideoCallEndFromAndroid() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.startConversation();
 		android.startVideoCall();
 		android.pause(2);
 		firefox.answerVideoCall();
+		
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
 		//ToDo verify video
 		android.pause(2);
 	//	firefox.muteMicrophone();
@@ -75,12 +78,14 @@ public class TestCasesRunner {
 	}
 	
 	@Test(priority = 6)
-	public void prospectReceiveVideoCallEndFromProspect() throws InterruptedException {
+	public void prospectReceiveVideoCallEndFromProspect() throws InterruptedException, IOException {
 		android.startConversation();
 		android.startVideoCall();
-		android.pause(10);
+		android.pause(5);
 		firefox.answerVideoCall();
-		android.pause(10);
+		android.pause(3);
+		firefox.verifyOwnVideo();
+		firefox.verifyOwnVideo();
 		firefox.stopVideoCall();
 		android.pause(30);
 		//android.closeConversation();
@@ -88,13 +93,15 @@ public class TestCasesRunner {
 	}
 	
 	@Test(priority = 7)
-	public void androidAgentReceiveVideoCall() throws InterruptedException {
+	public void androidAgentReceiveVideoCall() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.pause(2);
 		//firefox.callButtonFromHomeClick();
 		firefox.callButtonFromConversationClick();
 		android.pause(2);
 		android.answerVideoCall();
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
 		//ToDo verify video
 		android.pause(5);
 		firefox.muteMicrophone();
@@ -116,7 +123,7 @@ public class TestCasesRunner {
 	}
 	
 	@Test(priority = 9)
-	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException {
+	public void androidAgentReceiveVideoCallWhileInConversation() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.startConversation();
 		android.pause(2);
@@ -124,6 +131,8 @@ public class TestCasesRunner {
 		android.pause(2);
 		android.answerVideoCall();
 		//ToDo verify video
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
 		android.pause(7);
  		android.stopOrRejectVideoCall();
 		android.print("Test case - android receive video call while conversation is opened");
@@ -232,7 +241,7 @@ public class TestCasesRunner {
 	}
 	
 	@Test(priority = 15)
-	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException, AWTException {
+	public void androidAgentReceiveVideoCallWhileAppInBackground() throws InterruptedException, AWTException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.getAppBackInForeground();
 		firefox.close();
@@ -243,6 +252,8 @@ public class TestCasesRunner {
 		firefox.callButtonFromHomeClick();
 		//android.pause(5);
 		android.answerVideoCall();
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
 		//ToDo verify video
 		android.pause(5);
 		android.stopOrRejectVideoCall();
@@ -314,6 +325,8 @@ public class TestCasesRunner {
 			android.pause(1);
 			android.answerVideoCall();
 			//ToDo verify video
+			firefox.verifyOwnVideo();
+			firefox.verifyVideoFromAgent();
 			android.pause(5);
 			android.stopOrRejectVideoCall();
 			android.print("Test case - Call while android works in background");
@@ -331,6 +344,8 @@ public class TestCasesRunner {
 //		firefox.callButtonFromHomeClick();
 //		android.pause(5);
 //		android.answerVideoCall();
+//	firefox.verifyOwnVideo();
+//	firefox.verifyVideoFromAgent();
 		//ToDo verify video
 //		android.pause(5);
 //		android.stopOrRejectVideoCall();
