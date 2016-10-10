@@ -322,6 +322,7 @@ public class Android {
 			buttonName = buttons.get(j).getText().toLowerCase();
 			if (Objects.equals(buttonName, acceptOrReject)) {
 				buttons.get(j).click();
+				print("Android accepted/rejected notification");
 				return;
 			}
 		}
