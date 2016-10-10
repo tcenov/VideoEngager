@@ -174,7 +174,7 @@ public class Firefox {
 			call.click();
 			print("Firefox called.");
 		} catch (Exception e) {
-			print("Greshka pri call");
+			print("Firefox: Greshka pri call");
 		}
 	}
 
