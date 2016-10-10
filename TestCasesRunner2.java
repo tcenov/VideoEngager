@@ -25,36 +25,12 @@ public class TestCasesRunner2 {
 	}
 	
 	
-	@Test(priority = 10)
-	public void notificationsWhileRunInBackground() throws InterruptedException, IOException, AWTException {
-		android.print("start new test ------------------------------------------------------------------");
-		//android.runAppInBackground(5); - this is not a solution.
-		android.pressHomeButton();
-		android.clearNotifications();
-//		firefox.close();
-//		firefox.setUp();
-//		firefox.waitForPageLoad();
-		firefox.SendMessage("Message while android works in background");
-		android.openNotifications();
-		android.getAllNotifications();
-		android.pause(1);
-		android.acceptRejectNotification("accept");
-		android.pause(2);
-		android.verifyMessage("Message while android works in background");
-		android.pause(2);
-		android.closeConversation();
-		android.print("Test case - chat notifications while android run in background");
-		android.print("--------------------------------------------------------------------------------");
-	}
-
-	
-
 	@Test(priority = 12)
 	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
-		firefox.close();
-		firefox.setUp();
-		firefox.waitForPageLoad();
+//		firefox.close();
+//		firefox.setUp();
+//		firefox.waitForPageLoad();
 		android.startCalculatorApp();
 		android.lockScreen();
 		android.pause(4);
