@@ -3,26 +3,25 @@ ToDo
 
 - Orientation change testing
 - Capture screenshot on failure or pass.
-- need to verify video while in call
-- second agent from chrome
+- need to verify video while in call - partially done
+- second agent from chrome  - Implementation in progress
 - call from browser - accept from android/browser agent
  - verify message in notification
  - verify requested/received form from agent 
  
 	Call from background? - Implementation in progress
 	chat in background - Partially Done
-	push notification on stopped state- Partially Done
+	
 	while in app - - Implementation in progress
 	
 	To check if the notification received even if the app is not running
 	Check if the notification received if the app was open, or during playing a game, or using another app.
 
-
 	Is it clickable? If it is, what should it do? Open the app or open a new activity?
 	Push Message is received when Device is locked. Preconditions: App is Closed- Implementation in progress
-	Push Message is received. Preconditions: App is in use.- Implementation in progress
+	push notification on stopped state- Partially Done
 	Push Message is received. Preconditions: App is Closed - Implementation in progress, Java exceptions
-	Push Message is received.when other app is in use.- Implementation in progress
+	
 
 - Install guide - Done
 - Install app from apk file in folder. - Done
@@ -30,11 +29,12 @@ ToDo
 - Firefox message received confirmation.- Done
 - Android message received confirmation.- Done
 Push Message is received when Device is locked. Preconditions: App is in Background.- Done
+Push Message is received. when other app is in use.- Done
+ 
+ ----  Fix appium session timeout
+ Navigate to directory in your appium installation
+AppiumForWindows-1.2.4.1\Appium\node_modules\appium\lib\appium.js file and edit the following parameters.
 
-Bugs:
-
-
-Questions:
-Android studio
-NDK
+  this.defCommandTimeoutMs = this.args.defaultCommandTimeout * 5000;
+  this.commandTimeoutMs = this.defCommandTimeoutMs * 5;
 

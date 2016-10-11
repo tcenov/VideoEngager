@@ -31,17 +31,14 @@ public class Chrome {
 	}
 	
 	void login(String email, String password) {
-		print("Proceed with Agent from chrome login.");
-
+		print("Chrome: Proceed with Agent from chrome login.");
 		typeTextInSelector(By.name("Email"), email);
 		typeTextInSelector(By.name("Password"), password);
 		clickOnNameIfIsPresent("ENTER");
-		
 		WebDriverWait wait = new WebDriverWait(chrome, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("testa")));
 		print("Chrome: You are logged in as agent from Chrome");
 	}
-	
 	
 	private void clickOnIdIfIsPresent(String id) {
 		Boolean isPresent = chrome.findElements(By.id(id)).size() > 0;

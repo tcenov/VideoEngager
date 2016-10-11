@@ -34,7 +34,7 @@ public class Tests_CallWhileIsLockedInBackground {
 		android.pause(5);
 		android.answerVideoCall();
 		android.pause(5);
-		android.stopOrRejectVideoCall();
+		android.stopOrRejectVideoCalling();
 		android.print("Test case - Call while android works in background");
 	}
 	

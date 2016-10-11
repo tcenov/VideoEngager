@@ -30,7 +30,7 @@ public class Test_08_androidAgentRejectVideoCall {
 		firefox.callButtonFromHomeClick();
 		//firefox.callButtonFromConversationClick();
 		android.pause(1);
-		android.stopOrRejectVideoCall();
+		android.stopOrRejectVideoCalling();
 		android.pause(2);
 		android.print("Test case - android agent rejected video call.");
 		android.print("--------------------------------------------------------------------------------");

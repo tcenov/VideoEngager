@@ -28,7 +28,7 @@ public class Test_13_notificationsWhileAppIsBehindAnotherAppAndDeviceLocked {
 	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
 		android.pause(1);
-		android.startCalculatorApp();
+		android.startCompassApp();
 		android.pause(3);
 		android.lockScreen();
 		android.pause(4);
@@ -53,7 +53,7 @@ public class Test_13_notificationsWhileAppIsBehindAnotherAppAndDeviceLocked {
 		firefox.close();
 		firefox.setUp();
 		firefox.waitForPageLoad();
-		android.startCalculatorApp();
+		android.startCompassApp();
 		android.lockScreen();
 		android.pause(5);
 		firefox.SendMessage("Message while android is locked and behind calculator");
@@ -75,7 +75,7 @@ public class Test_13_notificationsWhileAppIsBehindAnotherAppAndDeviceLocked {
 		firefox.close();
 		firefox.setUp();
 		firefox.waitForPageLoad();
-		android.startCalculatorApp();
+		android.startCompassApp();
 		android.lockScreen();
 		android.pause(5);
 		firefox.SendMessage("Message while android is locked and behind calculator");

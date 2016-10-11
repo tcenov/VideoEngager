@@ -40,7 +40,7 @@ public class Test_15_androidAgentReceiveVideoCallWhileAppInBackground {
 		firefox.verifyOwnVideo();
 		firefox.verifyVideoFromAgent();
 		android.pause(5);
-		android.stopOrRejectVideoCall();
+		android.stopOrRejectVideoCalling();
 		android.print("Test case - Call while android works in background");
 		android.print("--------------------------------------------------------------------------------");
 	}

@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class Test_11_notificationsWhileAppIsKilled {
 
 	Firefox firefox = new Firefox();
-	static Android android = new Android();
+	Android android = new Android();
 	
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {

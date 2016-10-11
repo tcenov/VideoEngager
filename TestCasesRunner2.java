@@ -24,36 +24,36 @@ public class TestCasesRunner2 {
 		android.print("--------------------------------------------------------------------------------");
 	}
 	
-	
-	@Test(priority = 12)
-	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
+//	
+//	@Test(priority = 12)
+//	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
+//		android.print("start new test ------------------------------------------------------------------");
+////		firefox.close();
+////		firefox.setUp();
+////		firefox.waitForPageLoad();
+//		android.startCalculatorApp();
+//		android.lockScreen();
+//		android.pause(4);
+//		firefox.SendMessage("Message while android is locked and behind calculator");
+//		android.pause(4);
+//		android.unlockScreen();
+//		android.openNotifications();
+//		android.getAllNotifications();
+//		android.pause(1);
+//		android.acceptRejectNotification("accept");
+//		android.pause(3);
+//		android.verifyMessage("Message while android is locked and behind calculator");
+//		android.closeConversation();
+//		android.print("Test case - chat notifications while device is locked.");
+//		android.print("--------------------------------------------------------------------------------");
+//	}
+//	
+	@Test(priority = 13)
+	public void notificationsWhileAppInBackgroundAndDeviceLocked() throws InterruptedException, IOException, AWTException {
 		android.print("start new test ------------------------------------------------------------------");
 //		firefox.close();
 //		firefox.setUp();
 //		firefox.waitForPageLoad();
-		android.startCalculatorApp();
-		android.lockScreen();
-		android.pause(4);
-		firefox.SendMessage("Message while android is locked and behind calculator");
-		android.pause(4);
-		android.unlockScreen();
-		android.openNotifications();
-		android.getAllNotifications();
-		android.pause(1);
-		android.acceptRejectNotification("accept");
-		android.pause(3);
-		android.verifyMessage("Message while android is locked and behind calculator");
-		android.closeConversation();
-		android.print("Test case - chat notifications while device is locked.");
-		android.print("--------------------------------------------------------------------------------");
-	}
-	
-	@Test(priority = 13)
-	public void notificationsWhileAppInBackgroundAndDeviceLocked() throws InterruptedException, IOException, AWTException {
-		android.print("start new test ------------------------------------------------------------------");
-		firefox.close();
-		firefox.setUp();
-		firefox.waitForPageLoad();
 		android.pause(2);
 		//android.unlockScreenWithAppium();
 		android.getAppBackInForeground();
@@ -100,7 +100,7 @@ public class TestCasesRunner2 {
 		firefox.verifyVideoFromAgent();
 		//ToDo verify video
 		android.pause(1);
-		android.stopOrRejectVideoCall();
+		android.stopOrRejectVideoCalling();
 		android.print("Test case - Call while android works in background");
 		android.print("--------------------------------------------------------------------------------");
 	}
@@ -111,7 +111,7 @@ public class TestCasesRunner2 {
 		firefox.close();
 		firefox.setUp();
 		firefox.waitForPageLoad();
-		android.startCalculatorApp();
+		android.startCompassApp();
 		android.pause(5);
 		firefox.SendMessage("Message while android is behind calculator");
 		android.pause(5);
@@ -131,7 +131,7 @@ public class TestCasesRunner2 {
 			firefox.setUp();
 			firefox.waitForPageLoad();
 			android.pause(2);
-			android.startCalculatorApp();
+			android.startCompassApp();
 			android.pause(2);
 			firefox.callButtonFromHomeClick();
 			android.pause(1);
@@ -140,11 +140,10 @@ public class TestCasesRunner2 {
 			firefox.verifyOwnVideo();
 			firefox.verifyVideoFromAgent();
 			android.pause(5);
-			android.stopOrRejectVideoCall();
+			android.stopOrRejectVideoCalling();
 			android.print("Test case - Call while android works in background");
 			android.print("--------------------------------------------------------------------------------");
 		}
-
 
 	@AfterClass
 	void cleanUp() throws IOException {

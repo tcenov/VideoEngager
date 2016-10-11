@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_19_androidAgentReceiveVideoCallWhileAppBehindAnotherApp {
+public class Test_22_prospectFillRequestedForm {
 
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
@@ -24,23 +24,25 @@ public class Test_19_androidAgentReceiveVideoCallWhileAppBehindAnotherApp {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-
-	@Test(priority = 15)
-	public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException {
-		android.print("start new test ------------------------------------------------------------------");
-
-
-		android.startApp();
-		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
-		firefox.callButtonFromHomeClick();
+	@Test(priority = 22)
+	public void prospectFillRequestedForm() throws InterruptedException, IOException {
+		android.print("start new test  ------------------------------------------------------------------");
+		android.startConversation();
+		android.startVideoCall();
+		android.pause(1);
+		firefox.answerVideoCall();
+		firefox.muteMicrophone();
 		firefox.verifyOwnVideo();
-		android.pause(5);
-		android.answerVideoCall();
 		firefox.verifyVideoFromAgent();
-		//ToDo verify video
+		android.pause(1);
+		android.requestPhoneAndEmail();
 		android.pause(5);
+		firefox.fillRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
+		// ToDo verify requested details
+
 		android.stopOrRejectVideoCalling();
-		android.print("Test case - Call while android works in background");
+		android.closeConversation();
+		android.print("Test case - prospect fill details in requested form from agent.");
 		android.print("--------------------------------------------------------------------------------");
 	}
 	

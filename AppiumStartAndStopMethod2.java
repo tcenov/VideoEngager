@@ -18,7 +18,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class AppiumStartAndStopMethod2 {
-	static AndroidDriver driver;
+	AndroidDriver driver;
 	// Set path of your node.exe file. Set your path.
 	String nodePath = "C:/Progra~2/Appium/node.exe";
 	// Set path of your appium.js file.

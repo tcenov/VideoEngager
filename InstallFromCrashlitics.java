@@ -46,7 +46,6 @@ public class InstallFromCrashlitics {
 		System.out.println("Uninstall finished");
 		System.out.println("Install started");
 		List<WebElement> elements = driver.findElements(By.id("app_package"));
-
 		System.out.println("elements.size() = " + elements.size());
 		for (WebElement webElement : elements) {
 			webElement.getText();

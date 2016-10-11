@@ -37,7 +37,7 @@ public class Test_18_notificationsWhileAppIsClosed {
 		android.pause(5);
 		firefox.SendMessage("Message while android app is closed");
 		android.pause(5);
-		android.startCalculatorApp();
+		android.startCompassApp();
 		android.pause(5);
 		android.openNotifications();
 		android.pause(5);

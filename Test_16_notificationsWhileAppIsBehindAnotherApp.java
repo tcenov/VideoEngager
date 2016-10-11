@@ -30,7 +30,7 @@ public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedExceptio
 	firefox.close();
 	firefox.setUp();
 	firefox.waitForPageLoad();
-	android.startCalculatorApp();
+	android.startCompassApp();
 	android.pause(5);
 	firefox.SendMessage("Message while android is behind calculator");
 	android.pause(5);

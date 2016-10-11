@@ -37,7 +37,7 @@ public class Test_09_androidAgentReceiveVideoCallWhileInConversation {
 		firefox.verifyOwnVideo();
 		firefox.verifyVideoFromAgent();
 		android.pause(7);
- 		android.stopOrRejectVideoCall();
+ 		android.stopOrRejectVideoCalling();
 		android.print("Test case - android receive video call while conversation is opened");
 		android.print("--------------------------------------------------------------------------------");
 	}

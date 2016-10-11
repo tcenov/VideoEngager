@@ -18,7 +18,7 @@ public class AndroidCleanRun {
 	@BeforeTest
 	public void setUp() throws MalformedURLException {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("deviceName", "emulator-5554");
+		capabilities.setCapability("deviceName", "");
 		capabilities.setCapability("browserName", "Android");
 		capabilities.setCapability("platformVersion", "4.4.2");
 		capabilities.setCapability("platformName", "Android");

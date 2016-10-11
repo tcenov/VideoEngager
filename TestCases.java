@@ -4,24 +4,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TestCases extends Android {
-	Android base = new Android();
-	Firefox firefox = new Firefox();
 
-	@BeforeMethod
-	void cleanBeforeEachTest() {
-		print("@BeforeMethod");
-	}
 
-	@Test(priority=2)
-	public void agentCameraOnOffBackFrontincall() {
-		print("Test case - agent Camera On/ Off/ Back/ Front in call (see update on Local feed, see camera stream to prospect)");	
-	}
-	
-	@Test(priority=3)
-	public void prospectCameraOnOffBackFrontInCall () {
-		print("Test case - prospect Camera On/ Off/ Back/ Front in call (see update on Local feed, see camera stream to agent) ");		
-	}
-	
+
 	@Test(priority=4)
 	public void agentCameraOnForegroundBackgroundForegroudPauseOnBackground() {
 		print("Test case -  agent camera ON foreground/ background/ foregroud:pause on background,  restore camera stream on foreground");		
@@ -37,24 +22,9 @@ public class TestCases extends Android {
 		print("Test case - agent Turn On Microphone when no have call and make call (previous state is saved)");		
 	}
 	
-	@Test(priority=7)
-	public void agentTurnMicrophoneOnOffWhileInCall() {
-		print("Test case -  agent Turn Microphone On / Off when in call");		
-	}
-	
 	@Test(priority=8)
 	public void prospectMicrophoneTurnOnWhenNotInCallAndMakeCall () {
 		print("Test case -  prospect Microphone Turn On when no have call and make call (previous state is saved)");		
-	}
-	
-	@Test(priority=9)
-	public void prospectMicrophoneTurnOnOffWhileInCall() {
-		print("Test case - prospect Microphone Turn On/ Off when in call");		
-	}
-	
-	@Test(priority=10)
-	public void agentReceiveCallWhileInAppRejectAccept() {
-		print("Test case -  agent receive call while in app/ reject/ accept");		
 	}
 	
 	@Test(priority=11)
@@ -117,14 +87,7 @@ public class TestCases extends Android {
 		print("Test case - prospect receive call after that chat");		
 	}
 	
-	@Test(priority=23)
-	public void a() {
-		print("Test case - ");		
-	}
-	
-	@Test(priority=24)
-	public void test24() {
-		print("Tuk sa opisani test cases!!!");
+//		print("Tuk sa opisani test cases!!!");
 
 //			Call			
 //			call pick up: one the same agent on 2 devices
@@ -148,4 +111,3 @@ public class TestCases extends Android {
 //			Upgrade
 //			Upgrade as agent: old version, set location, install new version, see location	
 	}
-}

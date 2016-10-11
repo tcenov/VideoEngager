@@ -5,10 +5,10 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_19_androidAgentReceiveVideoCallWhileAppBehindAnotherApp {
+public class Test_23_prospectMicrophoneTurnOnOffWhileInCall {
 
 	Firefox firefox = new Firefox();
-	static Android android = new Android();
+	Android android = new Android();
 	
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
@@ -24,24 +24,26 @@ public class Test_19_androidAgentReceiveVideoCallWhileAppBehindAnotherApp {
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-
-	@Test(priority = 15)
-	public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException {
+	@Test(priority = 23)
+	public void prospectMicrophoneTurnOnOffWhileInCall() throws InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
-
-
-		android.startApp();
-		android.adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
 		firefox.callButtonFromHomeClick();
-		firefox.verifyOwnVideo();
-		android.pause(5);
+		// firefox.callButtonFromConversationClick();
+
 		android.answerVideoCall();
-		firefox.verifyVideoFromAgent();
-		//ToDo verify video
-		android.pause(5);
+		android.pause(1);
+		firefox.muteMicrophone();
+		android.pause(1);
+		firefox.unmuteMicrophone();
+		android.pause(1);
+		firefox.muteMicrophone();
+		android.pause(1);
+		firefox.unmuteMicrophone();
+		
 		android.stopOrRejectVideoCalling();
-		android.print("Test case - Call while android works in background");
-		android.print("--------------------------------------------------------------------------------");
+		android.pause(1);
+		android.print("Test case - prospectMicrophoneTurnOnOffWhileInCall");
+		android.print("---------------------------------------------------------------------------");
 	}
 	
 	@AfterClass

@@ -43,16 +43,12 @@ public class PrepareTestCasesForRunner {
 //		firefox.close();
 //		firefox.setUp();
 		firefox.waitForPageLoad();
-		android.startCalculatorApp();
+		android.startCompassApp();
 		android.lockScreen();
 		android.pause(5);
 		firefox.SendMessage("Message while android is locked and behind calculator");
 		android.pause(5);
-		//android.unlockScreenWithAppium();
 		android.unlockScreen();
-		android.startCalculatorApp();
-		//android.getAppBackInForeground();
-		android.openNotifications();
 		android.openNotifications();
 		android.getAllNotifications();
 		android.pause(2);

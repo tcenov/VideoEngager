@@ -37,7 +37,7 @@ public class Test_05_prospectReceiveVideoCall {
 		android.pause(2);
 	//	firefox.muteMicrophone();
 		android.pause(2);
-		android.stopOrRejectVideoCall();
+		android.stopOrRejectVideoCalling();
 		android.closeConversation();
 		android.print("Test case - prospect receive Video call, video ended from android");
 		android.print("--------------------------------------------------------------------------------");

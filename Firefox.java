@@ -145,16 +145,21 @@ public class Firefox {
 		Assert.assertEquals(messageText, message);
 	}
 
-	public void CameraButtonClick() {
+	public void cameraButtonClick() {
 		clickOnIdIfIsPresent("showHideVideo");
 		print("Firefox: showHideVideo.");
 	}
 
 	public void muteMicrophone() {
 		clickOnIdIfIsPresent("showHideAudio");
-		print("Firefox: showHideAudio.");
+		print("Firefox: muted microphone.");
 	}
-
+	
+	public void unmuteMicrophone() {
+		clickOnIdIfIsPresent("showHideAudio");
+		print("Firefox: unmuted microphone.");
+	}
+	
 	public void stopVideoCall() {
 		clickOnIdIfIsPresent("hangupButton");
 		print("Firefox stopped video call.");

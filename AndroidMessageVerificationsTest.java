@@ -29,7 +29,7 @@ public class AndroidMessageVerificationsTest {
 	@BeforeTest
 	public void setUp() throws IOException {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("deviceName", "test");
+		capabilities.setCapability("deviceName", "");
 		capabilities.setCapability("browserName", "Android");
 		capabilities.setCapability("platformVersion", "5.5.1");
 		capabilities.setCapability("platformName", "Android");

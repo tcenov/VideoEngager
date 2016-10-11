@@ -38,7 +38,7 @@ public class Test_14_androidAgentReceiveVideoCallWhileAppIsClosed {
 		firefox.verifyVideoFromAgent();
 		//ToDo verify video
 		android.pause(5);
-		android.stopOrRejectVideoCall();
+		android.stopOrRejectVideoCalling();
 		android.print("Test case - Call when app is closed");
 		android.print("--------------------------------------------------------------------------------");
 	}

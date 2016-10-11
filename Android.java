@@ -3,6 +3,8 @@ package android2.VideoEngager;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
+import io.appium.java_client.remote.MobileCapabilityType;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -31,12 +33,13 @@ public class Android {
 	@BeforeTest
 	public void setUp() throws IOException, InterruptedException {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("deviceName", "009511b51b8a18eb");
+		capabilities.setCapability("deviceName", "");
 		capabilities.setCapability("browserName", "Android");
 		capabilities.setCapability("platformVersion", "4.4.2");
 		capabilities.setCapability("platformName", "Android");
 		capabilities.setCapability("appPackage", "com.leadsecure.agent");
 		capabilities.setCapability("appActivity", "com.leadsecure.core.ui.LoginActivity");
+		capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 120);
 		cleanUpAndroid();
 		android = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		// android.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -54,7 +57,7 @@ public class Android {
 		visitors.get(0).click();
 		try {
 			String visitorName = android.findElement(By.id("txtTitle")).getText();
-			print("Started Conversation with " + visitorName);
+			print("Android: Started Conversation with " + visitorName);
 		} catch (Exception e) {
 			print("Android: Error on get visitor's name ");
 		}
@@ -96,8 +99,8 @@ public class Android {
 		clickOnIdIfIsPresent("btnRight");
 		print("Android clicked on StartVideoCall button.");
 	}
-
-	void stopOrRejectVideoCall() {
+	
+	void stopOrRejectVideoCalling() {
 		clickOnIdIfIsPresent("incallRejectButton");
 		print("Android clicked on StopVideoCall button.");
 	}
@@ -113,6 +116,10 @@ public class Android {
 		print("Android answered video call");
 	}
 
+	void muteOrUnmuteMicrophone(){
+		clickOnIdIfIsPresent("incallMicrophoneButton");
+	} 
+			
 	void changeCameraTo(String cameraPosition) {
 		String optionName = null;
 		// Camera position can be "Back Camera","Front Camera" or "No Camera"
@@ -127,15 +134,15 @@ public class Android {
 			}
 			// if (Objects.equals(new String("back camera"), cameraPosition)) {
 			// options.get(0).click();
-			// print("Clicked on back camera");
+			// print("Android: Clicked on back camera");
 			// }
 			// if (Objects.equals(new String("front camera"), cameraPosition)) {
 			// options.get(1).click();
-			// print("Clicked on front camera");
+			// print("Android: Clicked on front camera");
 			// }
 			// if (Objects.equals(new String("no camera"), cameraPosition)) {
 			// options.get(2).click();
-			// print("Clicked on 'no camera'");
+			// print("Android: Clicked on 'no camera'");
 			// }
 
 		}
@@ -229,7 +236,7 @@ public class Android {
 	}
 
 	void logout() throws InterruptedException {
-		print("Proceed with logout.");
+		print("Android: Proceed with logout.");
 		// Navigate to logout and logout
 		clickOnIdIfIsPresent("vanityMenuButton");
 		clickOnNameIfIsPresent("Logout");
@@ -347,10 +354,10 @@ public class Android {
 		for (i = 0; i < elements.size(); i++) {
 			title = elements.get(i).getText();
 			if (Objects.equals(title, new String("Video Agent"))) {
-				print("Found video agent notification.");
+				print("Android: Found video agent notification.");
 				return;
 			} else {
-				print("There are no agent notifications");
+				print("Android: There are no agent notifications");
 			}
 		}
 	}
@@ -379,17 +386,21 @@ public class Android {
 		print("Android 'adb shell monkey' launched video agent application.");
 	}
 
-	void startCalculatorApp() throws IOException {
-		// kill calculator before start
-		adbExecuteComand("adb shell am force-stop com.google.android.calculator");
-		adbExecuteComand("adb shell am force-stop com.android.calculator2");
-		adbExecuteComand("adb shell am force-stop com.google.android.calculator-2");
-
-		adbExecuteComand("adb shell monkey -p com.google.android.calculator -c android.intent.category.LAUNCHER 1");
-		adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
-		adbExecuteComand("adb shell am start -n com.android.calculator2/.CalculatorGoogle");
-		adbExecuteComand("adb shell monkey -p com.google.android.calculator-2 -c android.intent.category.LAUNCHER 1");
-		print("Android 'adb' launched Calculator application.");
+	void startCompassApp() throws IOException {
+		// kill app before start
+		adbExecuteComand("adb shell am force-stop com.twodlevel.compass");
+		adbExecuteComand("adb shell am start -n com.twodlevel.compass/.MainActivity");
+				
+		//		// kill calculator before start
+//		adbExecuteComand("adb shell am force-stop com.google.android.calculator");
+//		adbExecuteComand("adb shell am force-stop com.android.calculator2");
+//		adbExecuteComand("adb shell am force-stop com.google.android.calculator-2");
+//
+//		adbExecuteComand("adb shell monkey -p com.google.android.calculator -c android.intent.category.LAUNCHER 1");
+//		adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
+//		adbExecuteComand("adb shell am start -n com.android.calculator2/.CalculatorGoogle");
+//		adbExecuteComand("adb shell monkey -p com.google.android.calculator-2 -c android.intent.category.LAUNCHER 1");
+//		print("Android 'adb' launched Calculator application.");
 	}
 
 	void closeApp() throws IOException, InterruptedException {
@@ -418,7 +429,7 @@ public class Android {
 	}
 
 	void pause(int seconds) throws InterruptedException {
-		System.out.println("Android: Waiting " + seconds + " seconds");
+		print("Android: Waiting " + seconds + " seconds");
 		Thread.sleep(seconds * 1000);
 	}
 
@@ -434,8 +445,8 @@ public class Android {
 		adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
 		adbExecuteComand("adb shell pm clear com.leadsecure.agent");
 
-		adbExecuteComand("adb shell am force-stop com.google.android.calculator");
-		adbExecuteComand("adb shell am force-stop com.android.calculator2");
-		adbExecuteComand("adb shell am force-stop com.google.android.calculator-2");
+//		adbExecuteComand("adb shell am force-stop com.google.android.calculator");
+//		adbExecuteComand("adb shell am force-stop com.android.calculator2");
+//		adbExecuteComand("adb shell am force-stop com.google.android.calculator-2");
 	}
 }

@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-public class Test_07_androidAgentReceiveVideoCall {
+public class Test_11_androidAgentChangeCameraPosition {
 
 	Firefox firefox = new Firefox();
-	static Android android = new Android();
-	
+	Android android = new Android();
+
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
 		android.setUp();
@@ -23,26 +23,42 @@ public class Test_07_androidAgentReceiveVideoCall {
 		firefox.join();
 		android.print("--------------------------------------------------------------------------------");
 	}
-	
-	@Test(priority = 6)
-	public void androidAgentReceiveVideoCall() throws InterruptedException, IOException {
+
+	@Test(priority = 11)
+	public void androidAgentChangeCameraPosition() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
-		android.pause(2);
 		firefox.callButtonFromHomeClick();
-		//firefox.callButtonFromConversationClick();
-		android.pause(2);
+		// firefox.callButtonFromConversationClick();
+		android.pause(1);
 		android.answerVideoCall();
-		//ToDo verify video
-		firefox.verifyOwnVideo();
 		firefox.verifyVideoFromAgent();
-		android.pause(5);
+		firefox.verifyOwnVideo();
 		firefox.muteMicrophone();
-		android.stopOrRejectVideoCalling();
+		android.pause(1);
+		android.inVideoCallCameraButtonClick();
+		android.pause(1);
+		android.changeCameraTo("no camera");
+		android.pause(1);
+		android.verifyStoppedOwnVideo();
+		firefox.cameraButtonClick();
+		android.pause(1);
+		android.verifyStoppedVideoFromProspector();
+		firefox.verifyStoppedOwnVideo();
+		android.pause(1);
+		android.inVideoCallCameraButtonClick();
+		android.pause(1);
+		android.changeCameraTo("front camera");
+		android.pause(1);
+		android.inVideoCallCameraButtonClick();
+		android.pause(1);
+		android.changeCameraTo("back camera");
 		android.pause(2);
-		android.print("Test case - android agent receive video call,then android end video call ");
+		android.stopOrRejectVideoCalling();
+		android.pause(1);
+		android.print("Test case - androidAgentChangeCameraPosition");
 		android.print("---------------------------------------------------------------------------");
 	}
-	
+
 	@AfterClass
 	void cleanUp() throws IOException {
 		android.cleanUpAndroid();
