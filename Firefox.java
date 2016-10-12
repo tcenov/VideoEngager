@@ -214,22 +214,17 @@ public class Firefox {
 		typeTextInSelector(By.xpath("//*[contains(@id, 'instacollab_email')]"), email);
 		typeTextInSelector(By.xpath("//*[contains(@id, 'instacollab_phone')]"), phone);
 		clickOnSelector(By.xpath("//*[contains(@id, 'continue-button')]"));	
-//		String[] form = new String[3];
-//		form[0] = name;
-//		form[1] = email;
-//		form[2] = phone;
-//		return form;
-//		
+		print("Firefox: Firefox send requested form.");
 	}
 	
 	public String generateName() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("hh_mm_ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("hh_mm");
 		String name = dateFormat.format(new Date())+ "_name";
 		return name;
 	}
 	
 	public String generateEmail() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("hh_mm_ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("hh_mm");
 		String email = dateFormat.format(new Date())+ "@mail.com";
 		return email;
 	}

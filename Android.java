@@ -47,7 +47,8 @@ public class Android {
 	}
 
 	void startConversation() {
-		print("Android: Waiting up to 20 sec. for visitors");
+		print("Android: try to startConversation");
+		print("Android: Waiting up to 15 sec. for visitors");
 		WebDriverWait wait = new WebDriverWait(android, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("ongoingCallerName")));
 		List<WebElement> visitors = android.findElements(By.id("ongoingCallerName"));
@@ -61,15 +62,16 @@ public class Android {
 		} catch (Exception e) {
 			print("Android: Error on get visitor's name ");
 		}
-
 	}
 
 	void closeConversation() {
+		print("Android: try to closeConversation");
 		clickOnIdIfIsPresent("btnLeft");
 		print("Android closed conversation");
 	}
 
 	void sendMessage(String message) {
+		print("Android: try to sendMessage");
 		WebElement textField = android.findElement(By.id("chatBottomLayout"));
 		textField.click();
 		android.hideKeyboard();
@@ -82,6 +84,7 @@ public class Android {
 	}
 
 	void verifyMessage(String message) {
+		print("Android: try to verifyMessage");
 		List<WebElement> messages = android.findElements(By.id("chatRowInMessageText"));
 		String messageText = null;
 		for (WebElement webElement : messages) {
@@ -95,16 +98,19 @@ public class Android {
 	}
 
 	void startVideoCall() {
+		print("Android: try to startVideoCall");
 		clickOnIdIfIsPresent("btnRight");
 		print("Android clicked on StartVideoCall button.");
 	}
 
 	void stopOrRejectVideoCalling() {
+		print("Android: try to stopOrRejectVideoCalling");
 		clickOnIdIfIsPresent("incallRejectButton");
 		print("Android clicked on StopVideoCall button.");
 	}
 
 	void answerVideoCall() {
+		print("Android: try to answerVideoCall");
 		if (isElementPresent(By.id("incomingCallerName"))) {
 			String callerName = android.findElement(By.id("incomingCallerName")).getText();
 			print(callerName + " is calling");
@@ -116,10 +122,13 @@ public class Android {
 	}
 
 	void muteOrUnmuteMicrophone() {
+		print("Android: try to muteOrUnmuteMicrophone");
 		clickOnIdIfIsPresent("incallMicrophoneButton");
+		print("Android: muted or unmuted Mic.");
 	}
 
 	void changeCameraTo(String cameraPosition) {
+		print("Android: try to changeCameraTo");
 		String optionName = null;
 		// Camera position can be "Back Camera","Front Camera" or "No Camera"
 		cameraPosition = cameraPosition.toLowerCase();
@@ -143,18 +152,19 @@ public class Android {
 			// options.get(2).click();
 			// print("Android: Clicked on 'no camera'");
 			// }
-
 		}
 		print("Android changed camera to: " + optionName);
 	}
 
 	void openNotifications() throws InterruptedException {
+		print("Android: try to openNotifications");
 		((AndroidDriver) android).openNotifications();
 		pause(2);
 		print("Android opened Notifications.");
 	}
 
 	void clearNotifications() throws InterruptedException {
+		print("Android: try to clearNotifications");
 		openNotifications();
 		Boolean isPresent = android.findElements(By.className("android.widget.Button")).size() > 0;
 		if (isPresent) {
@@ -186,49 +196,45 @@ public class Android {
 	}
 
 	void inVideoCallCameraButtonClick() {
+		print("Android: try to inVideoCallCameraButtonClick");
 		clickOnIdIfIsPresent("incallCameraButton");
 		print("Android clicked on incallCameraButton button.");
 	}
 
 	void verifyStoppedOwnVideo() {
+		print("Android: try to verifyStoppedOwnVideo");
 		if (isElementPresent(By.id("incallCalleeImage"))) {
 			print("Android: Verified stopped own video.");
 		}
 	}
 
 	void verifyStoppedVideoFromProspector() {
+		print("Android: try to verifyStoppedVideoFromProspector");
 		if (isElementPresent(By.id("incallCallerImage"))) {
 			print("Android: Verified stopped video from prospector.");
 		}
 	}
 
 	void requestPhoneAndEmail() throws IOException {
+		print("Android: try to requestPhoneAndEmail");
 		clickOnIdIfIsPresent("requestInfoButton");
 		print("Android: Requested prospåctor for phone and email");
 	}
 
 	public void verifyRequestedForm(String name, String email, String phone) {
+		print("Android: started requested form verification.");
+		String callName = android.findElement(By.id("callerName")).getText();
+		String callEmail = android.findElement(By.id("callerEmail")).getText();
+		String callPhone = android.findElement(By.id("callerPhone")).getText();
+		print("callName = " + callName + " callEmail = " + callEmail + " callPhone = " + callPhone);
 
-		String callName = android.findElement(By.xpath("//EditText[contains(@text,'Name:')]")).getText();
-		String callEmail = android.findElement(By.xpath("//EditText[contains(@text,'Email:')]")).getText();
-		String callPhone = android.findElement(By.xpath("//EditText[contains(@text,'Phone:')]")).getText();
-		
-		List<WebElement> nameEmailPhone = android.findElements(By.id(""));
-		//android.widget.ScrollView
-		try {
-			if (Objects.equals(nameEmailPhone.get(0), name) && Objects.equals(nameEmailPhone.get(1), email)
-					&& Objects.equals(nameEmailPhone.get(2), phone)) {
-				print("Android: requested form is verified name.");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		String messageText = null;
-		for (WebElement webElement : nameEmailPhone) {
-			messageText = webElement.getText();
-			return;
-		}
+		Assert.assertEquals(callName, name);
+		print("Android: verified name.");
+		Assert.assertEquals(callEmail, email);
+		print("Android: verified email.");
+		Assert.assertEquals(callPhone, phone);
+		print("Android: verified phone.");
+		print("Android: requested form is verified.");
 	}
 
 	void videoCallGetTextFromElements() {
@@ -288,6 +294,7 @@ public class Android {
 	}
 
 	private void typeTextInSelector(By selector, String text) {
+		print("Android: try to enter text");
 		try {
 			android.findElement(selector).click();
 			android.findElement(selector).sendKeys(text);
@@ -329,6 +336,7 @@ public class Android {
 	}
 
 	void lockScreen() throws IOException {
+		print("Android: try to lockScreen");
 		// adbExecuteComand("adb shell am force-stop io.appium.unlock");
 		adbExecuteComand("adb shell input keyevent 26");
 		print("Android: Screen is locked");
@@ -345,6 +353,7 @@ public class Android {
 	}
 
 	void acceptRejectNotification(String acceptOrReject) {
+		print("Android: try to acceptRejectNotification");
 		acceptOrReject = acceptOrReject.toLowerCase();
 		List<WebElement> buttons = android.findElements(By.xpath("*//android.widget.Button"));
 		String buttonName = null;
@@ -361,6 +370,7 @@ public class Android {
 	}
 
 	void getAllNotifications() {
+		print("Android: try to getAllNotifications");
 		List<WebElement> elements = android.findElements(By.xpath("//android.widget.TextView"));
 		for (WebElement webElement : elements) {
 			print(webElement.getText());
@@ -396,6 +406,7 @@ public class Android {
 	}
 
 	void startApp() {
+		print("Android: try to startApp");
 		try {
 			android.launchApp();
 		} catch (Exception e) {
@@ -405,11 +416,13 @@ public class Android {
 	}
 
 	void startAgentAppMainActivity() throws IOException {
+		print("Android: try to startAgentAppMainActivity");
 		adbExecuteComand("adb shell monkey -p com.leadsecure.agent -c android.intent.category.LAUNCHER 1");
 		print("Android 'adb shell monkey' launched video agent application.");
 	}
 
 	void startCompassApp() throws IOException {
+		print("Android: try to startCompassApp");
 		// kill app before start
 		adbExecuteComand("adb shell am force-stop com.twodlevel.compass");
 		adbExecuteComand("adb shell am start -n com.twodlevel.compass/.MainActivity");
@@ -433,12 +446,14 @@ public class Android {
 	}
 
 	void closeApp() throws IOException, InterruptedException {
+		print("Android: try to closeApp");
 		((AppiumDriver) android).closeApp();
 		// adbExecuteComand("adb shell input keyevent 187");
 		print("Android closed application.");
 	}
 
 	void closeAllApps() throws IOException {
+		print("Android: try to closeAllApps");
 		adbExecuteComand("adb shell input keyevent 187");
 		By closeAnyAppButton = By.xpath("//android.widget.ImageView[contains(@resource-id,'dismiss_task')]");
 		WebDriverWait wait = new WebDriverWait(android, 15);

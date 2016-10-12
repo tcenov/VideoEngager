@@ -10,14 +10,14 @@ public class Test_22_prospectFillRequestedForm {
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
 	
-	@Test(priority = 1)
+	@Test(priority = 2)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
 		android.setUp();
 		android.login("tester2006@abv.bg", "Tarator1");
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
 	public void firefoxJoin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
 		firefox.join();
@@ -31,15 +31,17 @@ public class Test_22_prospectFillRequestedForm {
 		android.startVideoCall();
 		android.pause(1);
 		firefox.answerVideoCall();
-		firefox.muteMicrophone();
+		android.muteOrUnmuteMicrophone();
 		firefox.verifyOwnVideo();
 		firefox.verifyVideoFromAgent();
 		android.pause(1);
+		firefox.muteMicrophone();
 		android.requestPhoneAndEmail();
-		android.pause(5);
+		android.pause(1);
 		firefox.fillRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
-		
-		android.videoCallGetTextFromElements();
+//		
+//		android.videoCallGetTextFromElements();
+//		android.pause(15);
 		
 		// ToDo verify requested details
 		android.verifyRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
