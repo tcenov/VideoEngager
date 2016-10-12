@@ -71,6 +71,14 @@
 
 - Add jar files in project's build path
 
+- Fix Appium session timeout
+ Navigate to directory in your appium installation
+AppiumForWindows-1.2.4.1\Appium\node_modules\appium\lib\appium.js file and edit the following parameters.
+
+  this.defCommandTimeoutMs = this.args.defaultCommandTimeout * 5000;
+  this.commandTimeoutMs = this.defCommandTimeoutMs * 5;
+  
+  
 ------------------------------------------------------
 - in case of errors add additional jar:
 	commons-io-2.5.jar

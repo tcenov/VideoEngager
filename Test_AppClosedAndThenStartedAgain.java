@@ -19,11 +19,11 @@ public class Test_AppClosedAndThenStartedAgain {
 	@Test(priority = 3)
 	public void test1() throws AWTException, IOException, InterruptedException {
 		android.print("start new test ------------------------------------------------------------------");
-		android.closeApp();
+		android.closeAllApps();
 		android.pause(7);
 		android.startApp();
 		android.pause(7);
-		android.closeApp();
+		android.closeAllApps();
 		android.pause(7);
 		android.startAgentAppMainActivity();
 		android.pause(7);

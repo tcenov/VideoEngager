@@ -32,7 +32,7 @@ public class Test_18_notificationsWhileAppIsClosed {
 //		firefox.close();
 //		firefox.setUp();
 //		firefox.waitForPageLoad();
-		android.closeApp();
+		android.closeAllApps();
 		
 		android.pause(5);
 		firefox.SendMessage("Message while android app is closed");

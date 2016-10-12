@@ -67,7 +67,6 @@ public class Android {
 	void closeConversation() {
 		clickOnIdIfIsPresent("btnLeft");
 		print("Android closed conversation");
-
 	}
 
 	void sendMessage(String message) {
@@ -99,7 +98,7 @@ public class Android {
 		clickOnIdIfIsPresent("btnRight");
 		print("Android clicked on StartVideoCall button.");
 	}
-	
+
 	void stopOrRejectVideoCalling() {
 		clickOnIdIfIsPresent("incallRejectButton");
 		print("Android clicked on StopVideoCall button.");
@@ -116,10 +115,10 @@ public class Android {
 		print("Android answered video call");
 	}
 
-	void muteOrUnmuteMicrophone(){
+	void muteOrUnmuteMicrophone() {
 		clickOnIdIfIsPresent("incallMicrophoneButton");
-	} 
-			
+	}
+
 	void changeCameraTo(String cameraPosition) {
 		String optionName = null;
 		// Camera position can be "Back Camera","Front Camera" or "No Camera"
@@ -156,7 +155,6 @@ public class Android {
 	}
 
 	void clearNotifications() throws InterruptedException {
-		// Required Login
 		openNotifications();
 		Boolean isPresent = android.findElements(By.className("android.widget.Button")).size() > 0;
 		if (isPresent) {
@@ -207,6 +205,30 @@ public class Android {
 	void requestPhoneAndEmail() throws IOException {
 		clickOnIdIfIsPresent("requestInfoButton");
 		print("Android: Requested prospåctor for phone and email");
+	}
+
+	public void verifyRequestedForm(String name, String email, String phone) {
+
+		String callName = android.findElement(By.xpath("//EditText[contains(@text,'Name:')]")).getText();
+		String callEmail = android.findElement(By.xpath("//EditText[contains(@text,'Email:')]")).getText();
+		String callPhone = android.findElement(By.xpath("//EditText[contains(@text,'Phone:')]")).getText();
+		
+		List<WebElement> nameEmailPhone = android.findElements(By.id(""));
+		//android.widget.ScrollView
+		try {
+			if (Objects.equals(nameEmailPhone.get(0), name) && Objects.equals(nameEmailPhone.get(1), email)
+					&& Objects.equals(nameEmailPhone.get(2), phone)) {
+				print("Android: requested form is verified name.");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		String messageText = null;
+		for (WebElement webElement : nameEmailPhone) {
+			messageText = webElement.getText();
+			return;
+		}
 	}
 
 	void videoCallGetTextFromElements() {
@@ -273,16 +295,6 @@ public class Android {
 		}
 	}
 
-	private void clickOnSelector(By selector) throws InterruptedException {
-		WebElement element = getWebElement(selector);
-		try {
-			element.click();
-		} catch (WebDriverException toci) {
-			pause(5);
-			getWebElement(selector);
-		}
-	}
-
 	private void clickOnIdIfIsPresent(String id) {
 		Boolean isPresent = android.findElements(By.id(id)).size() > 0;
 		if (isPresent) {
@@ -302,6 +314,17 @@ public class Android {
 			WebDriverWait wait = new WebDriverWait(android, 20);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(name)));
 			android.findElement(By.name(name)).click();
+		}
+	}
+
+	private void clickOnSelectorIfIsPresent(By selector) {
+		Boolean isPresent = android.findElements(selector).size() > 0;
+		if (isPresent) {
+			android.findElement(selector).click();
+		} else {
+			WebDriverWait wait = new WebDriverWait(android, 20);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(selector));
+			android.findElement(selector).click();
 		}
 	}
 
@@ -390,23 +413,54 @@ public class Android {
 		// kill app before start
 		adbExecuteComand("adb shell am force-stop com.twodlevel.compass");
 		adbExecuteComand("adb shell am start -n com.twodlevel.compass/.MainActivity");
-				
-		//		// kill calculator before start
-//		adbExecuteComand("adb shell am force-stop com.google.android.calculator");
-//		adbExecuteComand("adb shell am force-stop com.android.calculator2");
-//		adbExecuteComand("adb shell am force-stop com.google.android.calculator-2");
-//
-//		adbExecuteComand("adb shell monkey -p com.google.android.calculator -c android.intent.category.LAUNCHER 1");
-//		adbExecuteComand("adb shell am start -n com.android.calculator2/.Calculator");
-//		adbExecuteComand("adb shell am start -n com.android.calculator2/.CalculatorGoogle");
-//		adbExecuteComand("adb shell monkey -p com.google.android.calculator-2 -c android.intent.category.LAUNCHER 1");
-//		print("Android 'adb' launched Calculator application.");
+
+		// // kill calculator before start
+		// adbExecuteComand("adb shell am force-stop
+		// com.google.android.calculator");
+		// adbExecuteComand("adb shell am force-stop com.android.calculator2");
+		// adbExecuteComand("adb shell am force-stop
+		// com.google.android.calculator-2");
+		//
+		// adbExecuteComand("adb shell monkey -p com.google.android.calculator
+		// -c android.intent.category.LAUNCHER 1");
+		// adbExecuteComand("adb shell am start -n
+		// com.android.calculator2/.Calculator");
+		// adbExecuteComand("adb shell am start -n
+		// com.android.calculator2/.CalculatorGoogle");
+		// adbExecuteComand("adb shell monkey -p com.google.android.calculator-2
+		// -c android.intent.category.LAUNCHER 1");
+		// print("Android 'adb' launched Calculator application.");
 	}
 
 	void closeApp() throws IOException, InterruptedException {
 		((AppiumDriver) android).closeApp();
 		// adbExecuteComand("adb shell input keyevent 187");
 		print("Android closed application.");
+	}
+
+	void closeAllApps() throws IOException {
+		adbExecuteComand("adb shell input keyevent 187");
+		By closeAnyAppButton = By.xpath("//android.widget.ImageView[contains(@resource-id,'dismiss_task')]");
+		WebDriverWait wait = new WebDriverWait(android, 15);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(closeAnyAppButton));
+		int i = android.findElements(closeAnyAppButton).size();
+		while (i > 0) {
+			print("view " + i + " running apps.");
+			int j = 1;
+			List<WebElement> apps = android.findElements(closeAnyAppButton);
+			for (WebElement app : apps) {
+				try {
+					clickOnSelectorIfIsPresent(closeAnyAppButton);
+				} catch (Exception e) {
+					((AndroidDriver) android).pressKeyCode(AndroidKeyCode.HOME);
+					adbExecuteComand("adb shell input keyevent 187");
+					clickOnSelectorIfIsPresent(closeAnyAppButton);
+				}
+				print("closed " + j + " apps");
+				j++;
+			}
+			i = android.findElements(closeAnyAppButton).size();
+		}
 	}
 
 	void unlockScreen() throws IOException {
@@ -445,8 +499,10 @@ public class Android {
 		adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
 		adbExecuteComand("adb shell pm clear com.leadsecure.agent");
 
-//		adbExecuteComand("adb shell am force-stop com.google.android.calculator");
-//		adbExecuteComand("adb shell am force-stop com.android.calculator2");
-//		adbExecuteComand("adb shell am force-stop com.google.android.calculator-2");
+		// adbExecuteComand("adb shell am force-stop
+		// com.google.android.calculator");
+		// adbExecuteComand("adb shell am force-stop com.android.calculator2");
+		// adbExecuteComand("adb shell am force-stop
+		// com.google.android.calculator-2");
 	}
 }

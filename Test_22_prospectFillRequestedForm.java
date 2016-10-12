@@ -38,7 +38,13 @@ public class Test_22_prospectFillRequestedForm {
 		android.requestPhoneAndEmail();
 		android.pause(5);
 		firefox.fillRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
+		
+		android.videoCallGetTextFromElements();
+		
 		// ToDo verify requested details
+		android.verifyRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
+		
+
 
 		android.stopOrRejectVideoCalling();
 		android.closeConversation();

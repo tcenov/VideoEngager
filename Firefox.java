@@ -184,17 +184,11 @@ public class Firefox {
 	}
 
 	public void callButtonFromConversationClick() {
-		// id="callButton_3F37k1rLhVbmpxwf9"
 		// callButtonF37k1rLhVbmpxwf9
-		// By.xpath("//*[contains(@id, '7k1rLhVbmpxwf9')]")
-		// classes wd-v-pickup trn-link
-		// click(By.cssSelector(".wd-v-pickup"));
-
 		WebElement call;
 		WebDriverWait wait;
 		try {
 			call = firefox.findElement(By.xpath("//*[contains(@id, 'callButton_1')]"));
-			// By.xpath("//*[contains(@id, 'callButton_3')]")
 			print("callButton_");
 			print("call.isDisplayed()= " + call.isDisplayed());
 			print("call.isEnabled() = " + call.isEnabled());
@@ -220,6 +214,12 @@ public class Firefox {
 		typeTextInSelector(By.xpath("//*[contains(@id, 'instacollab_email')]"), email);
 		typeTextInSelector(By.xpath("//*[contains(@id, 'instacollab_phone')]"), phone);
 		clickOnSelector(By.xpath("//*[contains(@id, 'continue-button')]"));	
+//		String[] form = new String[3];
+//		form[0] = name;
+//		form[1] = email;
+//		form[2] = phone;
+//		return form;
+//		
 	}
 	
 	public String generateName() {
