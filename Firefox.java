@@ -115,7 +115,8 @@ public class Firefox {
 		print("Firefox: try to verifyStoppedOwnVideo");
 		WebElement localVideo = firefox.findElement(localVideo_);
 		Boolean isDisplayed = localVideo.isDisplayed();
-		if (isDisplayed = false) {
+		print("isDisplayed = " + isDisplayed);
+		if (!isDisplayed) {
 			print("Firefox: verified stopped own video");
 		} else {
 			 throw new IOException("Firefox: video is not stopped properly");

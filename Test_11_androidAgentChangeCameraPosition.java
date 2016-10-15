@@ -41,7 +41,7 @@ public class Test_11_androidAgentChangeCameraPosition {
 		android.pause(1);
 		android.verifyStoppedOwnVideo();
 		firefox.cameraButtonClick();
-		android.pause(10);
+		android.pause(1);
 		android.verifyStoppedVideoFromProspector();
 		firefox.verifyStoppedOwnVideo();
 		android.pause(1);
