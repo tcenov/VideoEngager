@@ -186,8 +186,9 @@ public class Firefox {
 	public void startVideoCall() {
 		print("Firefox: try to startVideoCall");
 		WebElement callButton;
-		WebDriverWait wait = new WebDriverWait(firefox, 15);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(callButton_1_));
+//		WebDriverWait wait = new WebDriverWait(firefox, 15);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(callButton_1_ || callButton_3_));
+//		ExpectedConditions.visibilityOfAllElementsLocatedBy(locator)
 		callButton = firefox.findElement(callButton_1_);
 		if (callButton.isDisplayed()) {
 			callButton.click();

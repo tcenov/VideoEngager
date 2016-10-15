@@ -26,9 +26,9 @@ public class Test_11_androidAgentChangeCameraPosition {
 
 	@Test(priority = 11)
 	public void androidAgentChangeCameraPosition() throws InterruptedException, IOException {
-		android.print("start new test ------------------------------------------------------------------");
-		firefox.callButtonFromHomeClick();
-		// firefox.callButtonFromConversationClick();
+//		firefox.callButtonFromHomeClick();
+//		firefox.callButtonFromConversationClick();
+		firefox.startVideoCall();
 		android.pause(1);
 		android.answerVideoCall();
 		firefox.verifyVideoFromAgent();
@@ -56,7 +56,6 @@ public class Test_11_androidAgentChangeCameraPosition {
 		android.stopOrRejectVideoCalling();
 		android.pause(1);
 		android.print("Test case - androidAgentChangeCameraPosition");
-		android.print("---------------------------------------------------------------------------");
 	}
 
 	@AfterClass

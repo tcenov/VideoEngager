@@ -219,9 +219,9 @@ public class TestCasesRunner {
 
 	@Test(priority = 12, retryAnalyzer = Retry.class)
 	public void notificationsWhileAppIsBehindAnotherAppAndDeviceLocked() throws InterruptedException, IOException, AWTException {
-//		firefox.close();
-//		firefox.setUp();
-//		firefox.waitForPageLoad();
+		firefox.close();
+		firefox.setUp();
+		firefox.waitForPageLoad();
 		android.startCompassApp();
 		android.lockScreen();
 		android.pause(4);
