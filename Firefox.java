@@ -25,7 +25,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.Assert.ThrowingRunnable;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -34,7 +33,20 @@ public class Firefox {
 	WebDriver firefox;
 	String agenUrl = "";
 	String geckodriverPath = "D:\\geckodriver-v0.10.0-win64\\geckodriver.exe";
-
+	
+	By inRequestedFormNameField_ = By.xpath("//*[contains(@id, 'instacollab_name')]");
+	By inRequestedFormEmailField_ = By.xpath("//*[contains(@id, 'instacollab_email')]");
+	By inRequestedFormPhoneField_ = By.xpath("//*[contains(@id, 'instacollab_phone')]");
+	By inRequestedFormContinueButton_ = By.xpath("//*[contains(@id, 'continue-button')]");
+	By connectButton_ = By.xpath("//*[contains(@id, 'cancel_call_button')]");
+	By callButton_1_ = By.xpath("//*[contains(@id, 'callButton_1')]");
+	By callButton_3_ = By.xpath("//*[contains(@id, 'callButton_3')]");
+	By chatMessages_= By.cssSelector(".wd-bubble>p");
+	By answerCallButton_ = By.xpath("//*[contains(@id, 'answer_call_button')]");
+	By chatMessageField_ = By.xpath("//*[contains(@id, 'instacollab_chat_message')]"); 
+	By sendMessageButton_ = By.xpath("//*[contains(@id, 'instacollab_chat_button1')]"); 
+	By localVideo_ = By.xpath("//*[contains(@id, 'localVideo')]");
+			
 	@BeforeTest
 	public void setUp() throws AWTException {
 		print("Firefox: firefox.setUp() is starting");
@@ -74,17 +86,17 @@ public class Firefox {
 	}
 
 	public void answerVideoCall() {
-		// answer_call_button selector
-		// *[@id='answer_call_buttonF37k1rLhVbmpxwf9']
-		if (isElementPresent(By.xpath("//*[contains(@id, 'answer_call_button')]"))) {
-			firefox.findElement(By.xpath("//*[contains(@id, 'answer_call_button')]")).click();
-			print("Firefox answer video call.");
+		print("Firefox: try to answerVideoCall");
+		if (isElementPresent(answerCallButton_)) {
+			firefox.findElement(answerCallButton_).click();
+			print("Firefox answered video call.");
 		} else {
 			print("Firefox: Greshka pri video call answer!!!");
 		}
 	}
 	
 	public void verifyVideoFromAgent() throws IOException {
+		print("Firefox: try to verifyVideoFromAgent");
 		//id=remoteVideoF37k1rLhVbmpxwf9
 		if (isElementPresent(By.xpath("//*[contains(@id, 'remoteVideo')]"))) {
 			print("Firefox: verified video received from agent.");
@@ -92,6 +104,7 @@ public class Firefox {
 	}
 	
 	public void verifyOwnVideo() throws IOException {
+		print("Firefox: try to verifyOwnVideo");
 		//id=localVideoF37k1rLhVbmpxwf9
 		if (isElementPresent(By.xpath("//*[contains(@id, 'localVideo')]"))) {
 			print("Firefox: verified video send from prospector.");
@@ -99,9 +112,10 @@ public class Firefox {
 	}
 	
 	public void verifyStoppedOwnVideo() throws IOException {
-		//id=localVideoF37k1rLhVbmpxwf9
-		Boolean isPresent = firefox.findElements(By.xpath("//*[contains(@id, 'localVideo')]")).size() > 0;
-		if (isPresent = false) {
+		print("Firefox: try to verifyStoppedOwnVideo");
+		WebElement localVideo = firefox.findElement(localVideo_);
+		Boolean isDisplayed = localVideo.isDisplayed();
+		if (isDisplayed = false) {
 			print("Firefox: verified stopped own video");
 		} else {
 			 throw new IOException("Firefox: video is not stopped properly");
@@ -109,19 +123,17 @@ public class Firefox {
 	}
 	
 	public void SendMessage(String message) {
-		// id of "Message field" webelement =
-		// instacollab_chat_message1F37k1rLhVbmpxwf9
-		if (isElementPresent(By.xpath("//*[contains(@id, 'instacollab_chat_message')]"))) {
-			WebElement messageField = firefox.findElement(By.xpath("//*[contains(@id, 'instacollab_chat_message')]"));
+		print("Firefox: try to SendMessage");
+		if (isElementPresent(chatMessageField_)) {
+			WebElement messageField = firefox.findElement(chatMessageField_);
 			messageField.click();
 			messageField.sendKeys(message);
 			print("Firefox enter message in field");
 		} else {
 			print("Firefox: Greshka pri enter message in field!!!");
 		}
-		// id of "Enter" webelement = instacollab_chat_button1Fv1231231v134
-		if (isElementPresent(By.xpath("//*[contains(@id, 'instacollab_chat_button1')]"))) {
-			WebElement enter = firefox.findElement(By.xpath("//*[contains(@id, 'instacollab_chat_button1')]"));
+		if (isElementPresent(sendMessageButton_)) {
+			WebElement enter = firefox.findElement(sendMessageButton_);
 			enter.click();
 			print("Firefox: Message sent.");
 		} else {
@@ -130,8 +142,9 @@ public class Firefox {
 	}
 
 	void verifyMessage(String message) throws InterruptedException {
+		print("Firefox: try to verifyMessage");
 		pause(2);
-		List<WebElement> messages = firefox.findElements(By.cssSelector(".wd-bubble>p"));
+		List<WebElement> messages = firefox.findElements(chatMessages_);
 		print("messages.size() = " + messages.size());
 		String messageText = null;
 		for (WebElement webElement : messages) {
@@ -146,34 +159,51 @@ public class Firefox {
 	}
 
 	public void cameraButtonClick() {
+		print("Firefox: try to cameraButtonClick");
 		clickOnIdIfIsPresent("showHideVideo");
 		print("Firefox: showHideVideo.");
 	}
 
 	public void muteMicrophone() {
+		print("Firefox: try to muteMicrophone");
 		clickOnIdIfIsPresent("showHideAudio");
 		print("Firefox: muted microphone.");
 	}
 	
 	public void unmuteMicrophone() {
+		print("Firefox: try to unmuteMicrophone");
 		clickOnIdIfIsPresent("showHideAudio");
 		print("Firefox: unmuted microphone.");
 	}
 	
 	public void stopVideoCall() {
+		print("Firefox: try to stopVideoCall");
 		clickOnIdIfIsPresent("hangupButton");
 		print("Firefox stopped video call.");
 	}
 
+	public void startVideoCall() {
+		print("Firefox: try to startVideoCall");
+		WebElement callButton;
+		WebDriverWait wait = new WebDriverWait(firefox, 15);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(callButton_1_));
+		callButton = firefox.findElement(callButton_1_);
+		if (callButton.isDisplayed()) {
+			callButton.click();
+		}
+		callButton = firefox.findElement(callButton_3_);
+		if (callButton.isDisplayed()) {
+			callButton.click();
+		}
+		print("Firefox clicked on StartVideoCall button.");
+	}
+	
 	public void callButtonFromHomeClick() {
+		print("Firefox: try to callButtonFromHomeClick");
 		WebElement call;
 		WebDriverWait wait;
 		try {
-			call = firefox.findElement(By.xpath("//*[contains(@id, 'callButton_3')]"));
-			// By.xpath("//*[contains(@id, 'callButton_3')]")
-			print("callButton_");
-			print("call.isDisplayed()= " + call.isDisplayed());
-			print("call.isEnabled() = " + call.isEnabled());
+			call = firefox.findElement(callButton_3_);
 			wait = new WebDriverWait(firefox, 15);
 			wait.until(ExpectedConditions.elementToBeClickable(call));
 			call.click();
@@ -184,14 +214,12 @@ public class Firefox {
 	}
 
 	public void callButtonFromConversationClick() {
+		print("Firefox: try to callButtonFromConversationClick");
 		// callButtonF37k1rLhVbmpxwf9
 		WebElement call;
 		WebDriverWait wait;
 		try {
-			call = firefox.findElement(By.xpath("//*[contains(@id, 'callButton_1')]"));
-			print("callButton_");
-			print("call.isDisplayed()= " + call.isDisplayed());
-			print("call.isEnabled() = " + call.isEnabled());
+			call = firefox.findElement(callButton_1_);
 			wait = new WebDriverWait(firefox, 15);
 			wait.until(ExpectedConditions.elementToBeClickable(call));
 			call.click();
@@ -202,18 +230,17 @@ public class Firefox {
 	}
 
 	public void connectButtonClick() throws InterruptedException {
-		clickOnSelector(By.xpath("//*[contains(@id, 'cancel_call_button')]"));
+		print("Firefox: try to connectButtonClick");
+		clickOnSelector(connectButton_);
+		print("Firefox: clicked on Connect button");
 	}
 
 	public void fillRequestedForm(String name,String email, String phone) throws InterruptedException {
-		//id="instacollab_nameF37k1rLhVbmpxwf9"
-		//instacollab_emailF37k1rLhVbmpxwf9
-		//id="instacollab_phoneF37k1rLhVbmpxwf9"
-		//click on continue-buttonF37k1rLhVbmpxwf9
-		typeTextInSelector(By.xpath("//*[contains(@id, 'instacollab_name')]"), name);
-		typeTextInSelector(By.xpath("//*[contains(@id, 'instacollab_email')]"), email);
-		typeTextInSelector(By.xpath("//*[contains(@id, 'instacollab_phone')]"), phone);
-		clickOnSelector(By.xpath("//*[contains(@id, 'continue-button')]"));	
+		print("Firefox: try to fillRequestedForm");
+		typeTextInSelector(inRequestedFormNameField_, name);
+		typeTextInSelector(inRequestedFormEmailField_, email);
+		typeTextInSelector(inRequestedFormPhoneField_, phone);
+		clickOnSelector(inRequestedFormContinueButton_);	
 		print("Firefox: Firefox send requested form.");
 	}
 	
@@ -336,6 +363,7 @@ public class Firefox {
 	}
 
 	public void reloadAgentUrl() {
+		firefox.get("http://blank.org/");
 		firefox.get("https://videome.leadsecure.com/testtes");
 	}
 	

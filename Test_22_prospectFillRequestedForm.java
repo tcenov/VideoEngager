@@ -46,8 +46,6 @@ public class Test_22_prospectFillRequestedForm {
 		// ToDo verify requested details
 		android.verifyRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
 		
-
-
 		android.stopOrRejectVideoCalling();
 		android.closeConversation();
 		android.print("Test case - prospect fill details in requested form from agent.");

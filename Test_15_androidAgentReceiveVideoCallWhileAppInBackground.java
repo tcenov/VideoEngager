@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 public class Test_15_androidAgentReceiveVideoCallWhileAppInBackground {
 
 	Firefox firefox = new Firefox();
-	static Android android = new Android();
-	
+	Android android = new Android();
+
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
 		android.setUp();

@@ -10,14 +10,14 @@ public class Test_14_androidAgentReceiveVideoCallWhileAppIsClosed {
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
 	
-	@Test(priority = 1)
+	@Test(priority = 2)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
 		android.setUp();
 		android.login("tester2006@abv.bg", "Tarator1");
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
 	public void firefoxJoin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
 		firefox.join();
@@ -27,7 +27,6 @@ public class Test_14_androidAgentReceiveVideoCallWhileAppIsClosed {
 	@Test(priority = 16)
 	public void androidAgentReceiveVideoCallWhileAppIsClosed() throws InterruptedException, IOException {
 		android.print("start new test ------------------------------------------------------------------");
-
 
 		android.startApp();
 		android.closeAllApps();

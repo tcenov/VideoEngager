@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Test_AndroidLogin {
+public class Test_01_AndroidLogin {
 
 	Android android = new Android();
 
@@ -14,10 +14,10 @@ public class Test_AndroidLogin {
 		android.setUp();
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 2)
 	public void login() throws InterruptedException, AWTException, IOException {
 		android.login("tester2006@abv.bg", "Tarator1");
-		android.pause(15);
+		android.pause(45);
 
 	}
 

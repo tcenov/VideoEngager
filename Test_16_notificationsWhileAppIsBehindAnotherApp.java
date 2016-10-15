@@ -27,9 +27,9 @@ public class Test_16_notificationsWhileAppIsBehindAnotherApp {
 @Test(priority = 17)
 public void notificationsWhileAppIsBehindAnotherApp() throws InterruptedException, IOException, AWTException {
 	android.print("start new test ------------------------------------------------------------------");
-	firefox.close();
-	firefox.setUp();
-	firefox.waitForPageLoad();
+//	firefox.close();
+//	firefox.setUp();
+//	firefox.waitForPageLoad();
 	android.startCompassApp();
 	android.pause(5);
 	firefox.SendMessage("Message while android is behind calculator");

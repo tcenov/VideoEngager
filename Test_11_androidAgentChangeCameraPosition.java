@@ -10,14 +10,14 @@ public class Test_11_androidAgentChangeCameraPosition {
 	Firefox firefox = new Firefox();
 	Android android = new Android();
 
-	@Test(priority = 1)
+	@Test(priority = 2)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
 		android.setUp();
 		android.login("tester2006@abv.bg", "Tarator1");
 		android.print("--------------------------------------------------------------------------------");
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
 	public void firefoxJoin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
 		firefox.join();
@@ -41,7 +41,7 @@ public class Test_11_androidAgentChangeCameraPosition {
 		android.pause(1);
 		android.verifyStoppedOwnVideo();
 		firefox.cameraButtonClick();
-		android.pause(1);
+		android.pause(10);
 		android.verifyStoppedVideoFromProspector();
 		firefox.verifyStoppedOwnVideo();
 		android.pause(1);

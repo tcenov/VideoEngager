@@ -3,12 +3,26 @@ package android2.VideoEngager;
 import java.awt.AWTException;
 import java.io.IOException;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TestCasesRunner_backup {
 
 	Firefox firefox = new Firefox();
 	static Android android = new Android();
+	int i = 1;
+	
+	@BeforeMethod
+	void printBeforeEachTest() {
+		System.out.println("---started-test-" + i + "---------------------------------------------------------------");
+		i++;
+	}
+	
+	@AfterMethod
+	void printAfterEachTest() {
+		System.out.println("---end-of-test--" + i + "---------------------------------------------------------------");
+	}
 	
 	@Test(priority = 1)
 	public void androidLogin() throws InterruptedException, AWTException, IOException {
@@ -21,7 +35,6 @@ public class TestCasesRunner_backup {
 	public void firefoxJoin() throws InterruptedException, AWTException, IOException {
 		firefox.setUp();
 		firefox.join();
-		android.print("--------------------------------------------------------------------------------");
 	}
 
 	@Test(priority = 3)
@@ -37,7 +50,6 @@ public class TestCasesRunner_backup {
 		android.closeConversation();
 		android.pause(1);
 		android.print("Test case - agent receive chat message from browser.");
-		android.print("--------------------------------------------------------------------------------");
 	}
 
 	@Test(priority = 4)
@@ -52,7 +64,6 @@ public class TestCasesRunner_backup {
 		android.closeConversation();
 		android.pause(2);
 		android.print("Test case - agent android send message");
-		android.print("--------------------------------------------------------------------------------");
 	}
 
 	@Test(priority = 5)
@@ -71,7 +82,6 @@ public class TestCasesRunner_backup {
 		android.stopOrRejectVideoCalling();
 		android.closeConversation();
 		android.print("Test case - prospect receive Video call");
-		android.print("--------------------------------------------------------------------------------");
 	}
 	
 	@Test(priority = 6)
@@ -104,7 +114,6 @@ public class TestCasesRunner_backup {
 		android.stopOrRejectVideoCalling();
 		android.pause(2);
 		android.print("Test case - android agent receive video call,then android end video call ");
-		android.print("---------------------------------------------------------------------------");
 	}
 
 	@Test(priority = 8)
@@ -114,7 +123,6 @@ public class TestCasesRunner_backup {
 		android.stopOrRejectVideoCalling();
 		android.pause(2);
 		android.print("Test case - android agent rejected video call.");
-		android.print("--------------------------------------------------------------------------------");
 	}
 	
 	@Test(priority = 9)
@@ -130,7 +138,6 @@ public class TestCasesRunner_backup {
 		android.pause(2);
  		android.stopOrRejectVideoCalling();
 		android.print("Test case - android receive video call while conversation is opened");
-		android.print("--------------------------------------------------------------------------------");
 	}
 	
 	@Test(priority = 10)
@@ -151,9 +158,41 @@ public class TestCasesRunner_backup {
 		android.pause(2);
 		android.closeConversation();
 		android.print("Test case - chat notifications while android run in background");
-		android.print("--------------------------------------------------------------------------------");
 	}
 
+	@Test(priority = 11)
+	public void androidAgentChangeCameraPosition() throws InterruptedException, IOException {
+//		firefox.callButtonFromHomeClick();
+		firefox.callButtonFromConversationClick();
+		android.pause(1);
+		android.answerVideoCall();
+		firefox.verifyVideoFromAgent();
+		firefox.verifyOwnVideo();
+		firefox.muteMicrophone();
+		android.pause(1);
+		android.inVideoCallCameraButtonClick();
+		android.pause(1);
+		android.changeCameraTo("no camera");
+		android.pause(1);
+		android.verifyStoppedOwnVideo();
+		firefox.cameraButtonClick();
+		android.pause(1);
+		android.verifyStoppedVideoFromProspector();
+		firefox.verifyStoppedOwnVideo();
+		android.pause(1);
+		android.inVideoCallCameraButtonClick();
+		android.pause(1);
+		android.changeCameraTo("front camera");
+		android.pause(1);
+		android.inVideoCallCameraButtonClick();
+		android.pause(1);
+		android.changeCameraTo("back camera");
+		android.pause(2);
+		android.stopOrRejectVideoCalling();
+		android.pause(1);
+		android.print("Test case - androidAgentChangeCameraPosition");
+	}
+	
 	@Test(priority = 11)
 	public void notificationsWhileAppIsKilled() throws InterruptedException, IOException {
 		android.print("start new test ---- -while app is killed---------------------------------------");
@@ -171,7 +210,6 @@ public class TestCasesRunner_backup {
 //		android.pause(2);
 //		android.closeConversation();
 		android.print("Test case - chat notifications while app is killed");
-		android.print("--------------------------------------------------------------------------------");
 	}
 
 	@Test(priority = 12)
@@ -193,7 +231,6 @@ public class TestCasesRunner_backup {
 		android.verifyMessage("Message while android is locked and behind calculator");
 		android.closeConversation();
 		android.print("Test case - chat notifications while device is locked.");
-		android.print("--------------------------------------------------------------------------------");
 	}
 	
 	@Test(priority = 13)
@@ -221,13 +258,11 @@ public class TestCasesRunner_backup {
 		android.verifyMessage("Message while app is in background and device is locked.");
 		android.closeConversation();
 		android.print("Test case - chat notifications while deveice is locked.");
-		android.print("--------------------------------------------------------------------------------");
 	}
 	
 	@Test(priority = 14)
 	public void marker()  {
 		android.print("marker finished");
-		android.print("--------------------------------------------------------------------------------");
 	}
 	
 	@Test(priority = 15)
@@ -247,7 +282,6 @@ public class TestCasesRunner_backup {
 		android.pause(1);
 		android.stopOrRejectVideoCalling();
 		android.print("Test case - Call while android works in background");
-		android.print("--------------------------------------------------------------------------------");
 	}
 	
 	@Test(priority = 16)
@@ -265,7 +299,6 @@ public class TestCasesRunner_backup {
 		android.verifyMessage("Message while android is behind calculator");
 		android.closeConversation();
 		android.print("Test case - chat notifications while another app is on focus.");
-		android.print("--------------------------------------------------------------------------------");
 	}
 	
 	@Test(priority = 17)
@@ -275,18 +308,16 @@ public class TestCasesRunner_backup {
 		android.acceptRejectNotification("accept");		
 		//ToDo
 		android.print("Test case - chat notifications while play game.");
-		android.print("--------------------------------------------------------------------------------");
 	}
 	
 	
 	@Test(priority = 18)
 	public void notificationsWhileAppIsClosed() throws InterruptedException, AWTException, IOException {
-		android.print("start new test --------------------------------------------------------------------------------");
 		android.clearNotifications();
 		firefox.close();
 		firefox.setUp();
 		firefox.waitForPageLoad();
-		android.closeAllApps();		
+		android.closeAllApps();
 		firefox.SendMessage("Message while android app is closed");
 		android.pause(2);
 		android.openNotifications();
@@ -297,12 +328,10 @@ public class TestCasesRunner_backup {
 		android.pause(5);
 		android.closeConversation();
 		android.print("Test case - chat notifications while app is closed.");
-		android.print("--------------------------------------------------------------------------------");
 	}
 	
 	@Test(priority = 19)
 		public void androidAgentReceiveVideoCallWhileAppBehindAnotherApp() throws InterruptedException, IOException, AWTException {
-			android.print("start new test ------------------------------------------------------------------");
 			firefox.close();
 			firefox.setUp();
 			firefox.waitForPageLoad();
@@ -318,13 +347,11 @@ public class TestCasesRunner_backup {
 			android.pause(5);
 			android.stopOrRejectVideoCalling();
 			android.print("Test case - Call while android works in background");
-			android.print("--------------------------------------------------------------------------------");
 		}
 	 
 		
 //	@Test(priority = 20)
 //	public void androidAgentReceiveVideoCallWhileAppIsClosed() throws InterruptedException, IOException {
-//		android.print("start new test ------------------------------------------------------------------");
 //		firefox.reloadAgentUrl();
 //		firefox.waitForPageLoad();
 //		android.startApp();
@@ -338,16 +365,99 @@ public class TestCasesRunner_backup {
 //		android.pause(5);
 //		android.stopOrRejectVideoCall();
 //		android.print("Test case - Call when app is closed");
-//		android.print("--------------------------------------------------------------------------------");
 //	}
 //	
 //	@Test(priority = 21)
 //	public void androidAgentReceiveVideoCallWhenAppIsKilled() throws InterruptedException, IOException {
-//		android.print("start new test ------------------------------------------------------------------");
+//
 //		//ToDo
 //		android.print("Not implemented - Test case - Call when app is killed");
-//		android.print("--------------------------------------------------------------------------------");
 //	}
+	
+	@Test(priority = 22)
+	public void prospectFillRequestedForm() throws InterruptedException, IOException {
+		android.startConversation();
+		android.startVideoCall();
+		android.pause(1);
+		firefox.answerVideoCall();
+		android.muteOrUnmuteMicrophone();
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
+		android.pause(1);
+		firefox.muteMicrophone();
+		android.requestPhoneAndEmail();
+		android.pause(1);
+		firefox.fillRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
+//		
+//		android.videoCallGetTextFromElements();
+//		android.pause(15);
+		
+		// ToDo verify requested details
+		android.verifyRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
+		
+		android.stopOrRejectVideoCalling();
+		android.closeConversation();
+		android.print("Test case - prospect fill details in requested form from agent.");
+	}
+
+	@Test(priority = 23)
+	public void prospectMicrophoneTurnOnOffWhileInCall() throws InterruptedException {
+//		firefox.callButtonFromHomeClick();
+		firefox.callButtonFromConversationClick();
+
+		android.answerVideoCall();
+		android.pause(1);
+		firefox.muteMicrophone();
+		android.pause(1);
+		firefox.unmuteMicrophone();
+		android.pause(1);
+		firefox.muteMicrophone();
+		android.pause(1);
+		firefox.unmuteMicrophone();
+		
+		android.stopOrRejectVideoCalling();
+		android.pause(1);
+		android.print("Test case - prospectMicrophoneTurnOnOffWhileInCall");
+	}
+
+	@Test(priority = 24)
+	public void agentStartCancelVideoCall() throws InterruptedException, AWTException, IOException {
+		android.startConversation();
+		android.startVideoCall();
+		android.wait(1);
+		android.stopOrRejectVideoCalling();
+		android.wait(1);
+		android.startVideoCall();
+		android.wait(1);
+		android.stopOrRejectVideoCalling();
+		android.wait(1);
+		android.startVideoCall();
+		android.wait(1);
+		firefox.answerVideoCall();
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
+		android.stopOrRejectVideoCalling();
+		android.closeConversation();
+		android.print("Test case - agentStartCancelVideoCall");
+	}
+	
+	@Test(priority = 25)
+	public void agentTurnMicrophoneOnOffWhileInCall() throws InterruptedException, IOException {
+		android.startConversation();
+		android.startVideoCall();
+		firefox.answerVideoCall();
+		firefox.verifyOwnVideo();
+		firefox.verifyVideoFromAgent();
+		android.wait(1);
+		android.muteOrUnmuteMicrophone();
+		android.wait(1);
+		android.muteOrUnmuteMicrophone();
+		android.wait(1);
+		android.muteOrUnmuteMicrophone();
+		android.stopOrRejectVideoCalling();
+		android.closeConversation();
+		android.print("Test case - agent Turn Microphone On / Off when in call");
+	}
 	
 	@AfterClass
 	void cleanUp() throws IOException {

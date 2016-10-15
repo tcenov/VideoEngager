@@ -25,7 +25,6 @@ import org.testng.annotations.BeforeTest;
 public class Android {
 
 	AppiumDriver android;
-	Firefox firefox;
 	By prospector = By.id("ongoingCallerName");
 	By visitorName = By.id("txtTitle");
 	By messages = By.id("chatRowInMessageText");
@@ -43,7 +42,6 @@ public class Android {
 		cleanUpAndroid();
 		android = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		// android.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		firefox = new Firefox();
 	}
 
 	void startConversation() {
@@ -227,7 +225,6 @@ public class Android {
 		String callEmail = android.findElement(By.id("callerEmail")).getText();
 		String callPhone = android.findElement(By.id("callerPhone")).getText();
 		print("callName = " + callName + " callEmail = " + callEmail + " callPhone = " + callPhone);
-
 		Assert.assertEquals(callName, name);
 		print("Android: verified name.");
 		Assert.assertEquals(callEmail, email);
