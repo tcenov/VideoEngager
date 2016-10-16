@@ -17,6 +17,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
@@ -54,7 +55,11 @@ public class Firefox {
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities("firefox", geckodriverPath, Platform.ANY);
 		FirefoxProfile profile = new ProfilesIni().getProfile("default");
 		desiredCapabilities.setCapability("firefox_profile", profile);
-		firefox = new FirefoxDriver(desiredCapabilities);
+		//firefox = new FirefoxDriver(desiredCapabilities);
+		
+		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
+		firefox = new ChromeDriver();
+		
 		// ProfilesIni profile = new ProfilesIni();
 		// FirefoxProfile firefoxProfile =
 		// profile.getProfile("selenium");//using firefox default profile
@@ -62,7 +67,7 @@ public class Firefox {
 		// this make firefoxProfile to block web page images
 		// firefox = new FirefoxDriver(firefoxProfile);
 		firefox.manage().window().maximize();
-		new Minimize().minimize();
+//		new Minimize().minimize();
 		firefox.get("https://videome.leadsecure.com/testtes");
 		// firefox.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		firefox.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);

@@ -32,9 +32,9 @@ public class Android {
 	@BeforeTest
 	public void setUp() throws IOException, InterruptedException {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("deviceName", "");
+		capabilities.setCapability("deviceName", "test");
 		capabilities.setCapability("browserName", "Android");
-		capabilities.setCapability("platformVersion", "4.4.2");
+		capabilities.setCapability("platformVersion", "6.1");
 		capabilities.setCapability("platformName", "Android");
 		capabilities.setCapability("appPackage", "com.leadsecure.agent");
 		capabilities.setCapability("appActivity", "com.leadsecure.core.ui.LoginActivity");
@@ -77,7 +77,7 @@ public class Android {
 		textField.clear();
 		print("Android cleared message field.");
 		textField.sendKeys(message);
-		clickOnNameIfIsPresent("Send");
+		clickOnIdIfIsPresent("chatMessageSendButton");
 		print("Android: Message sent.");
 	}
 
@@ -252,9 +252,11 @@ public class Android {
 	void login(String email, String password) {
 		print("Proceed with android login.");
 		clickOnIdIfIsPresent("loginArrow");
-		android.findElement(By.name("Email")).sendKeys(email);
+		android.findElement(By.id("signInMobileEdit")).sendKeys(email);
 		android.findElement(By.id("signInPasswordEdit")).sendKeys(password);
-		clickOnNameIfIsPresent("ENTER");
+		
+		clickOnIdIfIsPresent("signInEnterButton");
+		
 		WebDriverWait wait = new WebDriverWait(android, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("vanityTitleText")));
 		print("Android: You are logged in from android device");
@@ -264,8 +266,9 @@ public class Android {
 		print("Android: Proceed with logout.");
 		// Navigate to logout and logout
 		clickOnIdIfIsPresent("vanityMenuButton");
-		clickOnNameIfIsPresent("Logout");
-		clickOnNameIfIsPresent("Yes");
+		//clickOnNameIfIsPresent("Logout");
+		//clickOn Yes button 
+		clickOnIdIfIsPresent("button1");
 	}
 
 	private WebElement getWebElement(By selector) {
@@ -310,16 +313,18 @@ public class Android {
 		}
 	}
 
-	private void clickOnNameIfIsPresent(String name) {
-		Boolean isPresent = android.findElements(By.name(name)).size() > 0;
-		if (isPresent) {
-			android.findElement(By.name(name)).click();
-		} else {
-			WebDriverWait wait = new WebDriverWait(android, 20);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(name)));
-			android.findElement(By.name(name)).click();
-		}
-	}
+	
+	//This method is deprecated for Mac and iOS
+//	private void clickOnNameIfIsPresent(String name) {
+//		Boolean isPresent = android.findElements(By.name(name)).size() > 0;
+//		if (isPresent) {
+//			android.findElement(By.name(name)).click();
+//		} else {
+//			WebDriverWait wait = new WebDriverWait(android, 20);
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(name)));
+//			android.findElement(By.name(name)).click();
+//		}
+//	}
 
 	private void clickOnSelectorIfIsPresent(By selector) {
 		Boolean isPresent = android.findElements(selector).size() > 0;
@@ -506,7 +511,7 @@ public class Android {
 	@AfterClass
 	void cleanUpAndroid() throws IOException {
 		print("Android: Clean up.");
-		adbExecuteComand("adb shell input keyevent 26");
+//		adbExecuteComand("adb shell input keyevent 26");
 		adbExecuteComand("adb shell am force-stop io.appium.unlock");
 		adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
 		adbExecuteComand("adb shell pm clear com.leadsecure.agent");
