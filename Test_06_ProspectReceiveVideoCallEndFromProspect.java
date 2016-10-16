@@ -27,13 +27,13 @@ public class Test_06_ProspectReceiveVideoCallEndFromProspect {
 	public void prospectReceiveVideoCallEndFromProspect() throws InterruptedException, IOException {
 		android.startConversation();
 		android.startVideoCall();
-		android.pause(10);
+		android.pause(3);
 		firefox.answerVideoCall();
 		firefox.verifyOwnVideo();
 		firefox.verifyVideoFromAgent();
-		android.pause(10);
+		android.pause(3);
 		firefox.stopVideoCall();
-		android.pause(30);
+		android.pause(3);
 		//android.closeConversation();
 		android.print("Test case - prospect receive Video call");
 	}

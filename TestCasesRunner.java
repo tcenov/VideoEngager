@@ -45,11 +45,10 @@ public class TestCasesRunner {
 		android.pause(1);
 		firefox.SendMessage("Sent from browser prospector");
 		// firefox.resizeWindow(500, 20);
-		android.pause(3);
-		android.verifyMessage("Sent from browser prospector");
-		android.pause(2);
-		android.closeConversation();
 		android.pause(1);
+		android.verifyMessage("Sent from browser prospector");
+		android.pause(1);
+		android.closeConversation();
 		android.print("Test case - agent receive chat message from browser.");
 	}
 
@@ -61,9 +60,9 @@ public class TestCasesRunner {
 		android.startConversation();
 		android.sendMessage("Sent from android agent");
 		firefox.verifyMessage("Sent from android agent");
-		android.pause(2);
+		android.pause(1);
 		android.closeConversation();
-		android.pause(2);
+		android.pause(1);
 		android.print("Test case - agent android send message");
 	}
 
@@ -71,15 +70,15 @@ public class TestCasesRunner {
 	public void prospectReceiveVideoCallEndFromAndroid() throws InterruptedException, IOException {
 		android.startConversation();
 		android.startVideoCall();
-		android.pause(2);
+		android.pause(1);
 		firefox.answerVideoCall();
 		
 		firefox.verifyOwnVideo();
 		firefox.verifyVideoFromAgent();
 		//ToDo verify video
-		android.pause(2);
+		android.pause(1);
 //		firefox.muteMicrophone();
-		android.pause(2);
+		android.pause(1);
 		android.stopOrRejectVideoCalling();
 		android.closeConversation();
 		android.print("Test case - prospect receive Video call");
@@ -89,13 +88,13 @@ public class TestCasesRunner {
 	public void prospectReceiveVideoCallEndFromProspect() throws InterruptedException, IOException {
 		android.startConversation();
 		android.startVideoCall();
-		android.pause(2);
+		android.pause(1);
 		firefox.answerVideoCall();
-		android.pause(2);
+		android.pause(1);
 		firefox.verifyOwnVideo();
 		firefox.verifyOwnVideo();
 		firefox.stopVideoCall();
-		android.pause(2);
+		android.pause(1);
 		//android.closeConversation();
 		android.print("Test case - prospect receive Video call");
 	}
@@ -114,7 +113,6 @@ public class TestCasesRunner {
 		android.pause(2);
 		firefox.muteMicrophone();
 		android.stopOrRejectVideoCalling();
-		android.pause(2);
 		android.print("Test case - android agent receive video call,then android end video call ");
 	}
 
@@ -124,7 +122,6 @@ public class TestCasesRunner {
 //		firefox.callButtonFromConversationClick();
 		android.pause(1);
 		android.stopOrRejectVideoCalling();
-		android.pause(2);
 		android.print("Test case - android agent rejected video call.");
 	}
 	
@@ -278,8 +275,8 @@ public class TestCasesRunner {
 		firefox.waitForPageLoad();
 		android.pressHomeButton();
 		android.pause(1);
-		firefox.startVideoCall();
-//		firefox.callButtonFromHomeClick();
+//		firefox.startVideoCall();
+		firefox.callButtonFromHomeClick();
 		android.pause(1);
 		android.answerVideoCall();
 		firefox.verifyOwnVideo();
@@ -329,7 +326,7 @@ public class TestCasesRunner {
 		android.openNotifications();
 		android.pause(5);
 		android.acceptRejectNotification("accept");
-		android.pause(4);
+		android.pause(6);
 		android.verifyMessage("Message while android app is closed");
 		android.pause(5);
 		android.closeConversation();
@@ -394,13 +391,13 @@ public class TestCasesRunner {
 		firefox.muteMicrophone();
 		android.requestPhoneAndEmail();
 		android.pause(1);
-		firefox.fillRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
+		firefox.fillRequestedForm("Test_Name", "Test_mail@mail.com", "1234567890");
 //		
 //		android.videoCallGetTextFromElements();
 //		android.pause(15);
 		
 		// ToDo verify requested details
-		android.verifyRequestedForm(firefox.generateName(), firefox.generateEmail(), "1234567890");
+		android.verifyRequestedForm("Test_Name", "Test_mail@mail.com", "1234567890");
 		
 		android.stopOrRejectVideoCalling();
 		android.closeConversation();

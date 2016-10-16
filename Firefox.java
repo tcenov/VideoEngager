@@ -18,6 +18,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
@@ -57,8 +58,14 @@ public class Firefox {
 		desiredCapabilities.setCapability("firefox_profile", profile);
 		//firefox = new FirefoxDriver(desiredCapabilities);
 		
+		
+		
 		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
-		firefox = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		//Users/<username>/Library/Application Support/Google/Chrome/Default
+		//C:\Users\toci\AppData\Local\Google\Chrome\User Data\Default
+		options.addArguments("--user-data-dir=D:\\Default");
+		firefox = new ChromeDriver(options);
 		
 		// ProfilesIni profile = new ProfilesIni();
 		// FirefoxProfile firefoxProfile =
