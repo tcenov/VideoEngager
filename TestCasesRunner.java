@@ -5,7 +5,10 @@ import java.io.IOException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+@Listeners({ GetAndroidLogs.class })
 
 public class TestCasesRunner {
 
@@ -69,6 +72,7 @@ public class TestCasesRunner {
 	@Test(priority = 5, retryAnalyzer = Retry.class)
 	public void prospectReceiveVideoCallEndFromAndroid() throws InterruptedException, IOException {
 		android.startConversation();
+		android.mute();
 		android.startVideoCall();
 		android.pause(1);
 		firefox.answerVideoCall();
@@ -117,7 +121,7 @@ public class TestCasesRunner {
 	}
 
 	@Test(priority = 8, retryAnalyzer = Retry.class)
-	public void androidAgentRejectVideoCall() throws InterruptedException {
+	public void androidAgentRejectVideoCall() throws InterruptedException, IOException {
 		firefox.startVideoCall();
 //		firefox.callButtonFromConversationClick();
 		android.pause(1);
@@ -405,9 +409,10 @@ public class TestCasesRunner {
 	}
 
 	@Test(priority = 23, retryAnalyzer = Retry.class)
-	public void prospectMicrophoneTurnOnOffWhileInCall() throws InterruptedException {
+	public void prospectMicrophoneTurnOnOffWhileInCall() throws InterruptedException, IOException {
 //		firefox.callButtonFromHomeClick();
 //		firefox.callButtonFromConversationClick();
+		
 		firefox.startVideoCall();
 		android.answerVideoCall();
 		android.pause(1);

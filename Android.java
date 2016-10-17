@@ -343,7 +343,13 @@ public class Android {
 		adbExecuteComand("adb shell input keyevent 26");
 		print("Android: Screen is locked");
 	}
-
+	
+	void mute() throws IOException {
+		adbExecuteComand("adb shell input keyevent 164");
+		adbExecuteComand("adb shell input keyevent 25");
+		print("Android: phone is muted.");
+	}
+	
 	void pressHomeButton() {
 		((AndroidDriver) android).pressKeyCode(AndroidKeyCode.HOME);
 		print("Android pressed Home button - app works in background");
@@ -515,7 +521,7 @@ public class Android {
 		adbExecuteComand("adb shell am force-stop io.appium.unlock");
 		adbExecuteComand("adb shell am force-stop com.leadsecure.agent");
 		adbExecuteComand("adb shell pm clear com.leadsecure.agent");
-
+		adbExecuteComand("adb shell rm -r /sdcard/Video\\ Agent/logs/");
 		// adbExecuteComand("adb shell am force-stop
 		// com.google.android.calculator");
 		// adbExecuteComand("adb shell am force-stop com.android.calculator2");
