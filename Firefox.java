@@ -200,7 +200,7 @@ public class Firefox {
 		WebElement callButton;
 //		WebDriverWait wait = new WebDriverWait(firefox, 15);
 //		wait.until(ExpectedConditions.visibilityOfElementLocated(callButton_1_ || callButton_3_));
-//		ExpectedConditions.visibilityOfAllElementsLocatedBy(locator)
+//		ExpectedConditions.visibilityOfAllElementsLocatedBy(selector)
 		callButton = firefox.findElement(callButton_1_);
 		if (callButton.isDisplayed()) {
 			callButton.click();
@@ -384,7 +384,7 @@ public class Firefox {
 	public void waitForPageLoad() {
 		WebDriverWait wait = new WebDriverWait(firefox, 30);
 		wait.until(new ExpectedCondition<Boolean>() {
-			public Boolean apply(WebDriver wdriver) {
+			public Boolean apply(WebDriver driver) {
 				return ((JavascriptExecutor) firefox).executeScript("return document.readyState").equals("complete");
 			}
 		});
